@@ -1,13 +1,5 @@
 <template>
-  <canvas
-    id="clock"
-    :style="{
-      'width': width,
-      'height': height
-    }"
-  >
-
-  </canvas>
+  <canvas id="clock" :style="{ 'width': width, 'height': height}"></canvas>
 </template>
 
 <script>
@@ -17,11 +9,11 @@ export default {
   name: "clock",
   props: {
     width: {
-      type: Number,
+      type: String,
       default: ' '
     },
     height: {
-      type: Number,
+      type: String,
       default: ' '
     }
   },
@@ -32,8 +24,8 @@ export default {
     clock() {
       new Clock({
         el: "#clock",
-        w: this.width,
-        h: this.height,
+        w: 260,
+        h: 50,
         offsetX: 0,
         offsetY: 10,
         scale: 25,
@@ -43,9 +35,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-#clock {
-  width: 210px;
-}
-</style>

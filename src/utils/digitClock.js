@@ -177,7 +177,7 @@ Clock.prototype = {
           if (v === 1) {
             this.ctx.beginPath()
             this.ctx.fillStyle = this.options.color
-            this.ctx.arc(this.options.offsetX+14*(this.r+2)*index+(2*col+1)*(this.r+1), this.options.offsetY+(2*row+1)*(this.r+1), this.r, 0, Math.PI*2, false)
+            this.ctx.arc(this.options.offsetX+10*(this.r+2)*index+(2*col+1)*(this.r+1), this.options.offsetY+(2*row+1)*(this.r+1), this.r, 0, Math.PI*2, false)
             this.ctx.closePath()
             this.ctx.fill()
           }
@@ -214,7 +214,7 @@ Clock.prototype = {
       item.forEach((v, col) => {
         if (v === 1) {
           this.ball = {
-              x: this.options.offsetX+14*(this.r+2)*index + col*2*(this.r+1)+(this.r+1),
+              x: this.options.offsetX+10*(this.r+2)*index + col*2*(this.r+1)+(this.r+1),
               y: this.options.offsetY+row*2*(this.r+1)+(this.r+1),
               stepX: Math.floor(Math.random()*4-2),
               stepY: Math.floor(Math.random()*6-4),

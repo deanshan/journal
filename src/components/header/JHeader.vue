@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="@/sass/font-special.scss"></style>
+<style lang="scss" scoped src="@/sass/global/font-special.scss"></style>
 
 <style lang="scss" scoped>
 #header {

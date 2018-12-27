@@ -36,7 +36,6 @@ export default {
   display: flex;
   flex-direction: column;
   section.main {
-    background: #fff;
     flex: auto;
     display: flex;
   }

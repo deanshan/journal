@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 
-import "./sass/reset.scss";
-import "./sass/global.scss";
+import "./sass/global/reset.scss";
+import "./sass/global/global.scss";
 
 Vue.config.productionTip = false
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar" :style="{'width': !isCollapse ? '200px' : '64px'}">
+  <div id="sidebar" :style="{'width': !isCollapse ? '260px' : '64px'}">
     <div class="switch" ref="switch" @click="switching">
         <i :class="[ !isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right' ]"></i>
     </div>
@@ -83,15 +83,27 @@
                 <el-menu-item index="5-1-2">选项1</el-menu-item>
                 <el-menu-item index="5-1-3">选项1</el-menu-item>
                 <el-menu-item index="5-1-4">选项1</el-menu-item>
+                <el-menu-item index="5-1-1">选项1</el-menu-item>
+                <el-menu-item index="5-1-2">选项1</el-menu-item>
+                <el-menu-item index="5-1-3">选项1</el-menu-item>
+                <el-menu-item index="5-1-4">选项1</el-menu-item>
+                <el-menu-item index="5-1-1">选项1</el-menu-item>
+                <el-menu-item index="5-1-2">选项1</el-menu-item>
+                <el-menu-item index="5-1-3">选项1</el-menu-item>
+                <el-menu-item index="5-1-4">选项1</el-menu-item>
             </el-submenu>
         </el-submenu>
     </el-menu>
+
+    <j-clock :style="{ 'width': '259px', 'height': '37px'}"></j-clock>
+
   </div>
 </template>
 
 <script>
 
 import MenuEffect from '@/components/aside/MenuEffect.vue'
+import Clock from '@/components/aside/Clock.vue'
 
 export default {
   name: "sidebar",
@@ -101,7 +113,8 @@ export default {
     };
   },
   components: {
-      'menu-effect': MenuEffect
+      'menu-effect': MenuEffect,
+      'j-clock': Clock
   },
   mounted() {
     this.$refs.switch.style.setProperty("--start", "2%");
@@ -144,6 +157,11 @@ export default {
             color: #347245;
             cursor: pointer;
         }
+    }
+    &/deep/#clock {
+        position: absolute;
+        left: 0;
+        bottom: 1%;
     }
 }
 @keyframes move {
