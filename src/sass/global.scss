@@ -1,0 +1,17 @@
+.el-menu {
+    border-right: none;
+}
+
+.el-submenu__title {
+    padding: 0 !important;
+    i.el-submenu__icon-arrow {
+        z-index: 111;
+        color: black;
+    }
+    >span {
+        margin-left: 48px;
+    }
+}
+.el-submenu__icon-arrow {
+    padding-left: 20px;
+}

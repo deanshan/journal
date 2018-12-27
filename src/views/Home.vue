@@ -1,18 +1,45 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="home">
+    <j-header></j-header>
+    <section class="main">
+      <j-sidebar></j-sidebar>
+      <section>main1111111111111111</section>
+    </section>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import JHeader from "@/components/header/JHeader.vue"
+import Sidebar from "@/components/aside/Sidebar.vue"
 
 export default {
-  name: 'home',
+  name: "home",
+  data() {
+    return {
+    }
+  },
   components: {
-    HelloWorld
+    'j-header': JHeader,
+    'j-sidebar': Sidebar
+  },
+  methods: {
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+#home {
+  width: 100%;
+  height: 100%;
+  // overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  section.main {
+    background: #fff;
+    flex: auto;
+    display: flex;
   }
 }
-</script>
+</style>
+

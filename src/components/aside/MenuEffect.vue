@@ -1,0 +1,72 @@
+<template>
+    <div id="menu-effect" @mousemove="effect($event)" ref="effect">
+        <i :class="iconclass"></i>
+        <span slot="title">{{ title }}</span>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'menuEffect',
+    props: {
+        iconclass: {
+            default: '',
+            type: String
+        },
+        title: {
+            default: '',
+            type: String
+        }
+    },
+    mounted() {
+    },
+    methods: {
+        effect(e) {
+            this.$refs.effect.style.setProperty('--x', `${e.offsetX}px`);
+            this.$refs.effect.style.setProperty('--y', `${e.offsetY}px`);
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+#menu-effect {
+    overflow: hidden;
+    transition: all .2s ease;
+    position: relative;
+    z-index: 101;
+    &:hover {
+        background: #3cdddd;
+        span,i {
+            color: gold;
+        }
+    }
+    &:before {
+        --opacity: 0;
+        --scale: 0;
+        --size: 200px;
+        -webkit-transform: scale(var(--scale));
+        background: radial-gradient(circle closest-side,#ff1ac6,transparent);
+        content: "";
+        height: var(--size);
+        left: calc(var(--x) - var(--size) / 2);
+        opacity: var(--opacity);
+        position: absolute;
+        top: calc(var(--y) - var(--size) / 2);
+        z-index: -1;
+        transform: scale(var(--scale));
+        transition: transform .8s cubic-bezier(.22,1,.32,1),opacity .8s cubic-bezier(.22,1,.32,1);
+        width: var(--size);
+    }
+    &:hover:before {
+        --opacity: 1;
+        --scale: 1;
+    }
+    span,i {
+      position: relative;
+    }
+    i {
+        margin-left: 20px;
+    }
+}
+</style>
