@@ -38,9 +38,6 @@
             <el-submenu index="2-1">
                 <span slot="title">选项4</span>
                 <el-menu-item index="2-1-1">选项1</el-menu-item>
-                <el-menu-item index="2-1-2">选项1</el-menu-item>
-                <el-menu-item index="2-1-3">选项1</el-menu-item>
-                <el-menu-item index="2-1-4">选项1</el-menu-item>
             </el-submenu>
         </el-submenu>
         <el-submenu index="3">
