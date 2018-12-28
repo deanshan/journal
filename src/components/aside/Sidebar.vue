@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar" :style="{'width': !isCollapse ? '260px' : '64px'}">
+  <div id="sidebar" :style="{'width': !isCollapse ? '270px' : '64px'}">
     <div class="switch" ref="switch" @click="switching">
         <i :class="[ !isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right' ]"></i>
     </div>
