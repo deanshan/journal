@@ -1,9 +1,9 @@
 <template>
   <div id="home">
     <j-header></j-header>
-    <section class="main">
+    <section class="section">
       <j-sidebar></j-sidebar>
-      <section>main1111111111111111</section>
+      <j-main></j-main>
     </section>
   </div>
 </template>
@@ -12,6 +12,7 @@
 
 import JHeader from "@/components/header/JHeader.vue"
 import Sidebar from "@/components/aside/Sidebar.vue"
+import JMain from "@/components/main/JMain.vue"
 
 export default {
   name: "home",
@@ -21,7 +22,8 @@ export default {
   },
   components: {
     'j-header': JHeader,
-    'j-sidebar': Sidebar
+    'j-sidebar': Sidebar,
+    'j-main': JMain
   },
   methods: {
   }
@@ -35,7 +37,7 @@ export default {
   // overflow: hidden;
   display: flex;
   flex-direction: column;
-  section.main {
+  section.section {
     flex: auto;
     display: flex;
   }

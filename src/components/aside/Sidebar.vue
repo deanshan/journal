@@ -6,13 +6,21 @@
 
     <el-menu
         :collapse="isCollapse"
+        :unique-opened=true
+        :collapse-transition=true
+        active-text-color="#3cdddd"
+        :default-active="this.$router.path"
+        router
+    >
+    <!-- <el-menu
+        :collapse="isCollapse"
         @open="handleOpen"
         @close="handleClose"
         @select="handleSelect"
         :unique-opened=true
         :collapse-transition=true
         active-text-color="#3cdddd"
-    >
+    > -->
         <el-submenu index="1" >
             <template slot="title">
                 <menu-effect
@@ -20,13 +28,10 @@
                     title="统计图"
                 ></menu-effect>
             </template>
-            <el-submenu index="1-1">
-                <span slot="title">选项4</span>
-                <el-menu-item index="1-1-1">选项1</el-menu-item>
-                <el-menu-item index="1-1-1">选项1</el-menu-item>
-                <el-menu-item index="1-1-1">选项1</el-menu-item>
-                <el-menu-item index="1-1-1">选项1</el-menu-item>
-            </el-submenu>
+            <el-menu-item-group>
+                <el-menu-item index="/">/cartogram</el-menu-item>
+                <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
             <template slot="title">
@@ -90,12 +95,14 @@
                 <el-menu-item index="5-1-1">选项1</el-menu-item>
                 <el-menu-item index="5-1-2">选项1</el-menu-item>
                 <el-menu-item index="5-1-3">选项1</el-menu-item>
-                <el-menu-item index="5-1-4">选项1</el-menu-item>
+                <el-menu-item index="5-1-4">选项12</el-menu-item>
             </el-submenu>
         </el-submenu>
     </el-menu>
 
-    <j-clock :style="{ 'width': '259px', 'height': '37px'}"></j-clock>
+    <div class="clock">
+        <j-clock :style="{ 'width': '240px', 'height': '37px'}"></j-clock>
+    </div>
 
   </div>
 </template>
@@ -144,7 +151,6 @@ export default {
     width: 240px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
     position: relative;
     transition: all 0.2s linear;
     .switch {
@@ -158,10 +164,18 @@ export default {
             cursor: pointer;
         }
     }
-    &/deep/#clock {
-        position: absolute;
-        left: 0;
-        bottom: 1%;
+    .el-menu {
+        flex: auto;
+        overflow: scroll;
+    }
+    .clock {
+        width: 260px;
+        height: 50px;
+        padding: 30px 0;
+        // text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 @keyframes move {

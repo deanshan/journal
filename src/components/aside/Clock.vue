@@ -24,8 +24,8 @@ export default {
     clock() {
       new Clock({
         el: "#clock",
-        w: 260,
-        h: 50,
+        w: 275,
+        h: 60,
         offsetX: 0,
         offsetY: 10,
         scale: 25,
