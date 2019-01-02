@@ -1,9 +1,9 @@
 <template>
-    <div>{{ data }}</div>
+    <div ref="div"></div>
 </template>
 
 <script>
-import md from '@/assets/es6.md'
+
 export default {
     data() {
         return {
@@ -12,9 +12,12 @@ export default {
         }
     },
     mounted() {
-        console.log(md)
-        console.log(this.$marked)
-        this.data = this.$marked(`${this.baseUrl}note/es6/es6.md`)
+        fetch(`${this.baseUrl}note/es6/es6.md`)
+            .then(response => response.text())
+            .then(data => {
+                // this.$refs.div.innerHTML = this.$marked(data)
+                this.$refs.div.innerHTML = data
+            })
     }
 }
 </script>

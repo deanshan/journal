@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'main',
+    name: 'jmain',
     data() {
         return {
             searchData: ''
