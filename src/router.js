@@ -14,6 +14,11 @@ export default new Router({
           path: '',
           name: 'cartogram',
           component: () => import('@/components/main/cartogram/Cartogram.vue')
+        },
+        {
+          path: '/knowledge',
+          name: 'knowledge',
+          component: () => import('@/components/main/knowledge/es6.vue')
         }
       ]
     },
