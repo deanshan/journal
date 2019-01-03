@@ -23,13 +23,5 @@ module.exports = {
         }
       }
     }
-  },
-  chainWebpack: config => {
-    config.module
-      .rule('markdown')
-      .test(/\.markdown$/)
-      .use('markdown-loader')
-      .loader('markdown-loader')
-      .end()
   }
 };

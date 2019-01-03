@@ -9,64 +9,66 @@
 ### 不存在变量提升
 
 ```js
-	{
-        var a = 1;
-        let b = 11;
-    }
-    console.log(a); //1
-    console.log(b); //ReferenceError:b is not defined
+{
+    var a = 1;
+    let b = 11;
+}
+console.log(a); //1
+console.log(b); //ReferenceError:b is not defined
 
-    for (let i = 0; i < 3; i++) {}
-    console.log(i);//ReferenceError:i is not defined
+for (let i = 0; i < 3; i++) {}
+console.log(i);//ReferenceError:i is not defined
 
-    console.log(a); //undefined,变量a提升了
-    var a = 11;
-    console.log(b); //ReferenceError：b is not defined
-    let b = 111;
+console.log(a); //undefined,变量a提升了
+var a = 11;
+console.log(b); //ReferenceError：b is not defined
+let b = 111;
 ```
+
+
 
 ### 暂时性死区(TDZ)
 
 在代码块内，如果使用某个变量后再去用let或const声明，就会形成TDZ，该变量都是不可用的
 
 ```js
-    console.log(typeof xx);//undefined
-    console.log(typeof x);//ReferenceError，在输出后用let声明了
-    let x;
+console.log(typeof xx);//undefined
+console.log(typeof x);//ReferenceError，在输出后用let声明了
+let x;
 
-    var y = y;// 不报错
-    let z = z;//ReferenceError  声明未完成前不能使用此变量
+var y = y;// 不报错
+let z = z;//ReferenceError  声明未完成前不能使用此变量
 
-    if (true) {
-        // TDZ开始
-        // tmp = 'abc';
-        // console.log(tmp); //ReferenceError
-        let tmp; // TDZ结束,在此变量tmp声明之前使用，报错
-        tmp = 100;
-        console.log(tmp); //100
-    }
+if (true) {
+    // TDZ开始
+    // tmp = 'abc';
+    // console.log(tmp); //ReferenceError
+    let tmp; // TDZ结束,在此变量tmp声明之前使用，报错
+    tmp = 100;
+    console.log(tmp); //100
+}
 
-    //隐蔽性的死区：在y未声明前就使用
-    function foo(x = y, y = 2) {//正确写法 x = 2, y = x
-        return {x, y};
-    }
-    console.log(foo());// 报错
+//隐蔽性的死区：在y未声明前就使用
+function foo(x = y, y = 2) {//正确写法 x = 2, y = x
+    return {x, y};
+}
+console.log(foo());// 报错
 ```
 
 ### 不允许重复声明
 
 ```JS
-	//let不允许在相同作用域内，重复声明同一个变量。
-    function foo() {
-        let aa = 1;
-        let aa = 22;// 报错
-    }
-    foo();
+//let不允许在相同作用域内，重复声明同一个变量。
+function foo() {
+    let aa = 1;
+    let aa = 22;// 报错
+}
+foo();
 
-    //不能在函数内部重新声明参数
-    function f(x) {
-        let x;// 报错
-    }
+//不能在函数内部重新声明参数
+function f(x) {
+    let x;// 报错
+}
 ```
 
 ### 块级作用域
@@ -86,7 +88,7 @@ ES6 提供 let 和 const 来代替 var 声明变量，新的声明方式支持�
 ==防止重复声明变量==
 
 ```js
-//for循环有个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。 
+//for循环有个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。
 for (let i=0;i < 3;i++) {
     let i='abc';
     console.log(i); //abc abc abc
@@ -102,7 +104,7 @@ console.log(b); // 1
 //块级作用域的出现，实际上使得获得广泛应用的立即执行函数表达式（IIFE）不再必要了。 // IIFE 写法
 (function () {
     var tmp=...;
-}()); 
+}());
 // 块级作用域写法
 {
     let tmp=...;
@@ -144,7 +146,7 @@ let colors = ["red", "green", "blue"],
   firstColor = "black",
   secondColor = "purple";
 [firstColor, secondColor] = colors;
-console.log(firstColor); //    "red" 
+console.log(firstColor); //    "red"
 console.log(secondColor);    // "green"
 ```
 
@@ -160,7 +162,7 @@ function f() {
     return undefined;
 }
 let [x=f()]=[1];
-//相当于 
+//相当于
 let x;
 if ([1][0]===undefined) {
     x=f();
@@ -215,10 +217,10 @@ console.log(newPoints);
 ==如果变量已声明或已初始化了，就必须用圆括号来包裹解构赋值语句==，因为暴露的花括号会被解析为代码块语句，而代码块语句是不允许在赋值操作符左侧出现的，而圆括号会被解析为表达式
 
 ```js
-let node = {type:"Identifier",    name:"foo"},    
+let node = {type:"Identifier",    name:"foo"},
 type = "Literal",name = 5;
-({type,name}= node);//    使用解构来分配不同的值 
-console.log(type); //    "Identifier" 
+({type,name}= node);//    使用解构来分配不同的值
+console.log(type); //    "Identifier"
 console.log(name); //    "foo"
 ```
 
@@ -233,7 +235,7 @@ let {x = 3} = {x: undefined}; x // 3
 let {x = 3} = {x: null}; x // null
 ```
 
-[对象的解构与数组不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。]() 
+[对象的解构与数组不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。]()
 
 ```js
 //变量名与属性名一致
@@ -243,7 +245,7 @@ let { bar, foo } = { foo: "aaa", bar: "bbb" };//foo= "aaa",bar="bbb"
 let { foo: baz, bar: f } = { foo: 'aaa', bar: 'bbb' };//baz='aaa',f='bbb'
 ```
 
-对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。 
+对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。
 
 [由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。]()
 
@@ -252,7 +254,7 @@ let arr=[1, 2, 3];
 let { 0: first, [arr.length - 1]: last} = arr;  //first // 1 ,last // 3
 ```
 
-对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。 
+对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。
 
 ```js
 let { log, sin, cos } = Math;
@@ -275,7 +277,7 @@ let x;
 
 ## 字符串的解构赋值
 
-字符串被转换成了一个类似数组的对象 
+字符串被转换成了一个类似数组的对象
 
 ```js
 const [a, b, c, d, e] = 'hello'; //a="h",b="e",c="l",d ="l",e= "o"
@@ -284,9 +286,9 @@ let {length : len} = 'hello';//len = 5，自带的length属性
 
 ## 数值和布尔值的解构赋值
 
-解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。 
+解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
 
-但`undefined`和`null`无法转为对象，所以对它们进行解构赋值，都会报错 
+但`undefined`和`null`无法转为对象，所以对它们进行解构赋值，都会报错
 
 ```js
 let {toString: s} = 123;
@@ -320,7 +322,7 @@ move({}); // [0, 0]
 move(); // [0, 0]
 ```
 
-[注意，下面的写法是为函数`move`的参数指定默认值，而不是为变量`x`和`y`指定默认值]() 
+[注意，下面的写法是为函数`move`的参数指定默认值，而不是为变量`x`和`y`指定默认值]()
 
 ```js
 function move({x, y} = { x: 0, y: 0 }) {
@@ -343,9 +345,9 @@ let y = 2;
 [x, y] = [y, x];
 ```
 
-##### (2)、**从函数返回多个值** 
+##### (2)、**从函数返回多个值**
 
-函数只能返回一个值，如果要返回多个值，只能将它们放在数组或对象里返回 
+函数只能返回一个值，如果要返回多个值，只能将它们放在数组或对象里返回
 
 ```js
 // 返回一个数组
@@ -364,9 +366,9 @@ function example() {
 let { foo, bar } = example();
 ```
 
-##### (3)、**函数参数的定义** 
+##### (3)、**函数参数的定义**
 
-解构赋值可以方便地将一组参数与变量名对应起来。 
+解构赋值可以方便地将一组参数与变量名对应起来。
 
 ```js
 // 参数是一组有次序的值
@@ -378,9 +380,9 @@ function f({x, y, z}) { ... }
 f({z: 3, y: 2, x: 1});
 ```
 
-##### (4)、**提取 JSON 数据** 
+##### (4)、**提取 JSON 数据**
 
-解构赋值对提取 JSON 对象中的数据，尤其有用。 
+解构赋值对提取 JSON 对象中的数据，尤其有用。
 
 ```js
 let jsonData = {
@@ -393,14 +395,14 @@ let { id, status, data: number } = jsonData;
 console.log(id, status, number);// 42, "OK", [867, 5309]
 ```
 
-##### (5)、**函数参数的默认值** 
+##### (5)、**函数参数的默认值**
 
 ```js
 //避免在函数体内写 let c = c || 11;
 function ({a = true, b = function(){}, c = 11} = {}) {}
 ```
 
-##### (6)、**遍历 Map 结构** 
+##### (6)、**遍历 Map 结构**
 
 ```js
 const map = new Map();
@@ -449,12 +451,12 @@ rest参数用于获取多余的参数，这样在函数中就不需要使用argu
 ```js
 // function add(...num) {}
 let add=(...num)=> {
-    let sum=0; 
+    let sum=0;
     // for (const val of num) { sum += val; }//10
     // num.map((val) => {sum += val});//10
     num.forEach((val)=> {sum += val}); //10
     return sum;
-}; 
+};
 // let add = (...num) => eval(num.join('+'));//10
 console.log('求和:' + add(1, 2, 3, 4)); //10
 ```
@@ -530,15 +532,15 @@ console.log(["blue","green",...defaultColors,...favoriteColors]
    }
    ```
 
-2. [使用参数默认值时，函数不能有同名参数。]() 
+2. [使用参数默认值时，函数不能有同名参数。]()
 
    ```js
    function foo(x, x, y) {...} // 不报错
-   
+
    function foo(x, x, y = 1) {...}// 报错
    ```
 
-3. [参数默认值不是传值的，而是每次都重新计算默认值表达式的值]() 
+3. [参数默认值不是传值的，而是每次都重新计算默认值表达式的值]()
 
    ```js
    let x = 99;
@@ -608,7 +610,7 @@ function (a, b, c=1, ...z) {}
 
 ##### (5)、作用域
 
-一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个[单独的作用域]()（context）。等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的。 
+一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个[单独的作用域]()（context）。等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的。
 
 ```js
 //调用函数f时，参数形成一个单独的作用域。这个作用域里，y的默认值变量x指向的是第一个参数x，并非全局变量x。
@@ -673,7 +675,7 @@ let add = (...num) => eval(num.join('+'));//10
 
 ```js
 const double = (number,number2) => {
-   sum = number + number2 
+   sum = number + number2
    return sum;
  }
 ```
@@ -682,17 +684,17 @@ const double = (number,number2) => {
 
 1. 函数体内的`this`对象，是定义时所在的对象，而不是使用时所在的对象。
 
-   `this`对象的指向是可变的，[但是在箭头函数中，它是固定的。]()  
+   `this`对象的指向是可变的，[但是在箭头函数中，它是固定的。]()
 
-2. 不可以当作构造函数，也就是说，不可以使用`new`命令，否则会抛出一个错误。 
+2. 不可以当作构造函数，也就是说，不可以使用`new`命令，否则会抛出一个错误。
 
-3. 不可以使用`arguments`对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。 
+3. 不可以使用`arguments`对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
 
-4. 不可以使用`yield`命令，因此箭头函数不能用作 Generator 函数。 
+4. 不可以使用`yield`命令，因此箭头函数不能用作 Generator 函数。
 
 ##### this对象
 
-`this`指向的固定化，并不是因为箭头函数内部有绑定`this`的机制，实际原因是箭头函数根本没有自己的`this`，导致内部的`this`就是外层代码块的`this`。正是因为它没有`this`，所以也就不能用作构造函数。 
+`this`指向的固定化，并不是因为箭头函数内部有绑定`this`的机制，实际原因是箭头函数根本没有自己的`this`，导致内部的`this`就是外层代码块的`this`。正是因为它没有`this`，所以也就不能用作构造函数。
 
 ```js
 for (let i = 0; i < divs.length; i++) {
@@ -702,7 +704,7 @@ for (let i = 0; i < divs.length; i++) {
 }
 for (let i = 0; i < divs.length; i++) {
 	divs[i].onclick = () => {
-		console.log(this);//指向所在的对象，此处为window 	
+		console.log(this);//指向所在的对象，此处为window
 	}
 }
 
@@ -835,15 +837,15 @@ for (let [index, elem] of ['a', 'b'].entries()) {
 
 2. `javascript`的七种数据类型：`Number`,`String`,`Boolean`,`Object`,`null`,`undefined`,`Symbol`
 
-3. 对象的属性名现在可以有两种类型，一种是原来就有的`字符串`，另一种就是新增的 `Symbol 类型` 
+3. 对象的属性名现在可以有两种类型，一种是原来就有的`字符串`，另一种就是新增的 `Symbol 类型`
 
-4. 属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突 
+4. 属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突
 
-5. [**`Symbol`函数前不能使用`new`命令，否则会报错**]() 
+5. [**`Symbol`函数前不能使用`new`命令，否则会报错**]()
 
-6. `Symbol`函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，只是利于区分  
+6. `Symbol`函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，只是利于区分
 
-7. Symbol 的参数是一个对象，就会调用该对象的`toString`方法，将其转为字符串，然后才生成一个 Symbol 值 
+7. Symbol 的参数是一个对象，就会调用该对象的`toString`方法，将其转为字符串，然后才生成一个 Symbol 值
 
    ```js
    let obj = {
@@ -855,14 +857,14 @@ for (let [index, elem] of ['a', 'b'].entries()) {
    console.log(s);//对象
    ```
 
-8. `Symbol`函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的`Symbol`函数的返回值是不相等的。 
+8. `Symbol`函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的`Symbol`函数的返回值是不相等的。
 
-9. Symbol 值不能与其他类型的值进行运算，会报错 
+9. Symbol 值不能与其他类型的值进行运算，会报错
 
 ### 2、属性名
 
-1. 只要属性名由Symbol生成，就不会出现同名，[**Symbol 值作为对象属性名时，不能用点运算符**](),只能通过[`方括号结构`]()和`Object.defineProperty`指定为一个 Symbol 值 
-2. Symbol 值作为属性名时，该属性还是公开属性，不是私有属性 
+1. 只要属性名由Symbol生成，就不会出现同名，[**Symbol 值作为对象属性名时，不能用点运算符**](),只能通过[`方括号结构`]()和`Object.defineProperty`指定为一个 Symbol 值
+2. Symbol 值作为属性名时，该属性还是公开属性，不是私有属性
 
 ```js
 let mySymbol = Symbol();
@@ -886,13 +888,13 @@ a[mySymbol] // "Hello!"
 
 ### 3、属性名的遍历
 
-1. Symbol 作为属性名，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回 
+1. Symbol 作为属性名，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回
 
-2. 因为它不是私有属性，有个`Object.getOwnPropertySymbols`方法，可以获取指定对象的所有 Symbol 属性名 
+2. 因为它不是私有属性，有个`Object.getOwnPropertySymbols`方法，可以获取指定对象的所有 Symbol 属性名
 
-3. `Object.getOwnPropertySymbols`方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值 
+3. `Object.getOwnPropertySymbols`方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值
 
-   `Reflect.ownKeys`方法可以返回所有类型的键名，包括常规键名和 Symbol 键名 
+   `Reflect.ownKeys`方法可以返回所有类型的键名，包括常规键名和 Symbol 键名
 
    ```js
    let a = Symbol('a');
@@ -919,7 +921,7 @@ a[mySymbol] // "Hello!"
    console.log(a === b)//true
    ```
 
-2. `Symbol.keyFor`方法返回一个已登记的 Symbol 类型值的`key`。 
+2. `Symbol.keyFor`方法返回一个已登记的 Symbol 类型值的`key`。
 
    ```js
    let a = Symbol('abc');
@@ -946,7 +948,7 @@ a[mySymbol] // "Hello!"
    dedupe([1, 1, 2, 3]) // [1, 2, 3]
    ```
 
-2. Set 函数可以接受一个数组（或者具有 `iterable` 接口的其他数据结构）作为参数，用来初始化。 
+2. Set 函数可以接受一个数组（或者具有 `iterable` 接口的其他数据结构）作为参数，用来初始化。
 
    ```js
    //参数为数组
@@ -964,7 +966,7 @@ a[mySymbol] // "Hello!"
    console.log(set)//Set { { a: 2, b: 3 }, { a: 1, b: 2 } }
    ```
 
-3. Set 内部判断两个值是否不同 ,类似于精确相等运算符（`===`） ,两个`NaN`是相等的，两个对象总是不相等的 
+3. Set 内部判断两个值是否不同 ,类似于精确相等运算符（`===`） ,两个`NaN`是相等的，两个对象总是不相等的
 
    ```js
    let set = new Set();
@@ -982,7 +984,7 @@ a[mySymbol] // "Hello!"
    - `Set.prototype.constructor`：构造函数，默认就是`Set`函数。
    - `size`：返回`Set`实例的成员总数。
 
-2. Set 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员） 
+2. Set 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）
 
    - `add(value)`：添加某个值，返回 Set 结构本身。
    - `delete(value)`：删除某个值，返回一个布尔值，表示删除是否成功。
@@ -1009,17 +1011,17 @@ a[mySymbol] // "Hello!"
    - `entries()`：返回键值对的遍历器
    - `forEach()`：使用回调函数遍历每个成员
 
-2. `Set`的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用 Set 保存一个回调函数列表，调用时就能保证按照添加顺序调用 
+2. `Set`的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用 Set 保存一个回调函数列表，调用时就能保证按照添加顺序调用
 
-3. Set 结构的实例默认可遍历，它的默认遍历器生成函数就是它的`values`方法 
+3. Set 结构的实例默认可遍历，它的默认遍历器生成函数就是它的`values`方法
 
    ```js
    Set.prototype[Symbol.iterator] === Set.prototype.values
    ```
 
-##### (1)、**keys()，values()，entries()** 
+##### (1)、**keys()，values()，entries()**
 
-1. 由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以`keys`方法和`values`方法的行为完全一致 
+1. 由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以`keys`方法和`values`方法的行为完全一致
 
    ```js
    let set = new Set([1, 2, 3])
@@ -1039,7 +1041,7 @@ a[mySymbol] // "Hello!"
 
 ##### (2)、forEach()
 
-1. Set 结构的实例与数组一样，也拥有`forEach`方法，用于对每个成员执行某种操作，没有返回值。 
+1. Set 结构的实例与数组一样，也拥有`forEach`方法，用于对每个成员执行某种操作，没有返回值。
 
    ```js
    set = new Set([1, 4, 9]);
@@ -1049,7 +1051,7 @@ a[mySymbol] // "Hello!"
 
 ##### (3)、应用
 
-1. 实现并集（Union）、交集（Intersect）和差集 （Difference） 
+1. 实现并集（Union）、交集（Intersect）和差集 （Difference）
 
    ```js
    let a = new Set([1, 2, 3]);
@@ -1062,14 +1064,14 @@ a[mySymbol] // "Hello!"
    let difference = new Set([...a].filter(x => !b.has(x)));// Set {1}
    ```
 
-2. 同步改变原来的 Set 结构，目前没有直接的方法，但有两种变通方法 
+2. 同步改变原来的 Set 结构，目前没有直接的方法，但有两种变通方法
 
    ```js
    // 方法一
    let set = new Set([1, 2, 3]);
    set = new Set([...set].map(val => val * 2));
    // set的值是2, 4, 6
-   
+
    // 方法二
    let set = new Set([1, 2, 3]);
    set = new Set(Array.from(set, val => val * 2));
@@ -1079,8 +1081,8 @@ a[mySymbol] // "Hello!"
 ### 2、WeakSet
 
 1. WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。
-   - WeakSet 的成员只能是对象，而不能是其他类型的值 
-   - WeakSet 中的对象都是弱引用 
+   - WeakSet 的成员只能是对象，而不能是其他类型的值
+   - WeakSet 中的对象都是弱引用
 2. WeakSet 结构有以下三个方法。
    - **WeakSet.prototype.add(value)**：向 WeakSet 实例添加一个新成员。
    - **WeakSet.prototype.delete(value)**：清除 WeakSet 实例的指定成员。
@@ -1088,9 +1090,9 @@ a[mySymbol] // "Hello!"
 
 ### 3、Map
 
-1. 由于对象只接受字符串作为键名 ,Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应 
+1. 由于对象只接受字符串作为键名 ,Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应
 
-2. 不仅仅是数组，任何具有 Iterator 接口、[**且每个成员都是一个双元素的数组**]()的数据结构（详见《Iterator》一章）都可以当作`Map`构造函数的参数 
+2. 不仅仅是数组，任何具有 Iterator 接口、[**且每个成员都是一个双元素的数组**]()的数据结构（详见《Iterator》一章）都可以当作`Map`构造函数的参数
 
    ```js
    //Set和Map都可以用来生成新的 Map
@@ -1104,7 +1106,7 @@ a[mySymbol] // "Hello!"
    console.log(m1);//Map { 1 => 2, 3 => 4 }
    ```
 
-3. 如果对同一个键多次赋值，后面的值将覆盖前面的值。 
+3. 如果对同一个键多次赋值，后面的值将覆盖前面的值。
 
    ```js
    let m = new Map();
@@ -1112,7 +1114,7 @@ a[mySymbol] // "Hello!"
    console.log(m)//Map { 'a' => 234 }
    ```
 
-4. [**注意，只有对同一个对象的引用，Map 结构才将其视为同一个键**]() 
+4. [**注意，只有对同一个对象的引用，Map 结构才将其视为同一个键**]()
 
    ```js
    let m = new Map();
@@ -1126,11 +1128,11 @@ a[mySymbol] // "Hello!"
 1. Map 结构的实例有以下属性。
    - `Map.prototype.constructor`：构造函数，默认就是`Map`函数。
    - `size`：返回`Map`实例的成员总数。
-2. Map 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员） 
-   - `set(key,value)`：设置键名key对应的键值为value，然后返回整个 Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键 ，因此可以采用链式写法。 
-   - `get(key)` ：读取`key`对应的[**键值**]()，如果找不到`key`，返回`undefined`。 
-   - `has(key)`：返回一个布尔值，表示某个[**键**]()是否在当前 Map 对象之中 
-   - `delete(key)`：删除某个[**键**]()，返回`true`。如果删除失败，返回`false`。 
+2. Map 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）
+   - `set(key,value)`：设置键名key对应的键值为value，然后返回整个 Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键 ，因此可以采用链式写法。
+   - `get(key)` ：读取`key`对应的[**键值**]()，如果找不到`key`，返回`undefined`。
+   - `has(key)`：返回一个布尔值，表示某个[**键**]()是否在当前 Map 对象之中
+   - `delete(key)`：删除某个[**键**]()，返回`true`。如果删除失败，返回`false`。
    - `clear()`：清除所有成员，没有返回值。
 
 ```js
@@ -1154,13 +1156,13 @@ Map 结构原生提供三个遍历器生成函数和一个遍历方法。
 - `entries()`：返回所有成员的遍历器。
 - `forEach()`：遍历 Map 的所有成员。
 
-Map 结构的实例默认可遍历，它的默认遍历器生成函数就是它的`entries`方法 
+Map 结构的实例默认可遍历，它的默认遍历器生成函数就是它的`entries`方法
 
 ```js
 map[Symbol.iterator] === map.entries // true
 ```
 
-[**Map 的遍历顺序就是插入顺序。**]() 
+[**Map 的遍历顺序就是插入顺序。**]()
 
 ```js
 const map = new Map([
@@ -1189,24 +1191,24 @@ map.forEach(function(value, key, map) {
 
 #### 3、与其他数据结构的互相转换
 
-##### (1)、**Map 转为数组** 
+##### (1)、**Map 转为数组**
 
-Map 转为数组最方便的方法，就是使用扩展运算符（`...`） 
+Map 转为数组最方便的方法，就是使用扩展运算符（`...`）
 
 ```js
 const myMap = new Map().set(true, 7).set({foo: 3}, ['abc']);
 console.log([...myMap])//[ [ true, 7 ], [ { foo: 3 }, [ 'abc' ] ] ]
 ```
 
-##### (2)、**数组 转为 Map** 
+##### (2)、**数组 转为 Map**
 
-将数组传入 Map 构造函数，就可以转为 Map。 
+将数组传入 Map 构造函数，就可以转为 Map。
 
-##### (3)、**Map 转为对象** 
+##### (3)、**Map 转为对象**
 
-如果所有 Map 的键都是字符串，它可以无损地转为对象。 
+如果所有 Map 的键都是字符串，它可以无损地转为对象。
 
-如果有非字符串的键名，那么这个键名会被转成字符串，再作为对象的键名。 
+如果有非字符串的键名，那么这个键名会被转成字符串，再作为对象的键名。
 
 ```js
 const myMap = new Map().set('yes', true).set('no', false).set(10, 100);
@@ -1220,7 +1222,7 @@ function fn(mapObj) {
 console.log(fn(myMap)) //{ '10': 100, yes: true, no: false }
 ```
 
-##### (4)、**对象转为 Map** 
+##### (4)、**对象转为 Map**
 
 ```js
 function fn(obj) {
@@ -1243,7 +1245,7 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
 
 1. Proxy用来处理默认行为（如get、set等），Proxy会在目标对象之前架设一层[“拦截”](),如果外界对该对象进行访问，都必须先通过这层拦截才可以访问。
 
-2. Proxy 对象 的写法，`new Proxy()`表示生成一个`Proxy`实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为 
+2. Proxy 对象 的写法，`new Proxy()`表示生成一个`Proxy`实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为
 
    ```JS
    var proxy = new Proxy(target, handler);
@@ -1253,49 +1255,49 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
 
 ### 1、get(**target, propKey, receiver** )
 
-用于拦截某个属性的[**读取**]()操作，可以接受三个参数，依次为目标对象、属性名和 proxy 实例本身（严格地说，是操作行为所针对的对象），其中最后一个参数可选 
+用于拦截某个属性的[**读取**]()操作，可以接受三个参数，依次为目标对象、属性名和 proxy 实例本身（严格地说，是操作行为所针对的对象），其中最后一个参数可选
 
 ### 2、set(**target, propKey**, value**, receiver** )
 
-用来拦截某个属性的[**赋值**]()操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身，其中最后一个参数可选。 
+用来拦截某个属性的[**赋值**]()操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身，其中最后一个参数可选。
 
-### 3、**apply(target, object, args)** 
+### 3、**apply(target, object, args)**
 
-拦截函数的调用、`call`和`apply`操作 。`apply`方法可以接受三个参数，分别是目标对象、目标对象的上下文对象（`this`）和目标对象的参数数组。 
+拦截函数的调用、`call`和`apply`操作 。`apply`方法可以接受三个参数，分别是目标对象、目标对象的上下文对象（`this`）和目标对象的参数数组。
 
-### 4、**has(target, propKey)** 
+### 4、**has(target, propKey)**
 
-### 5、construct(**target, args** ) 
+### 5、construct(**target, args** )
 
-### 6、**deleteProperty(target, propKey)** 
+### 6、**deleteProperty(target, propKey)**
 
-### 7、**defineProperty(target, propKey, propDesc)** 
+### 7、**defineProperty(target, propKey, propDesc)**
 
-### 8、**getOwnPropertyDescriptor(target, propKey)** 
+### 8、**getOwnPropertyDescriptor(target, propKey)**
 
-### 9、**getPrototypeOf(target)** 
+### 9、**getPrototypeOf(target)**
 
-### 10、**isExtensible(target)** 
+### 10、**isExtensible(target)**
 
-### 11、**ownKeys(target)** 
+### 11、**ownKeys(target)**
 
-### 12、**preventExtensions(target)** 
+### 12、**preventExtensions(target)**
 
-### 13、**setPrototypeOf(target, proto)** 
+### 13、**setPrototypeOf(target, proto)**
 
 ## 3、Proxy.revocable()
 
-`Proxy.revocable`方法返回一个可取消的 Proxy 实例。 
+`Proxy.revocable`方法返回一个可取消的 Proxy 实例。
 
 # Promise对象
 
-1. 使用`Promise`对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，`Promise`对象提供统一的接口，使得控制异步操作更加容易。 
+1. 使用`Promise`对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，`Promise`对象提供统一的接口，使得控制异步操作更加容易。
 
 2. 对象的状态不受外界影响。`Promise`对象代表一个异步操作，有三种状态：`pending`（进行中）、`resolved`（已成功）和`rejected`（已失败）。
 
-   Promise 的状态一旦改变，就永久保持该状态，不会再变了  
+   Promise 的状态一旦改变，就永久保持该状态，不会再变了
 
-3. `Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject` 
+3. `Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`
 
    ```js
    //Promise 状态已经变成resolved，再抛出错误是无效的。
@@ -1307,7 +1309,7 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
        value => console.log('resolve:' + value),//resolve:我是resolve的参数
        error => console.log('reject:' + error)
    )
-   
+
    new Promise((resolve, reject) => {
        // reject('我是reject抛出的错误'),
        throw new Error('错误')// 等同与 reject('我是reject抛出的错误')
@@ -1318,17 +1320,17 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
    )
    ```
 
-### Promise 实例方法 
+### Promise 实例方法
 
-- then(resolve，reject)：`then`方法返回的是一个新的`Promise`实例 ，`then`方法的第一个参数是`resolved`状态的回调函数，第二个参数（可选）是`rejected`状态的回调函数 
+- then(resolve，reject)：`then`方法返回的是一个新的`Promise`实例 ，`then`方法的第一个参数是`resolved`状态的回调函数，第二个参数（可选）是`rejected`状态的回调函数
 
-  建议总是使用`catch`方法，而不使用`then`方法的第二个参数 
+  建议总是使用`catch`方法，而不使用`then`方法的第二个参数
 
   ```js
   //1、状态为resolve
   new Promise((resolve, reject) => resolve('我是resolve的参数'))
       .then(value => console.log(value))//我是resolve的参数
-  
+
   //2、状态为reject
   new Promise((resolve, reject) => reject('我是reject抛出的错误'))
       .then(
@@ -1342,7 +1344,7 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
   ```js
   new Promise((resolve, reject) => reject('我是reject抛出的错误'))
       .catch(error => console.log('catch:' + error))//catch:我是reject抛出的错误
-  
+
   function fn(value) {//返回一个Promise的实例，并获取rs的值
       return new Promise((rs, rj) => rs(value))
   }
@@ -1358,24 +1360,24 @@ console.log([...fn(obj)])//[ [ '10', 100 ], [ 'yes', true ], [ 'no', false ] ]
       .catch(error => console.log('catch:' + error))//'错误,它们之中任何一个抛出的错误，都会被最后一个catch捕获
   ```
 
-- finally()：`finally`方法用于指定不管 Promise 对象最后状态如何，都会执行的操作 ，不接受任何参数 
+- finally()：`finally`方法用于指定不管 Promise 对象最后状态如何，都会执行的操作 ，不接受任何参数
 
-### Promise 静态方法 
+### Promise 静态方法
 
-- Promise.all ：用于将多个 Promise 实例，包装成一个新的 Promise 实例。 
+- Promise.all ：用于将多个 Promise 实例，包装成一个新的 Promise 实例。
 
-- Promise.race ：用于将多个 Promise 实例，包装成一个新的 Promise 实例。 
+- Promise.race ：用于将多个 Promise 实例，包装成一个新的 Promise 实例。
 
-- Promise.resolve ：将现有对象转为 Promise 对象 
+- Promise.resolve ：将现有对象转为 Promise 对象
 
-  `Promise.resolve`方法的参数分成四种情况。 
+  `Promise.resolve`方法的参数分成四种情况。
 
-  - 参数是一个 Promise 实例 
-  - **参数是一个thenable对象** 
-  - **参数不是具有then方法的对象，或根本就不是对象** 
-  - **不带有任何参数** 
+  - 参数是一个 Promise 实例
+  - **参数是一个thenable对象**
+  - **参数不是具有then方法的对象，或根本就不是对象**
+  - **不带有任何参数**
 
-- Promise.reject(reason)  ：返回一个新的 Promise 实例，该实例的状态为`rejected`。 
+- Promise.reject(reason)  ：返回一个新的 Promise 实例，该实例的状态为`rejected`。
 
 ### 应用
 
@@ -1432,9 +1434,9 @@ JavaScript 原有的表示“集合”的数据结构，主要是数组（Array�
 
 ### 1、简介
 
-1. 严格模式：ES6 实际上把整个语言升级到了严格模式 
+1. 严格模式：ES6 实际上把整个语言升级到了严格模式
 
-   [**类和模块的内部，默认就是严格模式**]()，所以不需要使用`use strict`指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。 
+   [**类和模块的内部，默认就是严格模式**]()，所以不需要使用`use strict`指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。
 
 2. class类写法不需要加上`function`这个关键字 ，方法之间不需要逗号分隔 ，使用时必须用`new`，也不能当普通函数运行(否则会报错),也不存在变量提升
 
@@ -1448,8 +1450,8 @@ let p = new Person();
 //使用在前，声明在后，会报错
 {
     new Foo(); // ReferenceError
-	class Foo {}                 
-} 
+	class Foo {}
+}
 ```
 
 1. es6与es5写法区别和枚举区别
@@ -1469,9 +1471,9 @@ Object.defineProperty(p, 'sex', {
     enumerable: true //是否可枚举,默认为false
 });
 
-//自身+原型+通过Object.defineProperty()添加的可枚举或通过原型对象绑定的可以枚举属性 
+//自身+原型+通过Object.defineProperty()添加的可枚举或通过原型对象绑定的可以枚举属性
 for (var key in p) {
-    console.log('for in:' + key); 
+    console.log('for in:' + key);
 }//age toString getAge p
 
 console.log('Object.keys:' + Object.keys(p)); //自身的+通过Object.defineProperty()添加的可枚举
@@ -1505,9 +1507,9 @@ Object.defineProperty(p, 'sex', {
     enumerable: true //是否可枚举,默认为false
 });
 //以下方法均取不到内部定义的方法
-//自身+原型+通过Object.defineProperty()添加的可枚举或通过原型对象绑定的可以枚举属性 
+//自身+原型+通过Object.defineProperty()添加的可枚举或通过原型对象绑定的可以枚举属性
 for (var key in p) {
-    console.log('for in:' + key); 
+    console.log('for in:' + key);
 }//age getAge() sex a() b()
 
 console.log('Object.keys:' + Object.keys(p)); //age sex
@@ -1516,18 +1518,18 @@ console.log('JSON.stringify:' + JSON.stringify(p)); //{"age":20,"sex":"male"}
 
 ### 2、constructor
 
-1. `constructor`方法是类的默认方法，通过`new`命令生成对象实例时，自动调用该方法。一个类必须有`constructor`方法，如果没有显式定义，一个空的`constructor`方法会被默认添加 
+1. `constructor`方法是类的默认方法，通过`new`命令生成对象实例时，自动调用该方法。一个类必须有`constructor`方法，如果没有显式定义，一个空的`constructor`方法会被默认添加
 
    ```.js
    class Point {...}
-   
+
    // 等同于
    class Point {
      constructor() {}
    }
    ```
 
-2. `constructor`方法默认返回实例对象（即`this`），完全可以指定返回另外一个对象。 
+2. `constructor`方法默认返回实例对象（即`this`），完全可以指定返回另外一个对象。
 
    ```js
    class Foo {
@@ -1558,10 +1560,10 @@ person.sayName();//lisi
 
 ### 4、this的指向
 
-1. 类的方法内部如果含有`this`，它[默认指向类的实例]() 
+1. 类的方法内部如果含有`this`，它[默认指向类的实例]()
 
 ```js
-//单独使用该方法，很可能报错 
+//单独使用该方法，很可能报错
 class Person {
     constructor(name) {
         this.name = name;
@@ -1577,7 +1579,7 @@ getName();//Cannot read property 'name' of undefined
 
 解决方法如下：
 
-1. 在构造方法中绑定`this` 
+1. 在构造方法中绑定`this`
 
    ```js
    class Person {
@@ -1594,7 +1596,7 @@ getName();//Cannot read property 'name' of undefined
    getName();//lisi
    ```
 
-2. 箭头函数 
+2. 箭头函数
 
    ```js
    class Person {
@@ -1633,7 +1635,7 @@ console.log(p.age);//error:"invalid value"
 
 ### 6、静态方法&静态属性&实例属性
 
-1. **静态方法**:类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上`static`关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法” 
+1. **静态方法**:类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上`static`关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”
 
    ```js
    class Person {
@@ -1646,7 +1648,7 @@ console.log(p.age);//error:"invalid value"
    p.getName();//TypeError: p.getName is not a function
    ```
 
-   [注意，如果静态方法包含`this`关键字，这个`this`指的是类，而不是实例。]() 
+   [注意，如果静态方法包含`this`关键字，这个`this`指的是类，而不是实例。]()
 
    ```js
    class Person {
@@ -1710,7 +1712,7 @@ console.log(p.age);//error:"invalid value"
 
 ### 1、extends
 
-1. Class 可以通过`extends`关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。 
+1. Class 可以通过`extends`关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。
 
    继承父类的所有方法和属性，在子类使用this之前必须使用super
 
@@ -1742,7 +1744,7 @@ console.log(p.age);//error:"invalid value"
 
 ### 2.Object.getPrototypeOf()
 
-`Object.getPrototypeOf`方法可以用来从子类上获取父类。 可以使用这个方法判断，一个类是否继承了另一个类。 
+`Object.getPrototypeOf`方法可以用来从子类上获取父类。 可以使用这个方法判断，一个类是否继承了另一个类。
 
 ```js
 Object.getPrototypeOf(ColorPoint) === Point// true
@@ -1750,17 +1752,17 @@ Object.getPrototypeOf(ColorPoint) === Point// true
 
 ### 3、super关键字
 
-`super`这个关键字，既可以当作函数使用，也可以当作对象使用。在这两种情况下，它的用法完全不同。 
+`super`这个关键字，既可以当作函数使用，也可以当作对象使用。在这两种情况下，它的用法完全不同。
 
 ##### 1、函数情况
 
-`super()`作为函数调用时，代表父类的构造函数 
+`super()`作为函数调用时，代表父类的构造函数
 
-ES6 要求，子类的构造函数必须执行一次`super`函数。 否则 JavaScript 引擎会报错。 
+ES6 要求，子类的构造函数必须执行一次`super`函数。 否则 JavaScript 引擎会报错。
 
-作为函数时，`super()`只能用在子类的构造函数之中，用在其他地方就会报错。 
+作为函数时，`super()`只能用在子类的构造函数之中，用在其他地方就会报错。
 
-[注意，`super`虽然代表了父类`A`的构造函数，但是返回的是子类`B`的实例，即`super`内部的`this`指的是`B`，因此`super()`在这里相当于`A.prototype.constructor.call(this)`。]() 
+[注意，`super`虽然代表了父类`A`的构造函数，但是返回的是子类`B`的实例，即`super`内部的`this`指的是`B`，因此`super()`在这里相当于`A.prototype.constructor.call(this)`。]()
 
 ```js
 class A {
@@ -1783,7 +1785,7 @@ class C extends A {
 
 ##### 3、对象情况
 
-`super`作为对象时，在普通方法中，指向父类的原型对象；在静态方法中，指向父类。 所以定义在父类实例上的方法或属性，是无法通过`super`调用的。 
+`super`作为对象时，在普通方法中，指向父类的原型对象；在静态方法中，指向父类。 所以定义在父类实例上的方法或属性，是无法通过`super`调用的。
 
 1. 普通函数
 
@@ -1834,7 +1836,7 @@ class C extends A {
    child.myMethod(2); // instance 2
    ```
 
-   在子类的静态方法中通过`super`调用父类的方法时，方法内部的`this`指向当前的子类，而不是子类的实例。 
+   在子类的静态方法中通过`super`调用父类的方法时，方法内部的`this`指向当前的子类，而不是子类的实例。
 
    ```js
    class A {
@@ -1872,7 +1874,7 @@ ES6的模块化的基本规则或特点：
 
 ### 1、export
 
-1. `export`命令用于规定模块的对外接口 
+1. `export`命令用于规定模块的对外接口
 
 2. 使用方式如下：
 
@@ -1901,22 +1903,22 @@ ES6的模块化的基本规则或特点：
 
    ```js
    export 1;//error
-   
+
    let x = 1;
    export x;//error
    export {x}//true
-   
+
    let f(){}
    export f;//error
    export {f}//true
-   
+
    function foo(){
        export default 'def'
    }
    foo();//error
    ```
 
-4. `export`语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。 
+4. `export`语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。
 
    ```js
    export var foo = 'bar';
@@ -1926,24 +1928,24 @@ ES6的模块化的基本规则或特点：
 
 ### 2、import
 
-1. `import`命令用于输入其他模块提供的功能。 
+1. `import`命令用于输入其他模块提供的功能。
 
    - 引入路径可以是相对或绝对路径
 
    - `import`只会加载一次
 
-   - `import`命令具有提升效果，会提升到整个模块的头部，首先执行。 
+   - `import`命令具有提升效果，会提升到整个模块的头部，首先执行。
 
    - `import` 命令输入的变量都是**只读** ，不可更改接口
 
    - 不能使用表达式和变量
 
      ```js
-     import {'f'+'oo'} from ... //报错`  
+     import {'f'+'oo'} from ... //报错`
      // 报错
      let module = 'my_module';
      import { foo } from module;
-     
+
      //报错,属于语法错误：因为es6是编译时加载，而非运行进再加载，所以在执行语句前已经做了提升
      if (x === 1) {
        import { xx } from  './demo.js'
@@ -1972,7 +1974,7 @@ ES6的模块化的基本规则或特点：
 
 ### 3、export default
 
-一个模块有且只有一个**export default** ,`export default`命令只能使用一次 
+一个模块有且只有一个**export default** ,`export default`命令只能使用一次
 
 ### 4、export和import的复合写法
 

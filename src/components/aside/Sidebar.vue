@@ -40,9 +40,15 @@
                     title="知识库"
                 ></menu-effect>
             </template>
-            <el-submenu index="2-1">
-                <span slot="title">选项4</span>
-                <el-menu-item index="/knowledge">es6</el-menu-item>
+            <el-submenu :index="key" v-for="(item,key) in catalog" :key="key">
+                <span slot="title">{{ key }}</span>
+                <el-menu-item
+                    index="/knowledge"
+                    v-for="(nav, k) in item"
+                    :key="k"
+                >
+                    <a :href="`#${nav}`">{{ nav }}</a>
+                </el-menu-item>
             </el-submenu>
         </el-submenu>
         <el-submenu index="3">
@@ -112,11 +118,14 @@
 import MenuEffect from '@/components/aside/MenuEffect.vue'
 import Clock from '@/components/aside/Clock.vue'
 
+import catalog from '@/assets/catalog.json'
+
 export default {
   name: "sidebar",
   data() {
     return {
-      isCollapse: false
+      isCollapse: false,
+      catalog
     };
   },
   components: {

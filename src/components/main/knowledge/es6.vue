@@ -1,23 +1,41 @@
 <template>
-    <div ref="div"></div>
+    <!-- <mavon-editor v-html="text" @navigationToggle="navigationToggle"/> -->
+    <div id="knowledge">
+        <mavon-editor
+            v-html="text"
+            :subfield="false"
+            defaultOpen="preview"
+            :navigation="true"
+        />
+    </div>
+
 </template>
 
 <script>
-
 export default {
     data() {
         return {
             baseUrl: process.env.BASE_URL,
-            data: ''
+            text: '',
+           value: ""
         }
     },
     mounted() {
-        fetch(`${this.baseUrl}note/es6/es6.md`)
+        fetch(`${this.baseUrl}note/es6.md`)
             .then(response => response.text())
             .then(data => {
-                // this.$refs.div.innerHTML = this.$marked(data)
-                this.$refs.div.innerHTML = data
+                this.text = this.$marked(data.toString())
             })
+    },
+    methods: {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+#knowledge {
+    flex: auto;
+    overflow-y: scroll;
+}
+</style>
+

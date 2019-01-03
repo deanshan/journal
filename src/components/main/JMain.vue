@@ -24,5 +24,7 @@ export default {
 <style lang="scss" scoped>
 #j-main {
     flex: auto;
+    overflow-y: scroll;
+    padding: 20px 50px;
 }
 </style>
