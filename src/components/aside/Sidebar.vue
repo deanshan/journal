@@ -42,6 +42,7 @@
             </template>
             <el-submenu :index="key" v-for="(item,key) in catalog" :key="key">
                 <span slot="title">{{ key }}</span>
+                <!-- <router-link slot="title" to="/knowledge">{{ key }}</router-link> -->
                 <el-menu-item
                     index="/knowledge"
                     v-for="(nav, k) in item"

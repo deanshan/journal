@@ -26,6 +26,11 @@ export default {
             .then(data => {
                 this.text = this.$marked(data.toString())
             })
+        fetch('http://10.2.102.134:3100')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
     },
     methods: {
     }
