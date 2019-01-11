@@ -21,15 +21,16 @@ export default {
         }
     },
     mounted() {
-        fetch(`${this.baseUrl}note/es6.md`)
+        // fetch(`${this.baseUrl}note/es6.md`)
+        //     .then(response => response.text())
+        //     .then(data => {
+        //         this.text = this.$marked(data.toString())
+        //     })
+        fetch('http://10.2.102.158:3100')
             .then(response => response.text())
             .then(data => {
-                this.text = this.$marked(data.toString())
-            })
-        fetch('http://10.2.102.134:3100')
-            .then(response => response.json())
-            .then(data => {
                 console.log(data)
+                this.text = data
             })
     },
     methods: {
