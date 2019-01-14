@@ -36,7 +36,7 @@ export default {
     position: relative;
     z-index: 101;
     &:hover {
-        background: #3cdddd;
+        background: #07417a;
         span,i {
             color: gold;
         }
@@ -46,7 +46,7 @@ export default {
         --scale: 0;
         --size: 200px;
         -webkit-transform: scale(var(--scale));
-        background: radial-gradient(circle closest-side,#ff1ac6,transparent);
+        background: radial-gradient(circle closest-side,#26c6f0,transparent);
         content: "";
         height: var(--size);
         left: calc(var(--x) - var(--size) / 2);

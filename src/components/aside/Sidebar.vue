@@ -1,14 +1,15 @@
 <template>
   <div id="sidebar" :style="{'width': !isCollapse ? '260px' : '64px'}">
-    <div class="switch" ref="switch" @click="switching">
-        <i :class="[ !isCollapse ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right' ]"></i>
+    <div class="switch" @click="switching" :style="{ 'left': !isCollapse ? '85%' : '32%'}">
+        <i class="el-icon-menu"></i>
     </div>
 
     <el-menu
         :collapse="isCollapse"
         :unique-opened=true
         :collapse-transition=true
-        active-text-color="#3cdddd"
+        active-text-color="#000c3b"
+        background="#07417a"
         :default-active="this.$router.path"
         router
     >
@@ -106,18 +107,12 @@
             </el-submenu>
         </el-submenu>
     </el-menu>
-
-    <div class="clock">
-        <j-clock :style="{ 'width': '240px', 'height': '37px'}"></j-clock>
-    </div>
-
   </div>
 </template>
 
 <script>
 
 import MenuEffect from '@/components/aside/MenuEffect.vue'
-import Clock from '@/components/aside/Clock.vue'
 
 import catalog from '@/assets/catalog.json'
 
@@ -130,12 +125,9 @@ export default {
     };
   },
   components: {
-      'menu-effect': MenuEffect,
-      'j-clock': Clock
+      'menu-effect': MenuEffect
   },
   mounted() {
-    this.$refs.switch.style.setProperty("--start", "2%");
-    this.$refs.switch.style.setProperty("--end", "8%");
   },
   methods: {
     switching() {
@@ -156,45 +148,28 @@ export default {
 
 <style lang="scss" scoped>
 #sidebar {
-    padding-top: 24px;
-    border-right: solid 1px #e6e6e6;
+    padding-top: 32px;
+    background: #000c3b;
+    box-shadow: inset 0 0 30px #07417a;
     width: 240px;
     display: flex;
     flex-direction: column;
     position: relative;
-    transition: all 0.2s linear;
+    overflow: hidden;
     .switch {
         position: absolute;
-        top: 0;
+        top: 1%;
         z-index: 111;
-        animation: move 1s ease-in infinite alternate;
         i {
             font-size: 24px;
-            color: #347245;
+            color: #83c7e3;
             cursor: pointer;
         }
     }
     .el-menu {
         flex: auto;
-        overflow: scroll;
+        overflow-y: scroll;
     }
-    .clock {
-        width: 260px;
-        height: 50px;
-        padding: 30px 0;
-        // text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-@keyframes move {
-  from {
-    right: var(--start);
-  }
-  to {
-    right: var(--end);
-  }
 }
 </style>
 

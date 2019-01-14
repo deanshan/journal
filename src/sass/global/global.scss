@@ -1,17 +1,43 @@
-.el-menu {
-    border-right: none;
+::-webkit-scrollbar {
+    width: 0px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.el-submenu__title {
-    padding: 0 !important;
-    i.el-submenu__icon-arrow {
-        z-index: 111;
-        color: black;
-    }
-    >span {
-        margin-left: 48px;
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(74, 168, 0, 0.6);
+}
+.el-menu {
+    border-right: none;
+    background: none;
+}
+// 二级菜单title style
+.el-submenu {
+    .el-submenu {
+        .el-submenu__title {
+            span {
+                padding-left: 40px;
+            }
+        }
     }
 }
-.el-submenu__icon-arrow {
-    padding-left: 20px;
+.el-submenu__title {
+    padding: 0 !important;
+}
+.el-submenu__title,
+.el-menu-item {
+    color: #83c7e3;
+}
+.el-submenu__title i {
+    color: #83c7e3;
+
+}
+.el-menu-item:focus,
+.el-menu-item:hover,
+.el-submenu__title:hover {
+    background-color: #07417a;
 }
