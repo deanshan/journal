@@ -25,7 +25,7 @@ export default new Router({
             {
               path: 'html',
               name: 'html',
-              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Html.vue')
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/HTML.vue')
             },
             {
               path: 'css',
