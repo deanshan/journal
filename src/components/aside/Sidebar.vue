@@ -41,9 +41,18 @@
                     title="知识库"
                 ></menu-effect>
             </template>
-            <el-submenu :index="key" v-for="(item,key) in catalog" :key="key">
+            <el-menu-item-group>
+                <el-menu-item
+                    v-for="(nav, key) in catalog"
+                    :key="key"
+                    :index="`/knowledge/${nav}`"
+                >
+                    {{ nav }}
+                </el-menu-item>
+            </el-menu-item-group>
+
+            <!-- <el-submenu :index="key" v-for="(item,key) in catalog" :key="key">
                 <span slot="title">{{ key }}</span>
-                <!-- <router-link slot="title" to="/knowledge">{{ key }}</router-link> -->
                 <el-menu-item
                     index="/knowledge"
                     v-for="(nav, k) in item"
@@ -51,7 +60,7 @@
                 >
                     <a :href="`#${nav}`">{{ nav }}</a>
                 </el-menu-item>
-            </el-submenu>
+            </el-submenu> -->
         </el-submenu>
         <el-submenu index="3">
             <template slot="title">
@@ -114,14 +123,14 @@
 
 import MenuEffect from '@/components/aside/MenuEffect.vue'
 
-import catalog from '@/assets/catalog.json'
+// import catalog from '@/assets/catalog.json'
 
 export default {
   name: "sidebar",
   data() {
     return {
       isCollapse: false,
-      catalog
+      catalog: ['html', 'css', 'javascript', 'es6', 'vue']
     };
   },
   components: {

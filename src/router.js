@@ -15,12 +15,39 @@ export default new Router({
         {
           path: '',
           name: 'cartogram',
-          component: () => import('@/components/main/cartogram/Cartogram.vue')
+          component: () => import(/* webpackChunkName: "main" */'@/components/main/cartogram/Cartogram.vue')
         },
         {
-          path: '/knowledge',
+          path: 'knowledge',
           name: 'knowledge',
-          component: () => import('@/components/main/knowledge/es6.vue')
+          component: () => import(/* webpackChunkName: "main" */ '@/components/main/Knowledge.vue'),
+          children: [
+            {
+              path: 'html',
+              name: 'html',
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Html.vue')
+            },
+            {
+              path: 'css',
+              name: 'css',
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/CSS.vue')
+            },
+            {
+              path: 'javascript',
+              name: 'javascript',
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Javascript.vue')
+            },
+            {
+              path: 'es6',
+              name: 'es6',
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/ES6.vue')
+            },
+            {
+              path: 'vue',
+              name: 'vue',
+              component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Vue.vue')
+            }
+          ]
         }
       ]
     },
