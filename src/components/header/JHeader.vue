@@ -1,8 +1,6 @@
 <template>
     <div id="header">
-        <div class="title">
-            <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
-        </div>
+
         <nav>
             <a
                 href="#"
@@ -29,8 +27,6 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped src="@/sass/global/font-special.scss"></style>
 
 <style lang="scss" scoped>
 #header {

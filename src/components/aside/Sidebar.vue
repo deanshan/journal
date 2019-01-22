@@ -1,8 +1,13 @@
 <template>
   <div id="sidebar" :style="{'width': !isCollapse ? '260px' : '64px'}">
-    <div class="switch" @click="switching" :style="{ 'left': !isCollapse ? '85%' : '32%'}">
-        <i class="el-icon-menu"></i>
-    </div>
+      <div>
+            <div class="title">
+                <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
+            </div>
+            <div class="switch" @click="switching" :style="{ 'left': !isCollapse ? '85%' : '32%'}">
+                <i class="el-icon-menu"></i>
+            </div>
+      </div>
 
     <el-menu
         :collapse="isCollapse"
@@ -13,27 +18,14 @@
         :default-active="this.$router.path"
         router
     >
-    <!-- <el-menu
-        :collapse="isCollapse"
-        @open="handleOpen"
-        @close="handleClose"
-        @select="handleSelect"
-        :unique-opened=true
-        :collapse-transition=true
-        active-text-color="#3cdddd"
-    > -->
-        <el-submenu index="1" >
+        <el-menu-item index="/">
             <template slot="title">
                 <menu-effect
                     iconclass="el-icon-news"
                     title="统计图"
                 ></menu-effect>
             </template>
-            <el-menu-item-group>
-                <el-menu-item index="/">/cartogram</el-menu-item>
-                <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-        </el-submenu>
+        </el-menu-item>
         <el-submenu index="2">
             <template slot="title">
                 <menu-effect
@@ -163,6 +155,7 @@ export default {
     width: 240px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     position: relative;
     overflow: hidden;
     .switch {

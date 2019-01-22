@@ -1,10 +1,19 @@
 <template>
   <div id="home">
-    <j-header></j-header>
+    <!-- 左侧导航 -->
+    <j-sidebar></j-sidebar>
+    <!-- 右侧内容 -->
+    <section class="section">
+      <!-- 头部 -->
+      <j-header></j-header>
+      <!-- 主体 -->
+      <j-main></j-main>
+    </section>
+    <!-- <j-header></j-header>
     <section class="section">
       <j-sidebar></j-sidebar>
       <j-main></j-main>
-    </section>
+    </section> -->
   </div>
 </template>
 
@@ -36,10 +45,10 @@ export default {
   height: 100%;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
   section.section {
     flex: auto;
     display: flex;
+    flex-direction: column;
   }
 }
 </style>

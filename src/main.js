@@ -12,6 +12,7 @@ Vue.use(mavonEditor)
 
 import "./sass/global/reset.scss";
 import "./sass/global/global.scss";
+import "./sass/global/font-special.scss";
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
