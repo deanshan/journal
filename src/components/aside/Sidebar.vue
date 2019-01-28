@@ -1,37 +1,21 @@
 <template>
-  <div id="sidebar" :style="{'width': !isCollapse ? '260px' : '64px'}">
-      <div>
-            <div class="title">
-                <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
-            </div>
-            <div class="switch" @click="switching" :style="{ 'left': !isCollapse ? '85%' : '32%'}">
-                <i class="el-icon-menu"></i>
-            </div>
-      </div>
-
+  <div id="sidebar" :style="{'width': !collapse_status ? '240px' : '64px'}">
     <el-menu
-        :collapse="isCollapse"
+        :collapse="collapse_status"
         :unique-opened=true
         :collapse-transition=true
         active-text-color="#000c3b"
         background="#07417a"
-        :default-active="this.$router.path"
+        default-active="/"
         router
     >
-        <el-menu-item index="/">
-            <template slot="title">
-                <menu-effect
-                    iconclass="el-icon-news"
-                    title="统计图"
-                ></menu-effect>
-            </template>
+        <el-menu-item index="/" >
+            <menu-effect iconclass="el-icon-news" title="统计图"></menu-effect>
         </el-menu-item>
+
         <el-submenu index="2">
             <template slot="title">
-                <menu-effect
-                    iconclass="el-icon-menu"
-                    title="知识库"
-                ></menu-effect>
+                <menu-effect iconclass="el-icon-menu" title="知识库"></menu-effect>
             </template>
             <el-menu-item-group>
                 <el-menu-item
@@ -39,79 +23,28 @@
                     :key="key"
                     :index="`/knowledge/${nav}`"
                 >
-                    {{ nav }}
+                    <menu-effect :title=nav padding_left="40px"></menu-effect>
                 </el-menu-item>
             </el-menu-item-group>
+        </el-submenu>
 
-            <!-- <el-submenu :index="key" v-for="(item,key) in catalog" :key="key">
-                <span slot="title">{{ key }}</span>
-                <el-menu-item
-                    index="/knowledge"
-                    v-for="(nav, k) in item"
-                    :key="k"
-                >
-                    <a :href="`#${nav}`">{{ nav }}</a>
-                </el-menu-item>
-            </el-submenu> -->
-        </el-submenu>
-        <el-submenu index="3">
-            <template slot="title">
-                <menu-effect
-                    iconclass="el-icon-service"
-                    title="音乐"
-                ></menu-effect>
-            </template>
-            <el-submenu index="3-1">
-                <span slot="title">选项4</span>
-                <el-menu-item index="3-1-1">选项1</el-menu-item>
-                <el-menu-item index="3-1-2">选项1</el-menu-item>
-                <el-menu-item index="3-1-3">选项1</el-menu-item>
-                <el-menu-item index="3-1-4">选项1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-submenu index="4">
-            <template slot="title">
-                <menu-effect
-                    iconclass="el-icon-location"
-                    title="位置信息"
-                ></menu-effect>
-            </template>
-            <el-submenu index="4-1">
-                <span slot="title">选项4</span>
-                <el-menu-item index="4-1-1">选项1</el-menu-item>
-                <el-menu-item index="4-1-2">选项1</el-menu-item>
-                <el-menu-item index="4-1-3">选项1</el-menu-item>
-                <el-menu-item index="4-1-4">选项1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-submenu index="5">
-            <template slot="title">
-                <menu-effect
-                    iconclass="el-icon-mobile-phone"
-                    title="实时通讯"
-                ></menu-effect>
-            </template>
-            <el-submenu index="5-1">
-                <span slot="title">选项4</span>
-                <el-menu-item index="5-1-1">选项1</el-menu-item>
-                <el-menu-item index="5-1-2">选项1</el-menu-item>
-                <el-menu-item index="5-1-3">选项1</el-menu-item>
-                <el-menu-item index="5-1-4">选项1</el-menu-item>
-                <el-menu-item index="5-1-1">选项1</el-menu-item>
-                <el-menu-item index="5-1-2">选项1</el-menu-item>
-                <el-menu-item index="5-1-3">选项1</el-menu-item>
-                <el-menu-item index="5-1-4">选项1</el-menu-item>
-                <el-menu-item index="5-1-1">选项1</el-menu-item>
-                <el-menu-item index="5-1-2">选项1</el-menu-item>
-                <el-menu-item index="5-1-3">选项1</el-menu-item>
-                <el-menu-item index="5-1-4">选项12</el-menu-item>
-            </el-submenu>
-        </el-submenu>
+        <el-menu-item index="/music">
+            <menu-effect iconclass="el-icon-service" title="音乐"></menu-effect>
+        </el-menu-item>
+
+        <el-menu-item index="/map" >
+            <menu-effect iconclass="el-icon-location" title="位置信息"></menu-effect>
+        </el-menu-item>
+
+        <el-menu-item index="/postal" >
+            <menu-effect iconclass="el-icon-mobile-phone" title="实时通讯"></menu-effect>
+        </el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 
 import MenuEffect from '@/components/aside/MenuEffect.vue'
 
@@ -121,7 +54,7 @@ export default {
   name: "sidebar",
   data() {
     return {
-      isCollapse: false,
+    //   isCollapse: false,
       catalog: ['html', 'css', 'javascript', 'es6', 'vue']
     };
   },
@@ -130,10 +63,12 @@ export default {
   },
   mounted() {
   },
+  computed: {
+      ...mapState({
+          collapse_status: state => state.collapse_status
+      }),
+  },
   methods: {
-    switching() {
-      this.isCollapse = !this.isCollapse;
-    },
     handleOpen(key, keyPath) {
         console.log(key, keyPath);
     },
@@ -158,16 +93,6 @@ export default {
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    .switch {
-        position: absolute;
-        top: 1%;
-        z-index: 111;
-        i {
-            font-size: 24px;
-            color: #83c7e3;
-            cursor: pointer;
-        }
-    }
     .el-menu {
         flex: auto;
         overflow-y: scroll;

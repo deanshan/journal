@@ -1,7 +1,7 @@
 <template>
     <div id="menu-effect" @mousemove="effect($event)" ref="effect">
         <i :class="iconclass"></i>
-        <span slot="title">{{ title }}</span>
+        <span slot="title" :style="{'padding-left': padding_left}">{{ title }}</span>
     </div>
 </template>
 
@@ -14,6 +14,10 @@ export default {
             type: String
         },
         title: {
+            default: '',
+            type: String
+        },
+        padding_left: {
             default: '',
             type: String
         }
@@ -31,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 #menu-effect {
+    width: 100%;
     overflow: hidden;
     transition: all .2s ease;
     position: relative;
@@ -64,9 +69,8 @@ export default {
     }
     span,i {
       position: relative;
-    }
-    i {
-        margin-left: 20px;
+      color: #83c7e3;
+      margin-left: 20px;
     }
 }
 </style>

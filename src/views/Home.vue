@@ -1,23 +1,18 @@
 <template>
-  <div id="home">
-    <!-- 左侧导航 -->
-    <j-sidebar></j-sidebar>
-    <!-- 右侧内容 -->
-    <section class="section">
-      <!-- 头部 -->
-      <j-header></j-header>
-      <!-- 主体 -->
-      <j-main></j-main>
-    </section>
-    <!-- <j-header></j-header>
-    <section class="section">
-      <j-sidebar></j-sidebar>
-      <j-main></j-main>
-    </section> -->
-  </div>
+    <div id="home" @click.stop="searchStatus">
+        <!-- 头部 -->
+        <j-header></j-header>
+        <section class="section">
+            <!-- 左侧导航 -->
+            <j-sidebar></j-sidebar>
+            <!-- 主体 -->
+            <j-main></j-main>
+        </section>
+    </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
 
 import JHeader from "@/components/header/JHeader.vue"
 import Sidebar from "@/components/aside/Sidebar.vue"
@@ -34,22 +29,31 @@ export default {
     'j-sidebar': Sidebar,
     'j-main': JMain
   },
-  methods: {
-  }
+  computed: {
+        ...mapState({
+            search_status: state => state.search_status,
+        })
+    },
+    methods: {
+        ...mapMutations(["SEARCH_STATUS"]),
+        searchStatus() {
+            this.SEARCH_STATUS({ search_status: false })
+        }
+    }
 };
 </script>
 
 <style lang="scss" scoped>
 #home {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  section.section {
-    flex: auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-  }
+    section.section {
+        flex: auto;
+        display: flex;
+    }
 }
 </style>
 

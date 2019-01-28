@@ -14,12 +14,12 @@ export default {
         }
     },
     mounted() {
-        fetch('http://192.168.1.106:3100/')
-            .then(response => response.text())
-            .then(data => {
-                data = JSON.parse(data)
-                this.api = data[2].content
-            })
+        // fetch('http://192.168.1.106:3100/')
+        //     .then(response => response.text())
+        //     .then(data => {
+        //         data = JSON.parse(data)
+        //         this.api = data[2].content
+        //     })
     },
     methods: {
     }
