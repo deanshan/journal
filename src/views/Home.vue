@@ -1,5 +1,5 @@
 <template>
-    <div id="home" @click.stop="searchStatus">
+    <div id="home" @click.stop="changeStatus">
         <!-- 头部 -->
         <j-header></j-header>
         <section class="section">
@@ -19,25 +19,27 @@ import Sidebar from "@/components/aside/Sidebar.vue"
 import JMain from "@/components/main/JMain.vue"
 
 export default {
-  name: "home",
-  data() {
-    return {
-    }
-  },
-  components: {
-    'j-header': JHeader,
-    'j-sidebar': Sidebar,
-    'j-main': JMain
-  },
-  computed: {
+    name: "home",
+    data() {
+        return {
+        }
+    },
+    components: {
+        'j-header': JHeader,
+        'j-sidebar': Sidebar,
+        'j-main': JMain
+    },
+    computed: {
         ...mapState({
             search_status: state => state.search_status,
+            user_list_status: state => state.user_list_status
         })
     },
     methods: {
-        ...mapMutations(["SEARCH_STATUS"]),
-        searchStatus() {
-            this.SEARCH_STATUS({ search_status: false })
+        ...mapMutations(["SEARCH_STATUS", "USER_LIST_STATUS"]),
+        changeStatus() {
+            this.SEARCH_STATUS({ search_status: false }),
+            this.USER_LIST_STATUS({ user_list_status: false })
         }
     }
 };

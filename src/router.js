@@ -18,7 +18,7 @@ export default new Router({
               {
                   path: 'knowledge',
                   name: 'knowledge',
-                  component: () => import(/* webpackChunkName: "main" */ '@/components/main/Knowledge.vue'),
+                  component: () => import(/* webpackChunkName: "main" */ '@/components/main/knowledge/Knowledge.vue'),
                   children: [
                   {
                     path: 'html',
@@ -46,6 +46,11 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Vue.vue')
                   }
                 ]
+              },
+              {
+                  path: 'maps',
+                  name: 'maps',
+                  component: () => import(/* webpackChunkName: "main" */ '@/components/main/map/Maps.vue')
               }
           ]
     }]

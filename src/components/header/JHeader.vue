@@ -13,25 +13,21 @@
                     prefix-icon="el-icon-search"
                     v-model="searchData"
                 >
+                    <el-button slot="append" icon="el-icon-circle-close"></el-button>
                 </el-input>
             </div>
+
             <div class="personal-info">
-                <el-dropdown trigger="click">
-                    <span class="el-dropdown-link">
-                        <span class="title">
-                            <i class="iconfont portrait">&#xe667;</i>
-                            <span class="username">castiel</span>
-                            <i class="el-icon-caret-bottom"></i>
-                        </span>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>黄金糕</el-dropdown-item>
-                        <el-dropdown-item>狮子头</el-dropdown-item>
-                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                        <el-dropdown-item>双皮奶</el-dropdown-item>
-                        <el-dropdown-item>蚵仔煎</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
+                <div class="user-info" @click.stop="showUserList">
+                    <i class="iconfont portrait">&#xe667;</i>
+                    <span class="username">castiel</span>
+                    <i class="el-icon-caret-bottom"></i>
+                </div>
+                <ul class="user-list" v-show="user_list_status">
+                    <li>porfiles</li>
+                    <li>message</li>
+                    <li>logout</li>
+                </ul>
             </div>
         </div>
         <!-- <nav>
@@ -63,15 +59,20 @@ export default {
         ...mapState({
             collapse_status: state => state.collapse_status,
             search_status: state => state.search_status,
+            user_list_status: state => state.user_list_status
         })
     },
     methods: {
-        ...mapMutations(["COLLAPSE_STATUS", "SEARCH_STATUS"]),
+        ...mapMutations(["COLLAPSE_STATUS", "SEARCH_STATUS", "USER_LIST_STATUS"]),
         collapseStatus() {
             this.COLLAPSE_STATUS({ collapse_status: !this.collapse_status })
         },
         searchStatus() {
+            this.searchData = '',
             this.SEARCH_STATUS({ search_status: true })
+        },
+        showUserList() {
+            this.USER_LIST_STATUS({ user_list_status: !this.user_list_status })
         }
     }
 };
@@ -79,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 #header {
-    background: rgb(240, 188, 180);;
+    background: rgb(240, 188, 180);
     height: 60px;
     flex-shrink: 0;
     display: flex;
@@ -128,22 +129,37 @@ export default {
         .personal-info {
             width: 100px;
             height: 25px;
-            background: #fa9fa4;
+            background: #8b5c7e;
             margin-right: 30px;
             border-radius: 100px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            .title {
+            position: relative;
+            cursor: pointer;
+            &:hover,&:focus {
+                background: #fa9fa4;
+            }
+            .user-info {
                 width: 100%;
                 height: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 align-items: center;
+                i,span {
+                    color: #fff;
+                }
+                .portrait {
+                    font-size: 16px;
+                }
             }
-            .portrait {
-                font-size: 16px;
-                color: #000;
+            .user-list {
+                width: 100%;
+                height: 60px;
+                position: absolute;
+                z-index: 99999;
+                top: 100%;
+                left: 0;
             }
         }
     }

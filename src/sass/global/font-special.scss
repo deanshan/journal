@@ -54,25 +54,25 @@
 .link-flip {
 	color: #D3D3D3;
 	text-transform: uppercase;
-	font-size: 1.2em;
+	font-size: 1em;
 	overflow: hidden;
-	&::after {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		border-width: 1px 0;
-		border-color: #fff;
-		border-style: solid;
-		left: 0;
-		bottom: 0;
-		transform: translate3d(-101%,0,0);
-		transition: transform 0.5s;
-	}
+	// &::after {
+	// 	content: '';
+	// 	position: absolute;
+	// 	height: 100%;
+	// 	width: 100%;
+	// 	border-width: 1px 0;
+	// 	border-color: #fff;
+	// 	border-style: solid;
+	// 	left: 0;
+	// 	bottom: 0;
+	// 	transform: translate3d(-101%,0,0);
+	// 	transition: transform 0.5s;
+	// }
 
-	&:hover::after {
-		transform: translate3d(0,0,0);
-	}
+	// &:hover::after {
+	// 	transform: translate3d(0,0,0);
+	// }
 
 	span {
 		display: inline-block;

@@ -6,38 +6,58 @@
         :collapse-transition=true
         active-text-color="#000c3b"
         background="#07417a"
-        default-active="/"
+        :default-active="this.$route.path"
         router
     >
         <el-menu-item index="/" >
-            <menu-effect iconclass="el-icon-news" title="统计图"></menu-effect>
+            <menu-effect title="统计图">
+                <template slot="icon">
+                    <i class="el-icon-news"></i>
+                </template>
+            </menu-effect>
         </el-menu-item>
 
-        <el-submenu index="2">
+        <el-submenu index="/knowledge">
             <template slot="title">
-                <menu-effect iconclass="el-icon-menu" title="知识库"></menu-effect>
+                <menu-effect title="知识库">
+                    <template slot="icon">
+                        <i class="el-icon-menu"></i>
+                    </template>
+                </menu-effect>
             </template>
             <el-menu-item-group>
-                <el-menu-item
-                    v-for="(nav, key) in catalog"
-                    :key="key"
-                    :index="`/knowledge/${nav}`"
-                >
-                    <menu-effect :title=nav padding_left="40px"></menu-effect>
+                <el-menu-item v-for="(nav, key) in catalog" :key="key" :index="`/knowledge/${nav}`">
+                    <menu-effect
+                        :title=nav
+                        :isEffect="true"
+                        :setStyle="{'padding-left': '60px'}"
+                    ></menu-effect>
                 </el-menu-item>
             </el-menu-item-group>
         </el-submenu>
 
         <el-menu-item index="/music">
-            <menu-effect iconclass="el-icon-service" title="音乐"></menu-effect>
+            <menu-effect title="音乐">
+                <template slot="icon">
+                    <i class="el-icon-service"></i>
+                </template>
+            </menu-effect>
         </el-menu-item>
 
-        <el-menu-item index="/map" >
-            <menu-effect iconclass="el-icon-location" title="位置信息"></menu-effect>
+        <el-menu-item index="/maps" >
+            <menu-effect title="位置信息">
+                <template slot="icon">
+                    <i class="el-icon-location"></i>
+                </template>
+            </menu-effect>
         </el-menu-item>
 
-        <el-menu-item index="/postal" >
-            <menu-effect iconclass="el-icon-mobile-phone" title="实时通讯"></menu-effect>
+        <el-menu-item index="/socket" >
+            <menu-effect title="实时通讯">
+                <template slot="icon">
+                    <i class="el-icon-mobile-phone"></i>
+                </template>
+            </menu-effect>
         </el-menu-item>
     </el-menu>
   </div>
@@ -48,13 +68,10 @@ import { mapState } from 'vuex';
 
 import MenuEffect from '@/components/aside/MenuEffect.vue'
 
-// import catalog from '@/assets/catalog.json'
-
 export default {
   name: "sidebar",
   data() {
     return {
-    //   isCollapse: false,
       catalog: ['html', 'css', 'javascript', 'es6', 'vue']
     };
   },

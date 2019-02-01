@@ -1,7 +1,16 @@
 <template>
     <div id="menu-effect" @mousemove="effect($event)" ref="effect">
-        <i :class="iconclass"></i>
-        <span slot="title" :style="{'padding-left': padding_left}">{{ title }}</span>
+        <!-- 图标 -->
+        <slot name="icon"></slot>
+
+        <a
+            :class="[isEffect ? 'link link-flip' : '']"
+            :style="setStyle"
+        >
+            <span v-if="isEffect === false">{{ title }}</span>
+            <span v-else-if="isEffect === true" v-for="(str, k) in title.split('')" :key="k">{{ str }}</span>
+        </a>
+
     </div>
 </template>
 
@@ -9,9 +18,9 @@
 export default {
     name: 'menuEffect',
     props: {
-        iconclass: {
-            default: '',
-            type: String
+        setStyle: {
+            default: () => {},  //  参数类型为Array/Object必须使用函数返回默认值，否则报错
+            type: Object
         },
         title: {
             default: '',
@@ -20,6 +29,10 @@ export default {
         padding_left: {
             default: '',
             type: String
+        },
+        isEffect: {
+            default: false,
+            type: Boolean
         }
     },
     mounted() {
@@ -40,9 +53,12 @@ export default {
     transition: all .2s ease;
     position: relative;
     z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
         background: #07417a;
-        span,i {
+        a,i {
             color: gold;
         }
     }
@@ -67,10 +83,13 @@ export default {
         --opacity: 1;
         --scale: 1;
     }
-    span,i {
+    a,i {
       position: relative;
       color: #83c7e3;
-      margin-left: 20px;
+      padding-left: 22px;
+    }
+    a {
+        width: 100%;
     }
 }
 </style>
