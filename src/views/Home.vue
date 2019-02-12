@@ -1,5 +1,7 @@
 <template>
     <div id="home" @click.stop="changeStatus">
+        <Audio></Audio>
+
         <!-- 头部 -->
         <j-header></j-header>
         <section class="section">
@@ -14,6 +16,8 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 
+import Audio from "@/components/common/Audio.vue"
+
 import JHeader from "@/components/header/JHeader.vue"
 import Sidebar from "@/components/aside/Sidebar.vue"
 import JMain from "@/components/main/JMain.vue"
@@ -25,6 +29,7 @@ export default {
         }
     },
     components: {
+        Audio,
         'j-header': JHeader,
         'j-sidebar': Sidebar,
         'j-main': JMain

@@ -7,13 +7,12 @@
             </div>
         </div>
         <div class="r-header">
-            <div class="search" @click.stop="searchStatus" :style="{'width': !search_status ? '25px' : '200px'}">
+            <div class="search" @click.stop="searchStatus" :style="{'width': !search_status ? '25px' : '300px'}">
                 <el-input
                     placeholder="请输入内容"
                     prefix-icon="el-icon-search"
                     v-model="searchData"
                 >
-                    <el-button slot="append" icon="el-icon-circle-close"></el-button>
                 </el-input>
             </div>
 

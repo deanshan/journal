@@ -3,12 +3,17 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+// const Audio = () => import('@/components/common/Audio.vue')
+
 export default new Router({
     mode: 'history',
     routes: [{
           path: '/',
           // component: resolve => require(['./views/Home.vue'], resolve)
-          component: () => import('./views/Home.vue'),
+          components: {
+              default: () => import('./views/Home.vue'),
+            //   Audio
+          },
           children: [
               {
                   path: '',
@@ -46,6 +51,11 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "knowledge" */ '@/components/main/knowledge/Vue.vue')
                   }
                 ]
+              },
+              {
+                  path: 'music',
+                  name: 'music',
+                  component: () => import(/* webpackChunkName: "main" */ '@/components/main/music/Music.vue')
               },
               {
                   path: 'maps',
