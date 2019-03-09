@@ -1,6 +1,57 @@
 <template>
-  <div id="sidebar" :style="{'width': !collapse_status ? '240px' : '64px'}">
+    <div id="sidebar" >
+        <!-- <div class="sidebar">
+            <menu-effect title="统计图">
+                <template slot="icon">
+                    <i class="el-icon-news"></i>
+                </template>
+            </menu-effect>
+
+        <el-submenu index="/knowledge">
+            <template slot="title">
+                <menu-effect title="知识库">
+                    <template slot="icon">
+                        <i class="el-icon-menu"></i>
+                    </template>
+                </menu-effect>
+            </template>
+            <el-menu-item-group>
+                <el-menu-item v-for="(nav, key) in catalog" :key="key" :index="`/knowledge/${nav}`">
+                    <menu-effect
+                        :title=nav
+                        :isEffect="true"
+                        :setStyle="{'padding-left': '60px'}"
+                    ></menu-effect>
+                </el-menu-item>
+            </el-menu-item-group>
+        </el-submenu>
+
+        <el-menu-item index="/music">
+            <menu-effect title="音乐">
+                <template slot="icon">
+                    <i class="el-icon-service"></i>
+                </template>
+            </menu-effect>
+        </el-menu-item>
+
+        <el-menu-item index="/maps" >
+            <menu-effect title="位置信息">
+                <template slot="icon">
+                    <i class="el-icon-location"></i>
+                </template>
+            </menu-effect>
+        </el-menu-item>
+
+        <el-menu-item index="/socket" >
+            <menu-effect title="实时通讯">
+                <template slot="icon">
+                    <i class="el-icon-mobile-phone"></i>
+                </template>
+            </menu-effect>
+        </el-menu-item>
+      </div> -->
     <el-menu
+        class="sidebar-menu"
         :collapse="collapse_status"
         :unique-opened=true
         :collapse-transition=true
@@ -60,6 +111,7 @@
             </menu-effect>
         </el-menu-item>
     </el-menu>
+
   </div>
 </template>
 
@@ -98,18 +150,24 @@ export default {
   }
 };
 </script>
-
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+</style>
 <style lang="scss" scoped>
 #sidebar {
     padding-top: 32px;
     background: #000c3b;
     box-shadow: inset 0 0 30px #07417a;
-    width: 240px;
+    // width: 240px;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
+    // transition: all .5s linear;
     .el-menu {
         flex: auto;
         overflow-y: scroll;
