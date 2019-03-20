@@ -1,66 +1,49 @@
 <template>
-    <div id="home" @click.stop="changeStatus">
+    <div id="home">
+
         <Audio></Audio>
 
-        <!-- 头部 -->
-        <j-header></j-header>
-        <section class="section">
-            <!-- 左侧导航 -->
-            <j-sidebar></j-sidebar>
-            <!-- 主体 -->
-            <j-main></j-main>
-        </section>
+        <el-container>
+            <!-- el-header必须写在这里，否则el-container没有flex-direction(原因待查找) -->
+            <el-header height="60px">
+                <JHeader></JHeader>
+            </el-header>
+
+            <el-container>
+
+                <JSidebar></JSidebar>
+
+                <JMain></JMain>
+
+            </el-container>
+
+        </el-container>
+
     </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
 
 import Audio from "@/components/common/Audio.vue"
 
 import JHeader from "@/components/header/JHeader.vue"
-import Sidebar from "@/components/aside/Sidebar.vue"
+import JSidebar from "@/components/aside/JSidebar.vue"
 import JMain from "@/components/main/JMain.vue"
 
 export default {
-    name: "home",
-    data() {
-        return {
-        }
-    },
+    name: 'home',
     components: {
         Audio,
-        'j-header': JHeader,
-        'j-sidebar': Sidebar,
-        'j-main': JMain
-    },
-    computed: {
-        ...mapState({
-            search_status: state => state.search_status,
-            user_list_status: state => state.user_list_status
-        })
-    },
-    methods: {
-        ...mapMutations(["SEARCH_STATUS", "USER_LIST_STATUS"]),
-        changeStatus() {
-            this.SEARCH_STATUS({ search_status: false }),
-            this.USER_LIST_STATUS({ user_list_status: false })
-        }
+        JHeader,
+        JSidebar,
+        JMain
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 #home {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    section.section {
-        flex: auto;
-        display: flex;
-    }
+  width: 100%;
+  height: 100%;
 }
 </style>
-

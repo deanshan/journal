@@ -1,13 +1,12 @@
 <template>
-    <div id="j-main">
-
+    <el-main>
         <router-view></router-view>
-    </div>
+    </el-main>
 </template>
 
 <script>
 export default {
-    name: 'jmain',
+    name: 'main',
     data() {
         return {
 
@@ -17,9 +16,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#j-main {
-    flex: auto;
-    overflow-y: scroll;
-    padding: 20px 50px;
-}
+
 </style>

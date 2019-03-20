@@ -2,9 +2,6 @@
     <div id="header">
         <div class="title">
             <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
-            <div class="switch" @click.stop="collapseStatus">
-                <i class="iconfont">&#xe62b;</i>
-            </div>
         </div>
         <div class="r-header">
             <div class="search" @click.stop="searchStatus" :style="{'width': !search_status ? '25px' : '300px'}">
@@ -29,16 +26,6 @@
                 </ul>
             </div>
         </div>
-        <!-- <nav>
-            <a
-                href="#"
-                class="link link-flip"
-                v-for="(item, key) in nav"
-                :key="key"
-            >
-              <span v-for="(str, k) in item.split('')" :key="k">{{ str }}</span>
-          </a>
-        </nav> -->
     </div>
 </template>
 
@@ -91,23 +78,6 @@ export default {
         text-align: center;
         line-height: 60px;
         position: relative;
-        .switch {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            transform: translate3d(-50%, -50%, 0);
-            background: #8b5c7e;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            cursor: pointer;
-            i {
-                font-size: 16px;
-                color: #fff;
-            }
-        }
     }
     .r-header{
         flex: auto;

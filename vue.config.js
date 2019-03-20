@@ -9,7 +9,6 @@ module.exports = {
     productionSourceMap: false, //  生产源映射 如果您不需要生产时的源映射，设为false可以加速生产构建
     devServer: {
         port: 3000,     // 端口号
-        // host: "10.2.104.184",
         host: "localhost",
         https: false,
         open: true,     // 自动启动浏览器
