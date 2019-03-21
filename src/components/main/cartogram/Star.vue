@@ -16,11 +16,11 @@ import NavTitle from '@/components/common/NavTitle'
 import { EleResize } from '@/utils/resize.js'
 
 export default {
-    name: "starChart",
+    name: "star",
     data() {
         return {
-            resourcePoolList: [],
-            virtualMachineData: [],
+            cityList: [],
+            cityData: [],
         }
     },
     components:{
@@ -32,59 +32,65 @@ export default {
         }
     },
     mounted() {
-        this.getVirtualMachineData()
+        this.getCityData()
     },
     methods: {
-        getResourcePoolList() {
+        // 获取所有城市列表
+        getCityList() {
             return new Promise(resolve => {
                 this.$https
-                    .get('/view/star')
+                    .get('/view/star/citylist')
                     .then(res => {
-                        console.log(JSON.stringify(res))
-                        if(res.length !== 0) {
-                            for(let item of Object.values(res)) {
-                                this.resourcePoolList.push({
-                                    name: item.name,
-                                    resourcePoolId: item.resourcePoolId
-                                })
-                            }
-                            resolve()
+                        console.log(res)
+                        for(let item of Object.values(res)) {
+
+                            this.cityList.push({
+                                cityId: item.cityId,
+                                name: item.name
+                            })
+
                         }
+                        resolve()
                     })
+
             }).catch(error => {
+
                 this.$message('请求数据异常')
+
             })
         },
-        async getVirtualMachineData() {
+        // 获取每个城市对应的数据
+        async getCityData() {
             let schemaData = [
-                { name: 'cpu', index: 1, text: 'cpu利用率' },
-                { name: 'memory', index: 2, text: '内存利用率' },
-                { name: 'name', index: 0, text: '虚拟机名称' },
+                { name: 'distance', index: 1, text: '距离' },
+                { name: 'speed', index: 2, text: '速度' },
+                { name: 'time', index: 3, text: '时间'},
+                { name: 'destination', index: 0, text: '城市名称' },
             ]
 
             let legendData = []
             let seriesData = []
 
-            await this.getResourcePoolList()
+            await this.getCityList()
 
-            for(let item of Object.values(this.resourcePoolList)) {
+            for(let item of Object.values(this.cityList)) {
                 await this.$https
-                        .get(`${this.operationUrl}/vHost/graph`, { resourcePoolId: item.resourcePoolId })
+                        .get('/view/star/citydata', { cityId: item.cityId })
                         .then(res => {
                             let data = []
-                            for(let item of Object.values(res)) {
+                            for(let value of Object.values(res.data)) {
                                 data.push([
-                                    parseInt(item.cpu * 100),
-                                    parseInt(item.memory * 100),
-                                    item.hostName
+                                    value.distance,
+                                    value.speed,
+                                    value.destination
                                 ])
                             }
-                            this.virtualMachineData.push({
+                            this.cityData.push({
                                 name: item.name,
                                 data
                             })
 
-                            for(let item of Object.values(this.virtualMachineData)) {
+                            for(let item of Object.values(this.cityData)) {
                                 legendData.push(item.name)
                                 seriesData.push({
                                     name: item.name,
@@ -153,18 +159,18 @@ export default {
                     borderWidth: 1,
                     formatter: function (obj) {
                         let value = obj.value;
+                        console.log(value)
                         return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
-                            + obj.seriesName + '：' + value[value.length - 1]
+                            + obj.seriesName + '——' + value[value.length - 1]
                             + '</div>'
-                            + schemaData[0].text + '：' + value[0] + '%<br>'
-                            + schemaData[1].text + '：' + value[1] + '%<br>'
+                            + schemaData[0].text + '：' + value[0] + 'km<br>'
+                            + schemaData[1].text + '：' + value[1] + 'km/h<br>'
+                            + schemaData[2].text + ': ' + (value[0] / value[1]).toFixed(1) + 'h'
                     }
                 },
                 xAxis: {
                     type: 'value',
-                    name: 'CPU利用率(%)',
-                    min: 0,
-                    max: 100,
+                    name: '距离(km)',
                     nameGap: 16,
                     nameTextStyle: {
                         color: '#000',
@@ -181,9 +187,7 @@ export default {
                 },
                 yAxis: {
                     type: 'value',
-                    name: '内存利用率(%)',
-                    min: 0,
-                    max: 100,
+                    name: '速度(km/h)',
                     nameLocation: 'end',
                     nameGap: 20,
                     nameTextStyle: {
@@ -203,23 +207,23 @@ export default {
                     {
                         top: '18%',
                         right: 20,
-                        dimension: 0,
+                        dimension: 0,   //  维度：对应数组的下标
                         min: 0,
-                        max: 100,
+                        max: 2000,
                         itemWidth: 30,
                         itemHeight: 120,
                         calculable: true,
                         precision: 0.1,
-                        text: ['cpu利用率'],
+                        text: ['距离(km)'],
                         textGap: 20,
                         textStyle: {
                             color: '#000'
                         },
                         inRange: {
-                            symbolSize: [10, 50]
+                            symbolSize: [10, 80]
                         },
                         outOfRange: {
-                            symbolSize: [10, 50],
+                            symbolSize: [10, 80],
                             color: ['rgba(255,255,255,.2)']
                         },
                         controller: {
@@ -234,13 +238,13 @@ export default {
                     {
                         right: 20,
                         bottom: '10%',
-                        dimension: 1,
+                        dimension: 1,   //  维度：对应数组的下标
                         min: 0,
-                        max: 100,
+                        max: 400,
                         itemHeight: 120,
                         calculable: true,
                         precision: 0.1,
-                        text: ['内存利用率'],
+                        text: ['速度(km/h)'],
                         textGap: 20,
                         textStyle: {
                             color: '#000'

@@ -7,7 +7,7 @@
             <div class="select-data">
                 <el-tabs v-model="ipAddressSegmentValue" @tab-click="changeIpSegment">
                     <el-tab-pane
-                        v-for="(value, index) in ipAddressSegmentData"
+                        v-for="(value, index) in yearList"
                         :key="index"
                         :label="value.label"
                         :name="value.value"
@@ -29,11 +29,11 @@ export default {
     name: "",
     data() {
         return {
-            networkSegment: [],
+            centuryList: [],
             networkSegmentValue: '',
-            ipAddressSegmentData: [],
+            yearList: [],
             ipAddressSegmentValue: '',
-            ipSegmentIdList: {},
+            dateList: {},
             scatterData: {
                 xAxis: [],
                 yAxis: [],
@@ -54,54 +54,48 @@ export default {
         this.initScatterData()
     },
     methods: {
-        getNetworkSegment() {
+        // 获取世纪数据列表
+        getCentury() {
             return new Promise(resolve => {
-                this.$axios
-                    .get('/view/matrix', {params:{ centuryId: '123'}})
+                this.$https
+                    .get('/view/matrix/century')
                     .then(res => {
-                        console.log(res)
                         for(let item of Object.values(res)) {
-                            this.networkSegment.push({
-                                value: item.ipAddressSegmentId,
-                                label: `${item.name}(${item.segment})`
+                            this.centuryList.push({
+                                value: item.centuryId,
+                                label: item.name
                             })
                         }
                         resolve()
                     })
             })
         },
-        async getIpSegmentId() {
-            for(let item of Object.values(this.networkSegment)) {
+        // 获取年代列表
+        async getYear() {
+            for(let item of Object.values(this.centuryList)) {
                 await this.$https
-                    .get(`${this.operationUrl}/ipPool/listIpSegments`, {parentId: item.value})
+                    .get('/view/matrix/year', {centuryId: item.value})
                     .then(res => {
-                        if(res.length !== 0) {
-                            for(let item of Object.values(res)) {
-                                this.ipAddressSegmentData.push({
-                                    value: item.ipAddressSegmentId,
-                                    label: item.name
-                                })
-                            }
-                        } else {
-                            this.ipAddressSegmentData = []
-                            this.ipAddressSegmentValue = ''
-                            this.ipSegmentIdList = {}
-                            for(let key in this.scatterData) {
-                                this.scatterData[key] = []
-                            }
+                        console.log(res)
+                        let yearlist = res.year
+                        for(let value of Object.values(yearlist)) {
+                            this.yearList.push({
+                                value: value.yearId,
+                                label: value.name
+                            })
                         }
                     })
             }
         },
-        async getIpSegmentIdList(ipSegmentId) {
+        async getDate(yearId) {
             return new Promise(resolve => {
                 this.$https
-                    .get(`${this.operationUrl}/ipPool/listIpAddressByIpSegmentId`, {ipSegmentId})
+                    .get('/view/matrix/date', {yearId})
                     .then(res => {
                         if(Object.keys(res).length !== 0) {
-                            this.ipSegmentIdList = res
+                            this.dateList = res
                         } else {
-                            this.ipSegmentIdList = {}
+                            this.dateList = {}
                             for(let key in this.scatterData) {
                                 this.scatterData[key] = []
                             }
@@ -113,18 +107,18 @@ export default {
         async getScatterData() {
             let data = []
 
-            for(let key in Object.keys(this.ipSegmentIdList)) {
+            for(let key in Object.keys(this.dateList)) {
                 if(key == 0) {
-                    let number = this.ipSegmentIdList[Object.keys(this.ipSegmentIdList)[key]].length
+                    let number = this.dateList[Object.keys(this.dateList)[key]].length
                     for(let i = 0; i < number; i++) {
                         this.scatterData.xAxis.push('')
                     }
                 }
             }
-            for(let key in Object.keys(this.ipSegmentIdList)) {
-                this.scatterData.yAxis.push(Object.keys(this.ipSegmentIdList)[key])
+            for(let key in Object.keys(this.dateList)) {
+                this.scatterData.yAxis.push(Object.keys(this.dateList)[key])
                 for(let index of Object.keys(this.scatterData.xAxis)) {
-                    data.push([key, index, this.ipSegmentIdList[Object.keys(this.ipSegmentIdList)[key]][index]])
+                    data.push([key, index, this.dateList[Object.keys(this.dateList)[key]][index]])
                 }
             }
 
@@ -150,11 +144,11 @@ export default {
         },
         async initScatterData() {
             try {
-                await this.getNetworkSegment()
-                await this.getIpSegmentId()
-                await this.getIpSegmentIdList(this.ipAddressSegmentData[0]['value'])
+                await this.getCentury()
+                await this.getYear()
+                await this.getDate(this.yearList[0]['value'])
 
-                this.ipAddressSegmentValue = this.ipAddressSegmentData[0]['value']
+                this.ipAddressSegmentValue = this.yearList[0]['value']
 
                 this.getScatterData()
             } catch(error) {
@@ -163,7 +157,7 @@ export default {
         },
         async changeIpSegment(data) {
             try {
-                await this.getIpSegmentIdList(data.name)
+                await this.getDate(data.name)
                 this.getScatterData()
             } catch(error) {
                 this.initScatter({})
