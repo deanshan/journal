@@ -65,21 +65,6 @@ export default {
                     index: "/cartogram",
                     lists: [
                         {
-                            "index": "/cartogram/dataCenterView",
-                            "name": "视图",
-                            "iconClass": "fa fa-share-alt-square"
-                        },
-                        {
-                            "index": "/cartogram/resourcePoolView",
-                            "name": "视图",
-                            "iconClass": "fa fa-share-alt-square"
-                        },
-                        {
-                            "index": "/cartogram/vdcBusinessview",
-                            "name": "视图",
-                            "iconClass": "fa fa-share-alt-square"
-                        },
-                        {
                             "index": "/cartogram/star",
                             "name": "星空图",
                             "iconClass": "fa fa-share-alt-square"

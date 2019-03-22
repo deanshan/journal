@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
+// import axios from 'axios'
 
 //element-ui
 import './plugins/element.js'
@@ -11,9 +11,7 @@ import echarts from 'echarts'
 import 'echarts/theme/macarons.js'
 //baidu-map
 import baiduMap from 'vue-baidu-map'
-Vue.use(baiduMap, {
-  ak: 'DlBAFrcThN8g3kkbfRcfnrHS1pWUwDeS'
-})
+
 
 //全局样式
 import "./sass/global/reset.scss";
@@ -22,6 +20,9 @@ import "./sass/global/font-special.scss";
 // 字体图标样式
 import "./sass/global/iconfont.scss";
 import 'font-awesome/scss/font-awesome.scss'
+
+// utils
+import { https } from './utils/https.js'
 
 // 路由拦截用户登录状态来判断跳转到首页还是登录页
 // router.beforeEach((to, from, next) => {
@@ -51,22 +52,22 @@ import 'font-awesome/scss/font-awesome.scss'
 //     }
 // })
 
-// utils
-import { https } from './utils/https.js'
-import { conversionType, getStatusStyle, getPlatformUrl } from './utils/common.js'
-import * as constant from './utils/constant.js'
-import { getToken } from '@/utils/cache.js'
+
+// import { conversionType, getStatusStyle, getPlatformUrl } from './utils/common.js'
+// import * as constant from './utils/constant.js'
+// import { getToken } from '@/utils/cache.js'
+// Vue.prototype.$getToken = getToken
+// Vue.prototype.$conversionType = conversionType
+// Vue.prototype.$getStatusStyle = getStatusStyle
+// Vue.prototype.$getPlatformUrl = getPlatformUrl
+// Vue.prototype.$constant = constant
+
+// Vue.use(axios)
+Vue.use(baiduMap, { ak: 'DlBAFrcThN8g3kkbfRcfnrHS1pWUwDeS' })
 
 Vue.prototype.$echarts = echarts
-Vue.prototype.$getToken = getToken
 Vue.prototype.$https = https
-Vue.prototype.$conversionType = conversionType
-Vue.prototype.$getStatusStyle = getStatusStyle
-Vue.prototype.$getPlatformUrl = getPlatformUrl
-Vue.prototype.$constant = constant
 
-Vue.use(axios)
-Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 new Vue({

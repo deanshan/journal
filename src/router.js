@@ -8,7 +8,6 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'history',
-    base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
@@ -16,7 +15,7 @@ export default new Router({
             component: Home,
             redirect: () => {
                 sessionStorage.removeItem('url')
-                return '/cartogram/DataCenterView'
+                return '/cartogram/star'
             }
         },
         {
@@ -24,24 +23,6 @@ export default new Router({
             name: 'cartogram',
             component: Home,
             children: [
-                {
-                    path: 'dataCenterView',
-                    name: 'dataCenterView',
-                    beforeEnter: (to, from, next) => {
-                        next()
-                    },
-                    component:() => import(/* webpackChunkName:"cartogram" */ '@/components/main/cartogram/DataCenterView.vue')
-                },
-                {
-                    path: 'resourcePoolView',
-                    name: 'resourcePoolView',
-                    component:() => import(/* webpackChunkName:"cartogram" */ '@/components/main/cartogram/ResourcePoolView.vue')
-                },
-                {
-                    path: 'vdcBusinessview',
-                    name: 'vdcBusinessview',
-                    component:() => import(/* webpackChunkName:"cartogram" */ '@/components/main/cartogram/VdcBusinessview.vue')
-                },
                 {
                     path: 'star',
                     name: 'star',

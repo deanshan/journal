@@ -9,17 +9,17 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from 'vuex'
+// import { mapState, mapGetters } from 'vuex'
 
-export default {
-  name: 'Play',
-  computed: {
-    ...mapState('player', {
-      paused: state => state.paused
-    }),
-    ...mapGetters('list', ['getCover'])
-  }
-}
+// export default {
+//   name: 'Play',
+//   computed: {
+//     ...mapState('player', {
+//       paused: state => state.paused
+//     }),
+//     ...mapGetters('list', ['getCover'])
+//   }
+// }
 </script>
 <style lang="scss" scoped>
   @keyframes musiclogo {

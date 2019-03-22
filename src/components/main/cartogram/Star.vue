@@ -57,6 +57,8 @@ export default {
 
                 this.$message('请求数据异常')
 
+                Promise.reject(error)
+
             })
         },
         // 获取每个城市对应的数据
