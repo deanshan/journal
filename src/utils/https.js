@@ -1,17 +1,17 @@
 import axios from 'axios'
 
-const baseUrl = () => {
-    switch (process.env.NODE_ENV) {
-        case 'development':
-            return "http://10.2.102.97:3100"   //开发环境url
-        case 'production':
-            return "http://10.2.102.97:3100"   //生产环境url
-        case 'test':
-            return "http://10.2.102.97:3100"   //测试环境url
-        default:
-            return "http://10.2.102.97:3100"   //其它环境url
-    }
-}
+// const baseUrl = () => {
+//     switch (process.env.NODE_ENV) {
+//         case 'development':
+//             return "http://10.2.102.97:3100"   //开发环境url
+//         case 'production':
+//             return "http://10.2.102.97:3100"   //生产环境url
+//         case 'test':
+//             return "http://10.2.102.97:3100"   //测试环境url
+//         default:
+//             return "http://10.2.102.97:3100"   //其它环境url
+//     }
+// }
 
 axios.defaults.baseURL = "http://10.2.102.97:3100"
 
