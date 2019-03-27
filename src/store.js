@@ -4,12 +4,16 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  }
+    state: {
+        token: ''
+    },
+    getters: {
+    },
+    mutations: {
+        CHANGE_TOKEN(state, payload) {
+            state.token = payload.token
+        }
+    },
+    actions: {
+    }
 })

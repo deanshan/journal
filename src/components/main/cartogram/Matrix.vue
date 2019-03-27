@@ -62,8 +62,8 @@ export default {
                     .then(res => {
                         for(let item of Object.values(res)) {
                             this.centuryList.push({
-                                value: item.centuryId,
-                                label: item.name
+                                value: item.id,
+                                label: item.centuryName
                             })
                         }
                         resolve()
@@ -76,12 +76,10 @@ export default {
                 await this.$https
                     .get('/view/matrix/year', {centuryId: item.value})
                     .then(res => {
-                        console.log(res)
-                        let yearlist = res.year
-                        for(let value of Object.values(yearlist)) {
+                        for(let value of Object.values(res)) {
                             this.yearList.push({
-                                value: value.yearId,
-                                label: value.name
+                                value: value.id,
+                                label: value.yearName
                             })
                         }
                     })
@@ -106,6 +104,10 @@ export default {
         },
         async getScatterData() {
             let data = []
+
+            for(let key in this.scatterData) {
+                this.scatterData[key] = []
+            }
 
             for(let key in Object.keys(this.dateList)) {
                 if(key == 0) {
@@ -148,9 +150,9 @@ export default {
                 await this.getYear()
                 await this.getDate(this.yearList[0]['value'])
 
-                this.ipAddressSegmentValue = this.yearList[0]['value']
+                // this.ipAddressSegmentValue = this.yearList[0]['value']
 
-                this.getScatterData()
+                // this.getScatterData()
             } catch(error) {
                 Promise.reject(error)
             }
@@ -169,7 +171,7 @@ export default {
 
             let option = {
                 title: {
-                    text: 'IP池矩阵图',
+                    text: '20世纪——21世纪',
                     padding: 20,
                     textStyle: {
                         color: '#ccc',

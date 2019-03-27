@@ -1,0 +1,109 @@
+<template>
+    <div id="login">
+        <el-form
+            ref="loginForm"
+            :model="loginForm"
+            status-icon
+            :rules="rules"
+            label-position="right"
+            label-width="100px"
+            :inline=false
+        >
+            <el-form-item label="用户名" prop="username">
+                <!-- 给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
+                <el-input
+                    v-model.number="loginForm.username"
+                    autocomplete="on"
+                    autofocus
+                    @keyup.enter.native="login('loginForm')"
+                ></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+                <el-input
+                    type="password"
+                    v-model="loginForm.password"
+                    autocomplete="off"
+                    @keyup.enter.native="login('loginForm')"
+                ></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="login('loginForm')">登录</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</template>
+
+<script>
+
+import { mapMutations } from 'vuex'
+import axios from 'axios'
+import md5 from '@/utils/md5.js'
+
+export default {
+    name: 'login',
+    data() {
+        return {
+            loginForm: {
+                password: '',
+                username: ''
+            },
+            rule: {}
+        }
+    },
+    computed: {
+        rules() {
+            return {
+                username: [
+                    {
+                        validator: (rule, value, callback) => {
+
+                            return value ? callback() : callback(new Error('用户名输入不正确'))
+                        },
+                        trigger: 'blur'
+                    }
+                ],
+                password: [
+                    {
+                        validator: (rule, value, callback) => {
+                            return value ? callback() : callback(new Error('密码输入不正确'))
+                        },
+                        trigger: 'blur'
+                    }
+                ]
+            }
+        }
+    },
+    methods: {
+        ...mapMutations(['CHANGE_TOKEN']),
+        getUserInfo(username, password) {
+
+            username = md5.MD5(username + md5.MD5_SUFFIX);
+            password = md5.MD5(password + md5.MD5_SUFFIX);
+
+            this.$https
+                .post('/admin/user', { username, password })
+                .then(res => {
+
+                    let token = res
+                    token && this.CHANGE_TOKEN({token})
+                    this.$router.push({ path: '/cartogram/star'})
+                })
+        },
+        login(formName) {
+            this.$refs[formName].validate((valid) => {
+                console.log(valid)
+                if (valid) {
+                    this.getUserInfo(this.loginForm.username, this.loginForm.password)
+                } else {
+                    console.log('error submit!!')
+                    return false
+                }
+            })
+        }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+
+</style>

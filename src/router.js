@@ -16,7 +16,13 @@ export default new Router({
             redirect: () => {
                 sessionStorage.removeItem('url')
                 return '/cartogram/star'
+                // return '/login'
             }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component:() => import(/* webpackChunkName:"login" */ '@/components/login/Login.vue')
         },
         {
             path: '/cartogram',

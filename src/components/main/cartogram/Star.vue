@@ -40,15 +40,14 @@ export default {
             return new Promise(resolve => {
                 this.$https
                     .get('/view/star/citylist')
-                    .then(res => {
-                        console.log(res)
+                    .then(res => {  //[]
+
                         for(let item of Object.values(res)) {
 
                             this.cityList.push({
-                                cityId: item.cityId,
-                                name: item.name
+                                cityId: item.id,
+                                name: item.city_name
                             })
-
                         }
                         resolve()
                     })
@@ -80,11 +79,11 @@ export default {
                         .get('/view/star/citydata', { cityId: item.cityId })
                         .then(res => {
                             let data = []
-                            for(let value of Object.values(res.data)) {
+                            for(let value of Object.values(res)) {
                                 data.push([
                                     value.distance,
                                     value.speed,
-                                    value.destination
+                                    value.end_city
                                 ])
                             }
                             this.cityData.push({
@@ -160,8 +159,8 @@ export default {
                     borderColor: '#777',
                     borderWidth: 1,
                     formatter: function (obj) {
-                        let value = obj.value;
-                        console.log(value)
+                        let value = obj.value
+
                         return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
                             + obj.seriesName + '——' + value[value.length - 1]
                             + '</div>'

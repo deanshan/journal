@@ -33,14 +33,17 @@ axios.interceptors.request.use(config => {
 // })
 
 const promise = (url, params, method) => {
+
+    let options = { url, params, method}
+    if(method !== 'get' || method !== 'delete') {
+        options = { url, data: params, method}
+    }
     return new Promise((resolve, reject) => {
-        axios({url, params, method})
+        axios(options)
             .then(response => {
                 resolve(response.data)
             })
             .catch(error => {
-                // Message('')
-                // window.open(`${sessionStorage.getItem(APP_KEY['account'])}/login.jsp`,"_self")
                 reject(error)
             })
     })
