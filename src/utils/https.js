@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 
 // const baseUrl = () => {
 //     switch (process.env.NODE_ENV) {
@@ -15,33 +16,38 @@ import axios from 'axios'
 
 axios.defaults.baseURL = "http://10.2.102.97:3100"
 
+// 请求前拦截数据
 axios.interceptors.request.use(config => {
-    let token = sessionStorage.getItem('token')
-    if(token) {
-        config.headers.common["token"] = token
+
+    //FIXME: 判断vuex中的token是否存在，若存在，则加入头部，当页面刷新时在router里重新获取token加入vuex
+    if(store.state.token) {
+        config.headers.common["token"] = store.state.token
     }
     return config
 }, error => {
     return Promise.reject(error)
 })
 
-// axios.interceptors.response.use(response => {
-//     return response
-// }, error => {
-//     console.log(error.response)
-//     return Promise.reject(error)
-// })
+// 返回请求的数据后，一般做错误处理
+axios.interceptors.response.use(response => {
 
+    return response.data
+}, error => {
+
+    return Promise.reject(error)
+})
+
+// TODO:需要重新封装
 const promise = (url, params, method) => {
 
     let options = { url, params, method}
-    if(method !== 'get' || method !== 'delete') {
+    if(method === 'post' || method === 'put') {
         options = { url, data: params, method}
     }
     return new Promise((resolve, reject) => {
         axios(options)
             .then(response => {
-                resolve(response.data)
+                resolve(response)
             })
             .catch(error => {
                 reject(error)

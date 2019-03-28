@@ -1,28 +1,41 @@
 import Vue from 'vue'
+import store from './store'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
 Vue.use(Router)
 
+
+// FIXME:页面刷新时，重新赋值token
+if (sessionStorage.getItem('token')) {
+    console.log(store)
+    store.commit('SET_TOKEN', {token: sessionStorage.getItem('token')})
+}
+
+
 // const Audio = () => import('@/components/common/Audio.vue')
 
 export default new Router({
-    mode: 'history',
+    // mode: 'history', //FIXME:需要在服务器端配置才能使用
     routes: [
         {
             path: '/',
             name: 'home',
             component: Home,
             redirect: () => {
-                sessionStorage.removeItem('url')
-                return '/cartogram/star'
-                // return '/login'
+                // return '/cartogram/star'
+                return '/login'
             }
         },
         {
             path: '/login',
             name: 'login',
-            component:() => import(/* webpackChunkName:"login" */ '@/components/login/Login.vue')
+            component:() => import(/* webpackChunkName:"account" */ '@/components/account/Login.vue')
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component:() => import(/* webpackChunkName:"account" */ '@/components/account/Register.vue')
         },
         {
             path: '/cartogram',

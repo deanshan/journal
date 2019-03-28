@@ -150,9 +150,9 @@ export default {
                 await this.getYear()
                 await this.getDate(this.yearList[0]['value'])
 
-                // this.ipAddressSegmentValue = this.yearList[0]['value']
+                this.ipAddressSegmentValue = this.yearList[0]['value']
 
-                // this.getScatterData()
+                this.getScatterData()
             } catch(error) {
                 Promise.reject(error)
             }

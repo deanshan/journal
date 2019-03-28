@@ -2,13 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import axios from 'axios'
 
 //element-ui
 import './plugins/element.js'
 //echarts
 import echarts from 'echarts'
-import 'echarts/theme/macarons.js'
+import 'echarts/theme/macarons.js'  //echarts主题
 //baidu-map
 import baiduMap from 'vue-baidu-map'
 

@@ -25,6 +25,9 @@
                     <li>logout</li>
                 </ul>
             </div>
+
+            <!-- TODO:需要清除sessionStorage -->
+            <router-link :to="{name: 'login'}">退出</router-link>
         </div>
     </div>
 </template>

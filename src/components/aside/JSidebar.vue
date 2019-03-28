@@ -14,7 +14,7 @@
                     :collapse-transition=true
                     background-color="#252A43"
                     text-color="#fff"
-                    :default-active=defaultMenu
+                    :default-active="$route.path"
                     router
                     @select="select"
                 >
@@ -256,14 +256,6 @@ export default {
         MenuLevelAside
     },
     computed: {
-        defaultMenu() {
-            let url = sessionStorage.getItem('url')
-            if(!url) {
-                sessionStorage.setItem('url', this.menulist.cartogram.lists[0]['index'])
-                url = this.menulist.cartogram.lists[0]['index']
-            }
-            return url
-        }
     },
     methods: {
         changeCollapse() {

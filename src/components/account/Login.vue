@@ -10,7 +10,7 @@
             :inline=false
         >
             <el-form-item label="用户名" prop="username">
-                <!-- 给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
+                <!-- FIXME:给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
                 <el-input
                     v-model.number="loginForm.username"
                     autocomplete="on"
@@ -26,6 +26,8 @@
                     @keyup.enter.native="login('loginForm')"
                 ></el-input>
             </el-form-item>
+
+            <router-link :to="{path: '/register'}">注册</router-link>
             <el-form-item>
                 <el-button type="primary" @click="login('loginForm')">登录</el-button>
             </el-form-item>
@@ -74,7 +76,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['CHANGE_TOKEN']),
+        ...mapMutations(['SET_TOKEN']),
         getUserInfo(username, password) {
 
             username = md5.MD5(username + md5.MD5_SUFFIX);
@@ -85,13 +87,12 @@ export default {
                 .then(res => {
 
                     let token = res
-                    token && this.CHANGE_TOKEN({token})
+                    token && this.SET_TOKEN({token})
                     this.$router.push({ path: '/cartogram/star'})
                 })
         },
         login(formName) {
             this.$refs[formName].validate((valid) => {
-                console.log(valid)
                 if (valid) {
                     this.getUserInfo(this.loginForm.username, this.loginForm.password)
                 } else {
