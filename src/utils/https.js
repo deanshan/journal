@@ -14,7 +14,8 @@ import store from '@/store'
 //     }
 // }
 
-axios.defaults.baseURL = "http://10.2.102.97:3100"
+// axios.defaults.baseURL = "http://10.2.102.97:3100"
+axios.defaults.baseURL = "http://169.254.186.21:3100"
 
 // 请求前拦截数据
 axios.interceptors.request.use(config => {
