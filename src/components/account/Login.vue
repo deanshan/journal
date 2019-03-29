@@ -1,44 +1,50 @@
 <template>
-    <div id="login">
-        <el-form
-            ref="loginForm"
-            :model="loginForm"
-            status-icon
-            :rules="rules"
-            label-position="right"
-            label-width="100px"
-            :inline=false
-        >
-            <el-form-item label="用户名" prop="username">
-                <!-- FIXME:给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
-                <el-input
-                    v-model.number="loginForm.username"
-                    autocomplete="on"
-                    autofocus
-                    @keyup.enter.native="login('loginForm')"
-                ></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input
-                    type="password"
-                    v-model="loginForm.password"
-                    autocomplete="off"
-                    @keyup.enter.native="login('loginForm')"
-                ></el-input>
-            </el-form-item>
+    <el-row type="flex" justify="center" class="h-100">
+        <el-col :span=24>
+            <div class="login">
+                <el-form
+                    ref="loginForm"
+                    :model="loginForm"
+                    status-icon
+                    :rules="rules"
+                    label-width="100px"
+                    :inline-message=true
+                    class="loginForm"
+                >
+                    <el-form-item label="用户名" prop="username">
+                        <!-- FIXME:给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
+                        <el-input
+                            v-model.number="loginForm.username"
+                            autocomplete="on"
+                            @keyup.enter.native="login('loginForm')"
+                        ></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                        <el-input
+                            type="password"
+                            v-model="loginForm.password"
+                            autocomplete="off"
+                            @keyup.enter.native="login('loginForm')"
+                        ></el-input>
+                    </el-form-item>
 
-            <router-link :to="{path: '/register'}">注册</router-link>
-            <el-form-item>
-                <el-button type="primary" @click="login('loginForm')">登录</el-button>
-            </el-form-item>
-        </el-form>
-    </div>
+                    <el-form-item>
+                        <router-link :to="{path: '/register'}">注册</router-link>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="login('loginForm')" style="width: 60%">登录</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-col>
+    </el-row>
+
 </template>
 
 <script>
 
 import { mapMutations } from 'vuex'
-import axios from 'axios'
 import md5 from '@/utils/md5.js'
 
 export default {
@@ -83,9 +89,9 @@ export default {
             password = md5.MD5(password + md5.MD5_SUFFIX);
 
             this.$https
-                .post('/admin/user', { username, password })
+                .post('/admin/login/user', { username, password })
                 .then(res => {
-
+                    // 请求成功，获取返回的token值
                     let token = res
                     token && this.SET_TOKEN({token})
                     this.$router.push({ path: '/cartogram/star'})
@@ -106,5 +112,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .loginForm {
+        width: 30%;
+    }
+}
+</style>
 
+<style scoped>
+.el-input {
+    width: 60%;
+}
 </style>
