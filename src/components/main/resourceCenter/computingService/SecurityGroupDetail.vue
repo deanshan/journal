@@ -84,7 +84,6 @@
 import NavTitle from '@/components/common/NavTitle'
 import ResourceDetails from '@/components/main/resourceCenter/common/ResourceDetails'
 import { https } from '@/utils/https.js'
-import { APP_KEY, MD_CONFIG } from '@/utils/constant.js'
 
 export default {
     name: "securityGroupDetail",

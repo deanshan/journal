@@ -1,7 +1,7 @@
 <template>
     <div class="operation-main-content">
         <!-- 导向 -->
-        <NavTitle :titles="['运维中心', '视图管理', 'IP池矩阵图']"></NavTitle>
+        <NavTitle :titles="['矩阵图']"></NavTitle>
         <!-- 主体 -->
         <div class="main-content">
             <div class="select-data">
@@ -191,7 +191,7 @@ export default {
                 tooltip: {
                     position: 'top',
                     formatter: function (params) {
-                        return `<div>${params.value[2]['ipAddress']}</br>${params.seriesName}</div>`
+                        return `<div>${params.value[2]['date']}</br>${params.seriesName}</div>`
                     }
                 },
                 grid: {

@@ -1,8 +1,8 @@
 <template>
     <div id="star-chart">
-        <!-- 导向 -->
-        <NavTitle :titles="['运维中心', '视图管理', '虚拟机星空图']"></NavTitle>
-        <!-- 主体 -->
+
+        <NavTitle :titles="['星空图']"></NavTitle>
+
         <div class="views">
             <div id="star-view" ></div>
         </div>
@@ -83,7 +83,7 @@ export default {
                                 data.push([
                                     value.distance,
                                     value.speed,
-                                    value.end_city
+                                    value.city_name
                                 ])
                             }
                             this.cityData.push({
@@ -166,7 +166,7 @@ export default {
                             + '</div>'
                             + schemaData[0].text + '：' + value[0] + 'km<br>'
                             + schemaData[1].text + '：' + value[1] + 'km/h<br>'
-                            + schemaData[2].text + ': ' + (value[0] / value[1]).toFixed(1) + 'h'
+                            + schemaData[2].text + '：' + (value[0] / value[1]).toFixed(1) + 'h'
                     }
                 },
                 xAxis: {

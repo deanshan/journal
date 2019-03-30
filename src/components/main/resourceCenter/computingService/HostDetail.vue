@@ -15,7 +15,6 @@
 
 import NavTitle from '@/components/common/NavTitle'
 import ResourceDetails from '@/components/main/resourceCenter/common/ResourceDetails'
-import { conversionTimeSlotType} from '@/utils/common.js'
 
 export default {
     name: "hostDetail",

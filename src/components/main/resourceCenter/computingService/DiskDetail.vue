@@ -15,7 +15,6 @@
 
 import NavTitle from '@/components/common/NavTitle'
 import ResourceDetails from '@/components/main/resourceCenter/common/ResourceDetails'
-import { conversionTimeSlotType, getDiskTypeName} from '@/utils/common.js'
 
 export default {
     name: "diskDetail",

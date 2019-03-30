@@ -23,45 +23,23 @@ import 'font-awesome/scss/font-awesome.scss'
 // utils
 import { https } from './utils/https.js'
 
-// 路由拦截用户登录状态来判断跳转到首页还是登录页
-// router.beforeEach((to, from, next) => {
-//     if(from.path === '/') {
-//         axios
-//             .get('/auth/session', {params: { token: sessionStorage.getItem('token') }} )
-//             .then(res => {
-//                 let data = res.data
-//                 if(data.code === 200 && data.result) {
-//                     sessionStorage.setItem("user",JSON.stringify(data.result))
-//                     next()
-//                 } else {
-//                     Message(data.msg)
-//                     setTimeout(() => {
-//                         // window.open(`${baseUrl}/login.jsp`,"_self")
-//                     }, 1000)
-//                 }
-//             })
-//             .catch(error => {
-//                 Message('获取用户信息失败，请重新登录！')
-//                 setTimeout(() => {
-//                     // window.open(`${baseUrl}/login.jsp`,"_self")
-//                 }, 1000)
-//             })
-//     } else {
-//         next()
-//     }
-// })
+// 验证用户登录状态
+router.beforeEach((to, from, next) => {
 
+    if(to.name === 'login') {   // 登录页面
+        next()
+    } else {    //非登录页面
+        //FIXME:可以通过sessionStorage获取token，此处在路由加载前已重新把token存储到vuex
+        if(store.state.token) {
+           // TODO:此处需要验证token的有效期
+            next()
+        } else {
+            // 退出页面，进行登录页面或指定页面
+            next('/login')
+        }
+    }
+})
 
-// import { conversionType, getStatusStyle, getPlatformUrl } from './utils/common.js'
-// import * as constant from './utils/constant.js'
-// import { getToken } from '@/utils/cache.js'
-// Vue.prototype.$getToken = getToken
-// Vue.prototype.$conversionType = conversionType
-// Vue.prototype.$getStatusStyle = getStatusStyle
-// Vue.prototype.$getPlatformUrl = getPlatformUrl
-// Vue.prototype.$constant = constant
-
-// Vue.use(axios)
 Vue.use(baiduMap, { ak: 'DlBAFrcThN8g3kkbfRcfnrHS1pWUwDeS' })
 
 Vue.prototype.$echarts = echarts
