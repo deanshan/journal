@@ -83,26 +83,25 @@ export default {
     },
     methods: {
         ...mapMutations(['SET_TOKEN']),
-        getUserInfo(username, password) {
+        getUserInfo( {username, password }) {
 
             username = md5.MD5(username + md5.MD5_SUFFIX);
             password = md5.MD5(password + md5.MD5_SUFFIX);
 
             this.$https
                 .post('/admin/login/user', { username, password })
-                .then(res => {
+                .then(({ token }) => {
                     // 请求成功，获取返回的token值
-                    let token = res
-                    token && this.SET_TOKEN({token})
+
+                    token && this.SET_TOKEN({ token })
                     this.$router.push({ path: '/cartogram/star'})
                 })
         },
         login(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.getUserInfo(this.loginForm.username, this.loginForm.password)
+                    this.getUserInfo(this.loginForm)
                 } else {
-                    console.log('error submit!!')
                     return false
                 }
             })

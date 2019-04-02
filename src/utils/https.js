@@ -1,5 +1,7 @@
-import axios from 'axios'
 import store from '@/store'
+import router from '@/router'
+import axios from 'axios'
+import { Notification } from 'element-ui';
 
 // const baseUrl = () => {
 //     switch (process.env.NODE_ENV) {
@@ -14,7 +16,7 @@ import store from '@/store'
 //     }
 // }
 
-axios.defaults.baseURL = "http://10.2.102.143:3100"
+axios.defaults.baseURL = 'http://10.2.103.221:3100'
 // axios.defaults.baseURL = "http://169.254.186.21:3100"
 
 // 请求前拦截数据
@@ -35,6 +37,17 @@ axios.interceptors.response.use(response => {
     return response.data
 }, error => {
 
+    if(error && error.response) {
+
+        let status = error.response.status
+        // TODO:暂时只针对token的有效期做了处理
+        switch(status) {
+            case 401:
+                Notification({ message: error.response.data})
+                router.push({ path: '/login' })
+        }
+    }
+    console.log(error.response)
     return Promise.reject(error)
 })
 

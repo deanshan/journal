@@ -63,7 +63,7 @@ export default {
         },
         url:{
             type:String,
-            defalut: () => ''
+            defalut: ''
         },
         tableData:{
             type:Array,
@@ -97,33 +97,6 @@ export default {
             this.$parent.gotoResourceDetailPage(type, obj)
         },
         handleOperation(index,row,type){
-            if(this.url){
-                this.$https
-                    .get(this.url, {
-                        resourcePoolId:row.resourcePoolId
-                    })
-                    .then(res => {
-                        switch(type){
-                            case 'detail':
-                                this.gotoDetailPage(res.type,row)
-                                break;
-                            case 'delete':
-                                this.$message.success("暂不支持删除")
-                                break;
-                        }
-                    })
-            }else{
-                switch(type){
-                    case 'detail':
-                        this.$parent.gotoDetailPage(row)
-                        break;
-                    case 'delete':
-                        this.$parent.deleteRow(index,row)
-                        break;
-                }
-            }
-
-
         }
     }
 }

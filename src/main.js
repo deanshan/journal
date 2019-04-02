@@ -11,14 +11,13 @@ import 'echarts/theme/macarons.js'  //echarts主题
 //baidu-map
 import baiduMap from 'vue-baidu-map'
 
-
 //全局样式
 import "./sass/global/reset.scss";
 import "./sass/global/global.scss";
 import "./sass/global/font-special.scss";
 // 字体图标样式
 import "./sass/global/iconfont.scss";
-import 'font-awesome/scss/font-awesome.scss'
+// import 'font-awesome/scss/font-awesome.scss'
 
 // utils
 import { https } from './utils/https.js'
@@ -29,9 +28,8 @@ router.beforeEach((to, from, next) => {
     if(to.name === 'login') {   // 登录页面
         next()
     } else {    //非登录页面
-        //FIXME:可以通过sessionStorage获取token，此处在路由加载前已重新把token存储到vuex
+        //FIXME:可以通过sessionStorage获取token，此处在路由(router.js)加载前已重新把token存储到vuex
         if(store.state.token) {
-           // TODO:此处需要验证token的有效期
             next()
         } else {
             // 退出页面，进行登录页面或指定页面

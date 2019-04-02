@@ -12,11 +12,11 @@
                 <el-menu
                     :collapse=isCollapse
                     :collapse-transition=true
+                    :unique-opened=true
                     background-color="#252A43"
                     text-color="#fff"
                     :default-active="$route.path"
                     router
-                    @select="select"
                 >
 
                     <MenuLevelAside
@@ -26,7 +26,7 @@
 
                     <MenuLevelAside
                         :level=3
-                        :menulists=this.menulist.resourceCenter
+                        :menulists=this.menulist.knowledge
                     ></MenuLevelAside>
 
                     <MenuLevelAside
@@ -76,65 +76,74 @@ export default {
                         }
                     ]
                 },
-                resourceCenter: {
+                knowledge: {
                     title: "知识库",
-                    index: "/resourceCenter",
+                    index: "/knowledge",
                     submeunlists: {
-                        computeServer: {
+                        html: {
                             subtitle: "HTML",
-                            index: "/computeServer",
+                            index: "/html",
                             lists:[
                                 {
-                                    "index": "/resourceCenter/host",
+                                    "index": "/knowledge/html",
                                     "name": "HTML",
                                     "iconClass": "fa fa-share-alt-square"
                                 },
-                                {
-                                    "index": "/resourceCenter/hostImage",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/resourceCenter/disk",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/resourceCenter/diskSnapshot",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/resourceCenter/keypair",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/resourceCenter/securityGroup",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                }
                             ]
                         },
-                        networkServer: {
-                            subtitle: "JavaScript",
-                            index: "/networkServer",
+                        css: {
+                            subtitle: "CSS",
+                            index: "/css",
                             lists:[
                                 {
-                                    "index": "/resourceCenter/vpc",
+                                    "index": "/knowledge/css",
+                                    "name": "CSS",
+                                    "iconClass": "fa fa-share-alt-square"
+                                },
+                            ]
+                        },
+                        javaScript: {
+                            subtitle: "JavaScript",
+                            index: "/javaScript",
+                            lists:[
+                                {
+                                    "index": "/knowledge/javaScript",
                                     "name": "JavaScript",
                                     "iconClass": "fa fa-share-alt-square"
                                 },
+                            ]
+                        },
+                        es6: {
+                            subtitle: "ES6",
+                            index: "/es6",
+                            lists:[
                                 {
-                                    "index": "/resourceCenter/floatingIP",
-                                    "name": "JavaScript",
+                                    "index": "/knowledge/es6",
+                                    "name": "ES6",
                                     "iconClass": "fa fa-share-alt-square"
                                 },
+                            ]
+                        },
+                        vue: {
+                            subtitle: "VUE",
+                            index: "/vue",
+                            lists:[
                                 {
-                                    "index": "/resourceCenter/firewall",
-                                    "name": "JavaScript",
+                                    "index": "/knowledge/vue",
+                                    "name": "VUE",
                                     "iconClass": "fa fa-share-alt-square"
-                                }
+                                },
+                            ]
+                        },
+                        fetch: {
+                            subtitle: "Fetch",
+                            index: "/fetch",
+                            lists:[
+                                {
+                                    "index": "/knowledge/fetch",
+                                    "name": "Fetch",
+                                    "iconClass": "fa fa-share-alt-square"
+                                },
                             ]
                         }
                     }
@@ -260,9 +269,6 @@ export default {
     methods: {
         changeCollapse() {
             this.isCollapse = !this.isCollapse
-        },
-        select(key,keyPath) {
-            sessionStorage.setItem('url', key)
         }
     }
 }

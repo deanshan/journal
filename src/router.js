@@ -8,8 +8,8 @@ Vue.use(Router)
 
 // FIXME:页面刷新时，重新赋值token
 if (sessionStorage.getItem('token')) {
-    console.log(store)
-    store.commit('SET_TOKEN', {token: sessionStorage.getItem('token')})
+
+    store.commit('SET_TOKEN', { token: sessionStorage.getItem('token') })
 }
 
 
@@ -55,98 +55,38 @@ export default new Router({
             ]
         },
         {
-            path:'/resourceCenter',
+            path:'/knowledge',
             component:Home,
             children:[
                 {
-                    path:'host',
-                    name:'host',
-                    component:() => import(/* webpackChunkName:"resourceCenter" */ '@/components/main/resourceCenter/computingService/Host.vue')
+                    path:'html',
+                    name:'html',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/html/HTML.vue')
                 },
                 {
-                    path:'hostDetail',
-                    name:'hostDetail',
-                    component:() => import(/* webpackChunkName:"resourceCenter" */ '@/components/main/resourceCenter/computingService/HostDetail.vue')
+                    path:'css',
+                    name:'css',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/css/CSS.vue')
                 },
                 {
-                    path:'hostImage',
-                    name:'hostImage',
-                    component:() => import(/* webpackChunkName:"resourceCenter" */ '@/components/main/resourceCenter/computingService/HostImage.vue')
+                    path:'javascript',
+                    name:'javascript',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/javascript/JavaScript.vue')
                 },
                 {
-                    path:'hostImageDetail',
-                    name:'hostImageDetail',
-                    component:() => import(/* webpackChunkName:"resourceCenter" */ '@/components/main/resourceCenter/computingService/HostImageDetail.vue')
+                    path:'es6',
+                    name:'es6',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/es6/ES6.vue')
                 },
                 {
-                    path:'disk',
-                    name:'disk',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/Disk.vue')
+                    path:'vue',
+                    name:'vue',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/vue/VUE.vue')
                 },
                 {
-                    path:'diskDetail',
-                    name:'diskDetail',
-                    component:() => import(/* webpackChunkName:"resourceCenter" */ '@/components/main/resourceCenter/computingService/DiskDetail.vue')
-                },
-                {
-                    path:'diskSnapshot',
-                    name:'diskSnapshot',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/DiskSnapshot.vue')
-                },
-                {
-                    path:'diskSnapshotDetail',
-                    name:'diskSnapshotDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/DiskSnapshotDetail.vue')
-                },
-                {
-                    path:'keypair',
-                    name:'keypair',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/Keypair.vue')
-                },
-                {
-                    path:'keypairDetail',
-                    name:'keypairDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/KeypairDetail.vue')
-                },
-                {
-                    path:'securityGroup',
-                    name:'securityGroup',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/SecurityGroup.vue')
-                },
-                {
-                    path:'securityGroupDetail',
-                    name:'securityGroupDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/computingService/SecurityGroupDetail.vue')
-                },
-                {
-                    path:'vpc',
-                    name:'vpc',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/Vpc.vue')
-                },
-                {
-                    path:'vpcDetail',
-                    name:'vpcDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/VpcDetail.vue')
-                },
-                {
-                    path:'floatingIP',
-                    name:'floatingIP',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/FloatingIp.vue')
-                },
-                {
-                    path:'floatingIpDetail',
-                    name:'floatingIpDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/FloatingIpDetail.vue')
-                },
-                {
-                    path:'firewall',
-                    name:'firewall',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/Firewall.vue')
-                },
-                {
-                    path:'firewallDetail',
-                    name:'firewallDetail',
-                    component:() => import(/* webpackChunkName:'resourceCenter' */ '@/components/main/resourceCenter/networkService/FirewallDetail.vue')
+                    path:'fetch',
+                    name:'fetch',
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/fetch/Fetch.vue')
                 },
             ]
         }
