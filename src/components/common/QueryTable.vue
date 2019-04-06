@@ -2,33 +2,34 @@
     <!-- 查询 -->
     <div class="query-content">
         <!-- 刷新 -->
-        <el-button type="default" class="btn-refresh" icon="fa fa-refresh" @click="refresh"></el-button>
+        <el-button type="primary" class="btn-refresh" icon="el-icon-refresh" @click="refresh"></el-button>
 
         <el-form :inline="true" :model="queryTerms" class="demo-form-inline">
             <el-form-item>
-                <el-input v-model=queryTerms.name.value :placeholder=queryTerms.name.label size="small">
+                <el-input
+                    size="small"
+                    v-model=queryTerms.name.value
+                    :placeholder="queryTerms.name.label"
+                    @keyup.enter.native="search('queryTerms')"
+                >
                     <template slot="prepend">{{ queryTerms.name.label }}</template>
                 </el-input>
             </el-form-item>
-            <!-- <el-form-item>
-                <el-input v-model="queryTerms.name['value']" :placeholder=queryTerms.name.label size="small">
-                    <template slot="prepend">{{ queryTerms.name.label }}</template>
-                </el-input>
-            </el-form-item> -->
             <el-form-item>
-                <el-select v-if="isShowStatus" v-model="queryTerms.arrange['value']" :placeholder=queryTerms.arrange.label size="small">
-                    <el-option label="状态" value=""></el-option>
+                <el-select
+                    size="small"
+                    v-model="queryTerms.arrange['value']"
+                    :placeholder="queryTerms.arrange.label"
+                    @change="search('queryTerms')"
+                >
+                    <el-option label="全部" value=""></el-option>
                     <el-option
                         v-for="(arrange, key) in queryTerms.arrange.lists"
                         :key="key"
-                        :label=arrange.label
-                        :value=arrange.value
+                        :label="arrange.label"
+                        :value="arrange.value"
                     ></el-option>
                 </el-select>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" icon="el-icon-search" @click="onSubmit" size="small" class="btn-line-height">查询</el-button>
-                <el-button type="primary" icon="fa fa-download" @click="onExport" size="small" plain class="btn-line-height">&nbsp;报表</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -44,10 +45,6 @@ export default {
         }
     },
     props: {
-        isShowStatus: {
-            default: true,
-            type: Boolean
-        },
         queryTerms: {
             default: () => {},
             type: Object
@@ -57,11 +54,8 @@ export default {
         refresh() {
             this.$emit('tableRefresh', '')
         },
-        onSubmit() {
-            this.$emit('onSubmit')
-        },
-        onExport() {
-            this.$emit('onExport')
+        search(form) {
+            console.log(form)
         }
     }
 }
@@ -69,8 +63,8 @@ export default {
 
 <style lang="scss" scoped>
 .query-content {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
-    padding: 10px 10px 10px 20px;
 }
 </style>

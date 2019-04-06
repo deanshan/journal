@@ -1,15 +1,15 @@
 <template>
     <el-row type="flex" justify="center" class="h-100">
-        <el-col :span=24>
+        <el-col :span='24'>
             <div class="login">
                 <el-form
-                    ref="loginForm"
-                    :model="loginForm"
-                    status-icon
-                    :rules="rules"
-                    label-width="100px"
-                    :inline-message=true
                     class="loginForm"
+                    ref="loginForm"
+                    status-icon
+                    label-width="100px"
+                    :model="loginForm"
+                    :rules="rules"
+                    :inline-message="true"
                 >
                     <el-form-item label="用户名" prop="username">
                         <!-- FIXME:给组件添加事件监听，必须加.native，相当于把组件变成原生HTML，否则监听事件无效 -->
@@ -94,7 +94,8 @@ export default {
                     // 请求成功，获取返回的token值
 
                     token && this.SET_TOKEN({ token })
-                    this.$router.push({ path: '/cartogram/star'})
+                    // this.$router.push({ path: '/cartogram/star'})
+                    this.$router.push({ path: '/knowledge/html'})
                 })
         },
         login(formName) {

@@ -29,18 +29,9 @@ export default {
 
 <style lang="scss" scoped>
 .nav-title {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+
     flex-shrink: 0;
-    .reply {
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 10px;
-        cursor: pointer;
-        .fa.fa-reply {
-            color: #2090ff;
-            font-size: 12px;
-        }
-    }
 }
 </style>
 <style>

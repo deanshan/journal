@@ -2,7 +2,7 @@
 
     <div class="html-content">
 
-        <NavTitle :titles="['HTML']"></NavTitle>
+        <NavTitle :titles="['知识库','HTML','html']"></NavTitle>
 
         <!-- 主体 -->
         <div class="main-content">
@@ -14,15 +14,14 @@
                 @onExport="onExport"
             ></QueryTable>
             <!--表格-->
-            <BaseTable
+            <Table
                 :loading="loading"
                 :url="url"
-                ref="baseTableData"
+                ref="tableData"
                 :tableData="tableData"
-                :itemData="itemData"
-                :operationData="operationData"
+                :tableHeader="tableHeader"
                 :total="totalNum"
-            ></BaseTable>
+            ></Table>
         </div>
     </div>
 </template>
@@ -30,25 +29,124 @@
 <script>
 
 import NavTitle from '@/components/common/NavTitle'
-import BaseTable from '@/components/common/BaseTable'
+import Table from '@/components/common/Table'
 import QueryTable from '@/components/common/QueryTable'
 
 export default {
     name: "host",
     data() {
         return {
-            loading: false,
+            loading: false,     //页面加载状态
             url: '',
             tableData:[
+                {
+                    name: '垂直居中1',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0',
+                },
+                {
+                    name: '垂直居中1',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0',
+                },
+                    {
+                        name: '垂直居中1',
+                        knowledgePoints: 'css2/css3',
+                        details: '纯CSS实现垂直居中的几种方法',
+                        url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                        source: '博客圆',
+                        arrange: '否',
+                        number: '0',
+                    },
+                {
+                    name: '垂直居中2',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中3',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
                 {
                     name: '垂直居中',
                     knowledgePoints: 'css2/css3',
                     details: '纯CSS实现垂直居中的几种方法',
                     url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
                     source: '博客圆',
-                    arrange: '未整理',
-                    number: '查看次数'
-                }
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
+                {
+                    name: '垂直居中',
+                    knowledgePoints: 'css2/css3',
+                    details: '纯CSS实现垂直居中的几种方法',
+                    url: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    source: '博客圆',
+                    arrange: '否',
+                    number: '0'
+                },
             ],
             totalNum:0,
             queryTerms: {
@@ -59,14 +157,24 @@ export default {
                 arrange: {
                     label: '状态',
                     value: '',
-                    lists: {}
+                    lists: [
+                        {
+                            label: '是',
+                            value: 'yes'
+                        },
+                        {
+                            label: '否',
+                            value: 'no'
+                        }
+                    ]
                 }
             },
-            itemData: [
+            tableHeader: [
                 {
                     prop: "name",
                     label: "名称",
-                    width: '240'
+                    width: '240',
+                    className: 'textColor'
                 },
                 {
                     prop: "knowledgePoints",
@@ -99,23 +207,18 @@ export default {
                     label: "查看次数",
                     width: '140'
                 }
-            ],
-            operationData:[{
-                prop: "bottomHostId",
-                label: "操作",
-                width: '80',
-                list:[{
-                    name: "详情",
-                    type: 'detail',
-                    textClass: "text-operation"
-                }]
-            }]
+            ]
         }
     },
     components:{
         NavTitle,
         QueryTable,
-        BaseTable
+        Table
+    },
+    mounted() {
+        for (let data of Object.values(this.tableData)) {
+            data['textColor'] = 'bell-green'
+        }
     },
     methods:{
         onSubmit(){
@@ -131,5 +234,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.html-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .main-content {
+        flex: auto;
+        display: flex;
+        flex-direction: column
+    }
+}
 </style>
