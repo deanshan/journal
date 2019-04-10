@@ -1,7 +1,7 @@
 import { parseLyric } from '@/utils/parseLyric'
 import { mapState, mapGetters } from 'vuex'
 // import BScroll from 'better-scroll'
-import { eventBus } from '@/utils/eventBus'
+// import { eventBus } from '@/utils/eventBus'
 
 // import '@/sass/lyric.scss'
 
@@ -15,15 +15,15 @@ export default {
   },
   computed: {
     ...mapState('player', {
-      paused: state => state.paused,
-      currentTime: state => state.currentTime
+        paused: state => state.paused,
+        currentTime: state => state.currentTime
     }),
     ...mapState('list', {
-      lrc: state => state.lrc
+        lrc: state => state.lrc
     }),
     ...mapGetters('list', ['getCover']),
     parseLrc () {
-      return parseLyric(this.lrc)
+        return parseLyric(this.lrc)
     }
   },
   render () {
