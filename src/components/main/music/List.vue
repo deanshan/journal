@@ -17,41 +17,41 @@
   </div>
 </template>
 <script>
-// import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
-// export default {
-//   name: 'List',
-//   data () {
-//     return {
-//       musicData: []
-//     }
-//   },
-//   computed: {
-//     ...mapState('player', {
-//       paused: state => state.paused
-//     }),
-//     ...mapState('list', {
-//       currentMusic: state => state.currentMusic,
-//       favoriteMusic: state => state.musicList.favoriteMusic
-//     })
-//   },
-//   methods: {
-//     ...mapMutations('player', ['PLAY_PAUSE']),
-//     ...mapMutations('list', ['CHANGE_MUSIC', 'DELETE_MUSIC']),
-//     listMusic (k) {
-//       window.localStorage.setItem('currentMusic', k)
-//       this.CHANGE_MUSIC()
-//       this.PLAY_PAUSE({paused: false})
-//     },
-//     deleteMusic (k) {
-//       if (k < this.currentMusic) {
-//         window.localStorage.setItem('currentMusic', this.currentMusic - 1)
-//         this.CHANGE_MUSIC({currentMusic: this.currentMusic - 1})
-//       }
-//       this.DELETE_MUSIC({currentMusic: k})
-//     }
-//   }
-// }
+export default {
+  name: 'List',
+  data () {
+    return {
+      musicData: []
+    }
+  },
+  computed: {
+    ...mapState('player', {
+      paused: state => state.paused
+    }),
+    ...mapState('list', {
+      currentMusic: state => state.currentMusic,
+      favoriteMusic: state => state.musicList.favoriteMusic
+    })
+  },
+  methods: {
+    ...mapMutations('player', ['PLAY_PAUSE']),
+    ...mapMutations('list', ['CHANGE_MUSIC', 'DELETE_MUSIC']),
+    listMusic (k) {
+      window.localStorage.setItem('currentMusic', k)
+      this.CHANGE_MUSIC()
+      this.PLAY_PAUSE({paused: false})
+    },
+    deleteMusic (k) {
+      if (k < this.currentMusic) {
+        window.localStorage.setItem('currentMusic', this.currentMusic - 1)
+        this.CHANGE_MUSIC({currentMusic: this.currentMusic - 1})
+      }
+      this.DELETE_MUSIC({currentMusic: k})
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .music-list {

@@ -92,10 +92,9 @@ export default {
                 .post('/admin/login/user', { username, password })
                 .then(({ token }) => {
                     // 请求成功，获取返回的token值
-
                     token && this.SET_TOKEN({ token })
                     // this.$router.push({ path: '/cartogram/star'})
-                    this.$router.push({ path: '/knowledge/html'})
+                    this.$router.push({ path: '/pleasure/music'})
                 })
         },
         login(formName) {

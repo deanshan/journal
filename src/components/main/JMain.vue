@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'jmain',
+    name: 'JMain',
     data() {
         return {
 

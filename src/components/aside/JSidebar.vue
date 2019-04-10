@@ -10,9 +10,9 @@
                     <img :src="[!isCollapse ? images.open : images.close]">
                 </div>
                 <el-menu
-                    :collapse=isCollapse
-                    :collapse-transition=true
-                    :unique-opened=true
+                    :collapse="isCollapse"
+                    :collapse-transition="true"
+                    :unique-opened="true"
                     background-color="#252A43"
                     text-color="#fff"
                     :default-active="$route.path"
@@ -20,23 +20,23 @@
                 >
 
                     <MenuLevelAside
-                        :level=2
-                        :menulists=this.menulist.cartogram
+                        :level="2"
+                        :menulists="this.menulist.cartogram"
                     ></MenuLevelAside>
 
                     <MenuLevelAside
-                        :level=3
-                        :menulists=this.menulist.knowledge
+                        :level="3"
+                        :menulists="this.menulist.knowledge"
                     ></MenuLevelAside>
 
                     <MenuLevelAside
-                        :level=3
-                        :menulists=this.menulist.itamCenter
+                        :level="2"
+                        :menulists="this.menulist.pleasure"
                     ></MenuLevelAside>
 
                     <MenuLevelAside
-                        :level=2
-                        :menulists=this.menulist.monitorCenter
+                        :level="2"
+                        :menulists="this.menulist.monitorCenter"
                     ></MenuLevelAside>
 
                 </el-menu>
@@ -148,89 +148,16 @@ export default {
                         }
                     }
                 },
-                itamCenter: {
-                    title: "音乐",
-                    index: "/itamCenter",
-                    submeunlists: {
-                        itamManagement: {
-                            subtitle: "音乐",
-                            index: "/itamManagement",
-                            lists: [
-                                {
-                                    "index": "/itamCenter/computeDevice",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/networkDevice",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/storageDevice",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/safety",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/peripheral",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                }
-                            ]
-                        },
-                        resourceManagement: {
-                           subtitle: "音乐",
-                           index: "/resourceManagement",
-                           lists:[
-                                {
-                                    "index": "/itamCenter/dataCenter",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/computerRoom",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/cabinet",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/label",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                }
-                            ]
-                        },
-                        supplierManagement: {
-                           subtitle: "音乐",
-                           index: "/supplierManagement",
-                           lists: [
-                                {
-                                    "index": "/itamCenter/vendor",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/personnel",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                                {
-                                    "index": "/itamCenter/model",
-                                    "name": "音乐",
-                                    "iconClass": "fa fa-share-alt-square"
-                                }
-                            ]
+                pleasure: {
+                    title: "娱乐",
+                    index: "/pleasure",
+                    lists: [
+                        {
+                            "index": "/pleasure/music",
+                            "name": "音乐",
+                            "iconClass": "fa fa-share-alt-square"
                         }
-                    }
+                    ]
                 },
                 monitorCenter: {
                     title: "地理位置",

@@ -4,15 +4,7 @@ import axios from "axios";
 
 const IS_ARRAY = {
   isArray(getters) {
-    return !(
-      getters.getCurrentList === undefined ||
-      getters.getCurrentList.length === 0
-    );
-    // if (getters.getCurrentList === undefined || getters.getCurrentList.length === 0) {
-    //   return false
-    // } else {
-    //   return true
-    // }
+    return !(getters.getCurrentList === undefined || getters.getCurrentList.length === 0)
   }
 };
 const GET_INDEX = {

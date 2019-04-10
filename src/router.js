@@ -89,6 +89,41 @@ export default new Router({
                     component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/fetch/Fetch.vue')
                 },
             ]
-        }
+        },
+        {
+            path: '/pleasure',
+            name: 'pleasure',
+            component: Home,
+            children: [
+                {
+                    path: 'music',
+                    // name: 'music',
+                    // component: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/Music.vue')
+                    components: {
+                        default: resolve => require(['@/components/main/music/Music.vue'], resolve),
+                        songTitle: resolve => require(['@/components/main/music/SongTitle.vue'], resolve),
+                        playControl: resolve => require(['@/components/main/music/PlayControl.vue'], resolve),
+                        // Myplayer
+                    },
+                    children: [
+                        {
+                            path: '',
+                            name: 'play',
+                            component: resolve => require(['@/components/main/music/Play.vue'], resolve)
+                        },
+                        {
+                            path: 'lyric',
+                            name: 'lyric',
+                            component: resolve => require(['@/components/main/music/Lyric.jsx'], resolve)
+                        },
+                        {
+                            path: 'list',
+                            name: 'list',
+                            component: resolve => require(['@/components/main/music/List.vue'], resolve)
+                        }
+                    ]
+                }
+            ]
+        },
   ]
 })
