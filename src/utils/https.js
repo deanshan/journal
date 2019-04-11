@@ -16,7 +16,8 @@ import { Notification } from 'element-ui';
 //     }
 // }
 
-axios.defaults.baseURL = 'http://10.2.102.191:3100'
+// FIXME:因music api是网络接口和node服务器两个不同的接口，暂时只能通过反向代理实现请求，否则无法请求网络接口
+// axios.defaults.baseURL = 'http://10.2.103.72:3100'
 // axios.defaults.baseURL = "http://169.254.186.21:3100"
 
 // 请求前拦截数据

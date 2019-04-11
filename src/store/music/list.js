@@ -1,5 +1,6 @@
 import axios from "axios";
-// import { EVAL } from '@/utils/eval'
+import { https } from '@/utils/https.js'
+import { EVAL } from '@/utils/EVAL.js'
 // import jsonp from 'jsonp'
 
 const IS_ARRAY = {
@@ -24,8 +25,9 @@ export default {
     },
     list: 0,
     lrc: "",
+    vkey: "",
     // musicData: [], // 歌单数据
-    currentMusic: GET_INDEX.getIndex() || 0 // 当前播放的歌曲，即下标所对应的歌曲
+    currentMusic: GET_INDEX.getIndex() || 1 // 当前播放的歌曲，即下标所对应的歌曲
   },
   getters: {
     getTitle(state, getters) {
@@ -42,14 +44,10 @@ export default {
       }
     },
     getURL(state, getters) {
-      if (IS_ARRAY.isArray(getters)) {
-        let songmid = getters.getCurrentList[state.currentMusic].data.songmid;
-        let url =
-          "http://ws.stream.qqmusic.qq.com/C100" +
-          songmid +
-          ".m4a?fromtag=0&guid=126548448";
-        return url;
-      }
+        if (IS_ARRAY.isArray(getters)) {
+          let songmid = getters.getCurrentList[state.currentMusic].data.songmid
+          return `http://dl.stream.qqmusic.qq.com/C400${songmid}.m4a?fromtag=38&guid=5931742855&vkey=${state.vkey}`
+        }
     },
     getCover(state, getters) {
       if (IS_ARRAY.isArray(getters)) {
@@ -107,6 +105,9 @@ export default {
     },
     GET_DATA(state, response) {
       console.log(state, response);
+    },
+    GET_VKEY(state, response) {
+       state.vkey = response
     }
   },
   actions: {
@@ -116,7 +117,7 @@ export default {
           "/api?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=27&_=1531113398355"
         )
         .then(res => {
-          ctx.commit("GET_NEW_MUSIC", res.data.songlist);
+          ctx.commit("GET_NEW_MUSIC", res.songlist);
         })
         .catch(error => {
           console.log(error);
@@ -129,7 +130,7 @@ export default {
           "/api?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=26&_=1531034162798"
         )
         .then(res => {
-          ctx.commit("GET_HOT_MUSIC", res.data.songlist);
+          ctx.commit("GET_HOT_MUSIC", res.songlist);
         })
         .catch(error => {
           console.log(error);
@@ -142,7 +143,7 @@ export default {
           "/api?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=36&_=1531059472453"
         )
         .then(res => {
-          ctx.commit("GET_SUTRA_MUSIC", res.data.songlist);
+          ctx.commit("GET_SUTRA_MUSIC", res.songlist);
         })
         .catch(error => {
           console.log(error);
@@ -159,12 +160,37 @@ export default {
       axios
         .get(url)
         .then(res => {
-          ctx.commit("GET_LYRIC", res.data.lyric);
+          ctx.commit("GET_LYRIC", res.lyric);
         })
         .catch(error => {
           console.log(error);
           ctx.dispatch("getLyric");
         });
+    },
+    getVKey(ctx) {
+      let songmid = ctx.getters.getCurrentList[ctx.state.currentMusic].data.songmid;
+        const data = Object.assign({}, {
+          callback: 'musicJsonCallback',
+          loginUin: 3051522991,
+          format: 'jsonp',
+          platform: 'yqq',
+          needNewCode: 0,
+          cid: 205361747,
+          uin: 3051522991,
+          guid: 5931742855,
+          songmid: songmid,
+          filename: `C400${songmid}.m4a`
+      })
+      https
+      .get('/vKey',data)
+      .then(res => {
+          let num1 = res.indexOf('(')
+          let num2 = res.indexOf(')')
+          let result = JSON.parse(res.substring(num1 + 1, num2))
+          let vkey = result.data.items[0].vkey
+          ctx.commit("GET_VKEY", vkey);
+
+      })
     }
   }
 };

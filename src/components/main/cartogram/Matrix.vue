@@ -58,7 +58,7 @@ export default {
         getCentury() {
             return new Promise(resolve => {
                 this.$https
-                    .get('/view/matrix/century')
+                    .get('/server/view/matrix/century')
                     .then(res => {
                         for(let item of Object.values(res)) {
                             this.centuryList.push({
@@ -74,7 +74,7 @@ export default {
         async getYear() {
             for(let item of Object.values(this.centuryList)) {
                 await this.$https
-                    .get('/view/matrix/year', {centuryId: item.value})
+                    .get('/server/view/matrix/year', {centuryId: item.value})
                     .then(res => {
                         for(let value of Object.values(res)) {
                             this.yearList.push({
@@ -88,7 +88,7 @@ export default {
         async getDate(yearId) {
             return new Promise(resolve => {
                 this.$https
-                    .get('/view/matrix/date', {yearId})
+                    .get('/server/view/matrix/date', {yearId})
                     .then(res => {
                         if(Object.keys(res).length !== 0) {
                             this.dateList = res

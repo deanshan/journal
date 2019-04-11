@@ -1,0 +1,157 @@
+
+/*控件*/
+.controls {
+    width: 100%;
+    height: 100px;
+    .pro-time {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 50px;
+      background:#000;
+      .time {
+        padding: 0 .07rem;
+        color: #fff;
+      }
+      .progress {
+        width: 70%;
+        height: 5px;
+        background: #fff;
+        border-radius: 5px;
+        position: relative;
+        .pro-len {
+          height: 100%;
+          background: linear-gradient(to right, red, orange ,yellow, green, cyan, blue, purple);
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          top: 0px;
+          border-radius: 5px;
+        }
+        .pro-thumb {
+          width: 16px;
+          height: 16px;
+          background: radial-gradient(circle, red, orange ,yellow, green, cyan, blue, purple);
+          border-radius: 50%;
+          position: absolute;
+          top: -6px;
+        }
+      }
+      /*音量控件*/
+      .volume-icon {
+        width: 30px;
+        height: 30px;
+        background: url(./music_icon.png) no-repeat;
+        &.volume {
+          background-position: -110px -30px;
+        }
+        &.muted {
+          background-position: -110px -58px;
+        }
+        /*1、移除默认样式*/
+        input[type=range] {
+          transform: rotate(-90deg);
+          -webkit-appearance: none;/*移除系统默认样式*/
+          width: 115px;
+          border-radius: 5px; /*这个属性设置使填充进度条时的图形为圆角*/
+          position: relative;
+          top: -75px;
+          left: -40px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;/*移除滑块thumb默认样式*/
+        }
+        /*2、给滑动轨道(track)添加样式*/
+        input[type=range]::-webkit-slider-runnable-track {
+          height: 5px;
+          border-radius: 10px; /*将轨道设为圆角的*/
+          box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+        }
+        input[type=range]::-moz-range-track {
+          height: 5px;
+          border-radius: 10px; /*将轨道设为圆角的*/
+          box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+        }
+        /*原始的控件获取到焦点时，会显示包裹整个控件的边框，所以还需要把边框取消。*/
+        input[type=range]:focus {
+          outline: none;
+        }
+        /*3、给滑块(thumb)添加样式*/
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 15px;
+          width: 15px;
+          margin-top: -4px; /*使滑块超出轨道部分的偏移量相等*/
+          background: #fff;
+          border-radius: 50%; /*外观设置为圆形*/
+          border: solid 0.125em rgba(205, 224, 230, 1); /*设置边框*/
+          box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+        }
+        input[type=range]::-moz-range-thumb {
+          -webkit-appearance: none;
+          height: 12px;
+          width: 12px;
+          margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+          background: #ffffff;
+          border-radius: 50%; /*外观设置为圆形*/
+          border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+          box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+        }
+      }
+    }
+    .music-ctl {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 50px;
+      background: #000;
+      div {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        background: url(./music_icon.png) no-repeat;
+      }
+      [class*='play-mode'] {
+        border: none;
+        zoom: 1.4;
+      }
+      .play-mode-order {
+        background-position: -221px -61px;
+      }
+      .play-mode-single {
+        background-position: -186px -35px;
+      }
+      .play-mode-circle {
+        background-position: -150px -35px;
+      }
+      .play-mode-random {
+        background-position: -257px -63px;
+      }
+      .play-prev {
+        background-position: 4px -30px;
+      }
+      .play-pause {
+        width: 40px;
+        height: 40px;
+        background-position: -26px -42px;
+      }
+      .play-start {
+        width: 40px;
+        height: 40px;
+        background-position: -35px -79px;
+      }
+      .play-next {
+        background-position: -74px -30px;
+      }
+      .music-list {
+        border: none;
+        width: 25px;
+        height: 25px;
+        background-position: -67px -89px;
+        zoom: 1.5;
+      }
+    }
+}

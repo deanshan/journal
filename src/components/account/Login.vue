@@ -89,7 +89,7 @@ export default {
             password = md5.MD5(password + md5.MD5_SUFFIX);
 
             this.$https
-                .post('/admin/login/user', { username, password })
+                .post('/server/admin/login/user', { username, password })
                 .then(({ token }) => {
                     // 请求成功，获取返回的token值
                     token && this.SET_TOKEN({ token })

@@ -13,14 +13,35 @@ module.exports = {
         https: false,
         open: true,     // 自动启动浏览器
         proxy: {
-            //  跨域代理
-            "/api": {
-              target: "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg",
+            '/server': {
+              target: 'http://10.2.103.72:3100',
               ws: true,
               changeOrigin: true,
               pathRewrite: {
-                "^/api": ""
+                '^/server': ''
               }
+            },
+            "/api": {
+                target: "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg",
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                  "^/api": ""
+                }
+            },
+            '/vKey': {
+                target: 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg',
+                changeOrigin: true,
+                pathRewrite: {
+                  '^/vKey': ''
+                }
+            },
+            '/lyric': {
+                target: 'http://ustbhuangyi.com/music/api/lyric',
+                changeOrigin: true,
+                pathRewrite: {
+                  '^/lyric': ''
+                }
             }
         }
     }

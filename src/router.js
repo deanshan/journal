@@ -13,7 +13,7 @@ if (sessionStorage.getItem('token')) {
 }
 
 
-// const Audio = () => import('@/components/common/Audio.vue')
+const Audio = () => import('@/components/common/Audio.vue')
 
 export default new Router({
     // mode: 'history', //FIXME:需要在服务器端配置才能使用
@@ -97,13 +97,11 @@ export default new Router({
             children: [
                 {
                     path: 'music',
-                    // name: 'music',
-                    // component: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/Music.vue')
                     components: {
-                        default: resolve => require(['@/components/main/music/Music.vue'], resolve),
-                        songTitle: resolve => require(['@/components/main/music/SongTitle.vue'], resolve),
-                        playControl: resolve => require(['@/components/main/music/PlayControl.vue'], resolve),
-                        // Myplayer
+                        default: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/Music.vue'),
+                        songTitle: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/SongTitle.vue'),
+                        playControl: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/PlayControl.vue'),
+                        Audio
                     },
                     children: [
                         {

@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="controls">
       <!-- 进度条时长 -->
       <div class="pro-time">
@@ -55,11 +54,10 @@
         ></router-link>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-// import '@/sass/play-control.scss'
+import '@/sass/play-control.scss'
 import { formatTime } from '@/utils/formatTime'
 import { eventBus } from '@/utils/eventBus'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'

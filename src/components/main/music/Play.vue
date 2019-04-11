@@ -4,7 +4,7 @@
       :to="{name: 'lyric'}"
       class="logo"
       :class="[!this.paused ? 'logo-animation-running' : 'logo-animation-paused']"
-      :style="{background: `url(${this.getCover})`}"
+      :style="{'background': `url(${this.getCover})`}"
     ></router-link>
   </div>
 </template>
@@ -22,34 +22,32 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @keyframes musiclogo {
-    from {
-      transform: rotate(0deg)
+    @keyframes musiclogo {
+        from {
+            transform: rotate(0deg)
+        }
+        to {
+            transform: rotate(360deg)
+        }
     }
-    to {
-      transform: rotate(360deg)
+    .music-logo {
+        // height: 600px;
+        display: flex;
+        flex: auto;
+        align-items: center;
+        justify-content: center;
+        // background: radial-gradient(circle, white 20%, gray 50%, black );
+        .logo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+        }
+        .logo-animation-running {
+            animation: musiclogo 8s linear infinite running;
+        }
+        .logo-animation-paused {
+            animation: musiclogo 8s linear infinite paused;
+        }
     }
-  }
-  .music-logo {
-    height: 100%;
-    display: flex;
-    flex: auto;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, white 20%, gray 50%, black );
-    .logo {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      // background-repeat: no-repeat;
-      // background-size: auto;
-    }
-    .logo-animation-running {
-      animation: musiclogo 8s linear infinite running;
-    }
-    .logo-animation-paused {
-      animation: musiclogo 8s linear infinite paused;
-    }
-  }
 
 </style>

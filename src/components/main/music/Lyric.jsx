@@ -1,9 +1,9 @@
 import { parseLyric } from '@/utils/parseLyric'
 import { mapState, mapGetters } from 'vuex'
-// import BScroll from 'better-scroll'
-// import { eventBus } from '@/utils/eventBus'
+import BScroll from 'better-scroll'
+import { eventBus } from '@/utils/eventBus'
 
-// import '@/sass/lyric.scss'
+import '@/sass/lyric.scss'
 
 export default {
   name: 'Lyric',
@@ -46,48 +46,48 @@ export default {
       )
     })
     return (
-      <div ref="lyric" class="music-lrc">
-        <ul ref='ul'>
-          {lrcList}
-        </ul>
-      </div>
+        <div ref="lyric" class="music-lrc">
+            <ul ref='ul'>
+                {lrcList}
+            </ul>
+        </div>
     )
   },
   methods: {
-    lrcTimer (t) {
-      if (this.curlrc > 5) {
-        let curLi = this.$refs.ul.children[this.curlrc - 5]
-        setTimeout(() => {
-          // 滚动到目标元素，即当前高亮li
-          this.lrcScroll.scrollToElement(curLi, t)
-        }, t)
-      } else {
-        // 后退到当前行数小于5时，回到最顶部
-        this.lrcScroll.scrollTo(0, 0, 800)
+      lrcTimer (t) {
+          if (this.curlrc > 5) {
+              let curLi = this.$refs.ul.children[this.curlrc - 5]
+              setTimeout(() => {
+                  // 滚动到目标元素，即当前高亮li
+                  this.lrcScroll.scrollToElement(curLi, t)
+              }, t)
+          } else {
+              // 后退到当前行数小于5时，回到最顶部
+              this.lrcScroll.scrollTo(0, 0, 800)
+          }
       }
-    }
   },
   mounted () {
-    // this.$nextTick(() => {
-    //   this.lrcScroll = new BScroll(this.$refs.lyric, {})
-    //   eventBus.$on('back', val => {
-    //     if (val) {
-    //       this.lrcScroll.scrollTo(0, 0, 200)
-    //     }
-    //   })
-    // })
+      this.$nextTick(() => {
+          this.lrcScroll = new BScroll(this.$refs.lyric, {})
+          eventBus.$on('back', val => {
+              if (val) {
+                  this.lrcScroll.scrollTo(0, 0, 200)
+              }
+          })
+      })
   },
   watch: {
-    'timeDif' (newVal) {
-      // this.lrcScroll必须在DOM生成之后才能使用
-      this.$nextTick(() => {
-        this.lrcTimer(newVal + 100)
-      })
-    },
-    'currentTime' (newVal, old) {
-      if (old - newVal > 1) {
-        this.curlrc = 0
+      'timeDif' (newVal) {
+          // this.lrcScroll必须在DOM生成之后才能使用
+          this.$nextTick(() => {
+            this.lrcTimer(newVal + 100)
+          })
+      },
+      'currentTime' (newVal, old) {
+          if (old - newVal > 1) {
+            this.curlrc = 0
+          }
       }
-    }
   }
 }

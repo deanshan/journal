@@ -1,7 +1,7 @@
 <template>
     <div id="home">
 
-        <Audio></Audio>
+        <!-- <Audio></Audio> -->
 
         <el-container>
             <!-- el-header必须写在这里，否则el-container没有flex-direction(原因待查找) -->
@@ -24,16 +24,16 @@
 
 <script>
 
-import Audio from "@/components/common/Audio.vue"
+// import Audio from "@/components/common/Audio.vue"
 
 import JHeader from "@/components/header/JHeader.vue"
 import JSidebar from "@/components/aside/JSidebar.vue"
 import JMain from "@/components/main/JMain.vue"
 
 export default {
-    name: 'home',
+    name: 'Home',
     components: {
-        Audio,
+        // Audio,
         JHeader,
         JSidebar,
         JMain

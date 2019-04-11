@@ -39,7 +39,7 @@ export default {
         getCityList() {
             return new Promise(resolve => {
                 this.$https
-                    .get('/view/star/citylist')
+                    .get('/server/view/star/citylist')
                     .then(res => {  //[]
 
                         for(let item of Object.values(res)) {
@@ -76,7 +76,7 @@ export default {
 
             for(let item of Object.values(this.cityList)) {
                 await this.$https
-                        .get('/view/star/citydata', { cityId: item.cityId })
+                        .get('/server/view/star/citydata', { cityId: item.cityId })
                         .then(res => {
                             let data = []
                             for(let value of Object.values(res)) {

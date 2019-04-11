@@ -1,12 +1,12 @@
 <template>
     <el-row type="flex" justify="center" class="register">
-        <el-col :span=12>
+        <el-col :span="12">
             <el-form
                 :model="registerForm"
                 :rules="rules"
                 ref="registerForm"
                 label-width="100px"
-                :inline-message=true
+                :inline-message="true"
             >
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="registerForm.username" class="width-50"></el-input>
@@ -36,9 +36,9 @@
                                 <el-select v-model="registerForm.province" placeholder="省级地区" @change="getCity()">
                                     <el-option
                                         v-for="(item, key) in province"
-                                        :key=key
-                                        :label=item.label
-                                        :value=item.value
+                                        :key="key"
+                                        :label="item.label"
+                                        :value="item.value"
                                     ></el-option>
                                 </el-select>
                             </el-form-item>
@@ -48,9 +48,9 @@
                                 <el-select v-model="registerForm.city" placeholder="市级地区" @change="getCounty()">
                                     <el-option
                                         v-for="(item, key) in city"
-                                        :key=key
-                                        :label=item.label
-                                        :value=item.value
+                                        :key="key"
+                                        :label="item.label"
+                                        :value="item.value"
                                     ></el-option>
                                 </el-select>
                             </el-form-item>
@@ -60,9 +60,9 @@
                                 <el-select v-model="registerForm.county" placeholder="区级地区">
                                     <el-option
                                         v-for="(item, key) in county"
-                                        :key=key
-                                        :label=item.label
-                                        :value=item.value
+                                        :key="key"
+                                        :label="item.label"
+                                        :value="item.value"
                                     ></el-option>
                                 </el-select>
                             </el-form-item>
@@ -255,7 +255,7 @@ export default {
                 }
             }
             this.$https
-                .post('/admin/register/userinfo', { userInfo: data })
+                .post('/server/admin/register/userinfo', { userInfo: data })
                 .then(res => {
                     this.$message({ message: '注册成功' })
                     if(res.code === 200) {
