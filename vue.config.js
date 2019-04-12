@@ -31,6 +31,7 @@ module.exports = {
             },
             '/vKey': {
                 target: 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg',
+                ws: true,
                 changeOrigin: true,
                 pathRewrite: {
                   '^/vKey': ''
@@ -38,6 +39,7 @@ module.exports = {
             },
             '/lyric': {
                 target: 'http://ustbhuangyi.com/music/api/lyric',
+                ws: true,
                 changeOrigin: true,
                 pathRewrite: {
                   '^/lyric': ''
