@@ -1,5 +1,6 @@
 <template>
-  <div class="homelist">
+  <div class="recommend">
+      <!-- tab页    下拉加载 -->
     <div class="nav">
       <mt-button size="small" @click.native.prevent="active = 'tab-container1'">tab 1</mt-button>
       <mt-button size="small" @click.native.prevent="active = 'tab-container2'">tab 2</mt-button>
@@ -200,7 +201,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.homelist {
+.recommend {
   flex: auto;
 }
 .item {

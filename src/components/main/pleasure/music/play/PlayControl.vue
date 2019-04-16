@@ -39,19 +39,33 @@
       <!-- 音乐控件 -->
       <div class="music-ctl">
         <!-- 播放模式 -->
-        <div :class="`play-mode-${playMode}`" @click="changeMode"></div>
+        <div  @click="changeMode">
+            <i class="iconfont play-mode" v-show="playMode === 'order'">&#xe61a;</i>
+            <i class="iconfont play-mode" v-show="playMode === 'single'">&#xe62f;</i>
+            <i class="iconfont play-mode" v-show="playMode === 'circle'">&#xe701;</i>
+            <i class="iconfont play-mode" v-show="playMode === 'random'">&#xe624;</i>
+        </div>
         <!-- 上一首 -->
-        <div class="play-prev" @click="prevNextMusic('prev')"></div>
+        <div class="play-prev" @click="prevNextMusic('prev')">
+            <i class="iconfont">&#xe621;</i>
+        </div>
         <!-- 播放暂停 -->
-        <div :class="[ paused ? 'play-pause' :'play-start']" @click="playPause"></div>
+        <div :class="[ paused ? 'play-pause' : 'play-start']" @click="playPause">
+            <i class="iconfont" v-show="paused">&#xe617;</i>
+            <i class="iconfont" v-show="!paused">&#xe681;</i>
+        </div>
         <!-- 下一首 -->
-        <div class="play-next" @click="prevNextMusic('next')"></div>
+        <div class="play-next" @click="prevNextMusic('next')">
+            <i class="iconfont">&#xe622;</i>
+        </div>
         <!-- 歌单切换 -->
         <router-link
           :to="{ name :this.$route.name === 'list' ? 'play' : 'list' }"
           class="music-list"
           tag="div"
-        ></router-link>
+        >
+            <i class="iconfont">&#xe65f;</i>
+        </router-link>
       </div>
     </div>
 </template>
@@ -152,4 +166,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.iconfont {
+    color: #fff;
+}
+.play-mode {
+    font-size: 20px;
+    color: #fff;
+}
 </style>

@@ -97,30 +97,65 @@ export default new Router({
             children: [
                 {
                     path: 'music',
-                    components: {
-                        default: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/Music.vue'),
-                        songTitle: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/SongTitle.vue'),
-                        playControl: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/PlayControl.vue'),
-                        Audio
-                    },
+                    // name: 'music',
+                    component: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/Music.vue'),
                     children: [
+                        // {
+                        //     path: '',
+                        //     name: 'recommend',
+                        //     component:() => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/recommend/Recommend.vue')
+                        // },
                         {
                             path: '',
                             name: 'play',
-                            component: resolve => require(['@/components/main/pleasure/music/Play.vue'], resolve)
-                        },
-                        {
-                            path: 'lyric',
-                            name: 'lyric',
-                            component: resolve => require(['@/components/main/pleasure/music/Lyric.jsx'], resolve)
-                        },
-                        {
-                            path: 'list',
-                            name: 'list',
-                            component: resolve => require(['@/components/main/pleasure/music/List.vue'], resolve)
+                            components: {
+                                default: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/Play.vue'),
+                                songTitle: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/SongTitle.vue'),
+                                playControl: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/PlayControl.vue'),
+                                Audio
+                            },
+                            children: [
+                                {
+                                    path: 'lyric',
+                                    name: 'lyric',
+                                    component: resolve => require(['@/components/main/pleasure/music/play/Lyric.jsx'], resolve)
+                                },
+                                {
+                                    path: 'list',
+                                    name: 'list',
+                                    component: resolve => require(['@/components/main/pleasure/music/play/List.vue'], resolve)
+                                }
+                            ]
+
                         }
                     ]
-                }
+                },
+                // {
+                //     path: 'music',
+                //     components: {
+                //         default: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/Music.vue'),
+                //         songTitle: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/SongTitle.vue'),
+                //         playControl: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/PlayControl.vue'),
+                //         Audio
+                //     },
+                //     children: [
+                //         {
+                //             path: '',
+                //             name: 'play',
+                //             component: resolve => require(['@/components/main/pleasure/music/Play.vue'], resolve)
+                //         },
+                //         {
+                //             path: 'lyric',
+                //             name: 'lyric',
+                //             component: resolve => require(['@/components/main/pleasure/music/Lyric.jsx'], resolve)
+                //         },
+                //         {
+                //             path: 'list',
+                //             name: 'list',
+                //             component: resolve => require(['@/components/main/pleasure/music/List.vue'], resolve)
+                //         }
+                //     ]
+                // }
             ]
         },
   ]
