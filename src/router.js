@@ -98,26 +98,26 @@ export default new Router({
                 {
                     path: 'music',
                     components: {
-                        default: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/Music.vue'),
-                        songTitle: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/SongTitle.vue'),
-                        playControl: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/music/PlayControl.vue'),
+                        default: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/Music.vue'),
+                        songTitle: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/SongTitle.vue'),
+                        playControl: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/PlayControl.vue'),
                         Audio
                     },
                     children: [
                         {
                             path: '',
                             name: 'play',
-                            component: resolve => require(['@/components/main/music/Play.vue'], resolve)
+                            component: resolve => require(['@/components/main/pleasure/music/Play.vue'], resolve)
                         },
                         {
                             path: 'lyric',
                             name: 'lyric',
-                            component: resolve => require(['@/components/main/music/Lyric.jsx'], resolve)
+                            component: resolve => require(['@/components/main/pleasure/music/Lyric.jsx'], resolve)
                         },
                         {
                             path: 'list',
                             name: 'list',
-                            component: resolve => require(['@/components/main/music/List.vue'], resolve)
+                            component: resolve => require(['@/components/main/pleasure/music/List.vue'], resolve)
                         }
                     ]
                 }

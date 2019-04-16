@@ -65,7 +65,7 @@ export default {
             // 切换歌词后的位置
             eventBus.$emit('back', true)
             let currentMusic = this.currentMusic
-            if (this.playMode === 'shunxubofangtubiao') {
+            if (this.playMode === 'order') {
               if (currentMusic === this.getCurrentList.length) {
                 this.audio.pause()
                 this.audio.load()
@@ -76,10 +76,10 @@ export default {
                 this.CHANGE_MUSIC({ currentMusic })
                 this.getLyric()
               }
-            } else if (this.playMode === 'danquxunhuan') {
+            } else if (this.playMode === 'single') {
               this.audio.load()
               this.audio.play()
-            } else if (this.playMode === 'xunhuan') {
+            } else if (this.playMode === 'circle') {
               currentMusic++
               if (currentMusic === this.getCurrentList.length) {
                 currentMusic = 0
@@ -87,7 +87,7 @@ export default {
               window.localStorage.setItem('currentMusic', currentMusic)
               this.CHANGE_MUSIC({ currentMusic })
               this.getLyric()
-            } else if (this.playMode === 'suijibofang') {
+            } else if (this.playMode === 'random') {
               let randomMusic = (currentMusic) => {
                 let newIndex = Math.floor(Math.random() * this.getCurrentList.length)
                 if (newIndex === currentMusic) {

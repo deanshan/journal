@@ -6,7 +6,7 @@ export default {
     volume: 0.3,
     duration: 0, // 当前歌曲总时长
     currentTime: 0, // 当前歌曲播放进度，即当前播放所在位置
-    playMode: "shunxubofangtubiao" // 播放模式，默认order为顺序播放
+    playMode: "order" // 播放模式，默认order为顺序播放
   },
   getters: {
     // 获取控件切换音乐的索引值
@@ -15,9 +15,9 @@ export default {
       let length = rootGetters["list/getCurrentList"].length;
       let playMode = state.playMode;
       if (
-        playMode === "shunxubofangtubiao" ||
-        playMode === "danquxunhuan" ||
-        playMode === "xunhuan"
+        playMode === "order" ||
+        playMode === "single" ||
+        playMode === "circle"
       ) {
         if (payload.type === "prev") {
           currentMusic = (currentMusic - 1 + length) % length;
@@ -66,17 +66,17 @@ export default {
     SET_PLAY_MODE(state) {
       let newMode = "";
       switch (state.playMode) {
-        case "shunxubofangtubiao":
-          newMode = "danquxunhuan";
+        case "order":
+          newMode = "single";
           break;
-        case "danquxunhuan":
-          newMode = "xunhuan";
+        case "single":
+          newMode = "circle";
           break;
-        case "xunhuan":
-          newMode = "suijibofang";
+        case "circle":
+          newMode = "random";
           break;
-        case "suijibofang":
-          newMode = "shunxubofangtubiao";
+        case "random":
+          newMode = "order";
           break;
       }
       state.playMode = newMode;
