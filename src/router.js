@@ -100,13 +100,13 @@ export default new Router({
                     // name: 'music',
                     component: () => import(/* webpackChunkName:"pleasure" */ '@/components/main/pleasure/music/Music.vue'),
                     children: [
-                        // {
-                        //     path: '',
-                        //     name: 'recommend',
-                        //     component:() => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/recommend/Recommend.vue')
-                        // },
                         {
                             path: '',
+                            name: 'recommend',
+                            component:() => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/recommend/Recommend.vue')
+                        },
+                        {
+                            path: 'play',
                             name: 'play',
                             components: {
                                 default: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/Play.vue'),

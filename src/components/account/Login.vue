@@ -1,5 +1,5 @@
 <template>
-    <el-row type="flex" justify="center" class="h-100">
+    <el-row type="flex" justify="center" class="h100">
         <el-col :span='24'>
             <div class="login">
                 <el-form

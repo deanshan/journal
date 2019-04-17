@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     isShowSidebar: false,
-    paused: true, // 播放暂停，默认true暂停
+    paused: false, // 播放暂停，默认true暂停
     volume: 0.3,
     duration: 0, // 当前歌曲总时长
     currentTime: 0, // 当前歌曲播放进度，即当前播放所在位置

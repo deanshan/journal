@@ -1,5 +1,5 @@
 <template>
-    <div class="music">
+    <div class="music h100">
         <Audio></Audio>
         <router-view name="songTitle"></router-view>
         <router-view></router-view>

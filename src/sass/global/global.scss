@@ -1,6 +1,6 @@
 // 滚动条样式
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
     height: 5px;
 }
 
@@ -84,6 +84,9 @@
     vertical-align: middle;
     font-size: 18px;
 }
+.el-tabs__content {
+    overflow-y: scroll;
+}
 // 表单样式
 .el-form-item {
     margin-bottom: 18px;
@@ -159,12 +162,6 @@
     flex-direction: column;
     overflow-y: scroll;
 }
-.bell-red{
-    color: red;
-}
-.bell-green{
-    color: green;
-}
 
 // 表单：注册
 .el-form-item__error {
@@ -172,6 +169,6 @@
     padding-top: 0;
 }
 
-.h-100 {
+.h100 {
     height: 100%;
 }
