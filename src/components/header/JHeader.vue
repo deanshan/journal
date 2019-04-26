@@ -85,7 +85,7 @@ export default {
         height: 100%;
         flex: auto;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         .search {
             width: 200px;

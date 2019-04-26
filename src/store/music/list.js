@@ -1,5 +1,6 @@
 import { https } from '@/utils/https.js'
 import { isArray } from '@/utils/common.js'
+import { parseLyric } from '@/utils/parseLyric'
 
 export default {
     namespaced: true,
@@ -11,11 +12,16 @@ export default {
             favoriteMusic: []
         },
         vkey: "",
-        list: 1,  // 对应歌曲类型
-        lrc: "",  // 歌词
+        lyric: "",  // 歌词
+        musicType: window.localStorage.getItem("musicType") || 'newMusic',  // 对应歌曲类型
         currentMusic: parseInt(window.localStorage.getItem("currentMusic")) || 0 // 当前播放的歌曲，即下标所对应的歌曲
     },
     getters: {
+        getCurrentList(state) {
+            if (state.musicType === 'newMusic'  ) return state.musicList.newMusic
+            if (state.musicType === 'hotMusic'  ) return state.musicList.hotMusic
+            if (state.musicType === 'sutraMusic') return state.musicList.sutraMusic
+        },
         getTitle(state, getters) {
 
             return isArray(getters.getCurrentList) && getters.getCurrentList[state.currentMusic].data.songname
@@ -35,11 +41,6 @@ export default {
             return isArray(getters.getCurrentList)
                 && `https://y.gtimg.cn/music/photo_new/T002R300x300M000${getters.getCurrentList[state.currentMusic].data.albummid}.jpg?max_age=2592000`
         },
-        getCurrentList(state) {
-            if (state.list === 0) return state.musicList.newMusic
-            if (state.list === 1) return state.musicList.hotMusic
-            if (state.list === 2) return state.musicList.sutraMusic
-        }
     },
     mutations: {
         // 切换音乐(如自动切换、列表切换、前后切换)
@@ -50,7 +51,7 @@ export default {
         },
         // 改变当前音乐列表
         CHANGE_MUSIC_LIST(state, payload) {
-            state.list = payload.list
+            state.musicType = payload.musicType
         },
         // deleteMusic列表中删除歌单
         DELETE_MUSIC(state, payload) {
@@ -72,9 +73,9 @@ export default {
         GET_SUTRA_MUSIC(state, response) {
             state.musicList.sutraMusic = response
         },
-        // 获取lrc
+        // 获取lyric
         GET_LYRIC(state, response) {
-            state.lrc = response
+            state.lyric = parseLyric(response)
         },
         // 获取vkey
         GET_VKEY(state, response) {
@@ -88,7 +89,7 @@ export default {
                 https
                     .get(url)
                     .then(res => {
-                        console.log(res)
+
                         ctx.commit("GET_NEW_MUSIC", res.songlist)
                         resolve()
                     })
@@ -100,7 +101,7 @@ export default {
                 https
                     .get(url)
                     .then(res => {
-                        console.log(res)
+
                         ctx.commit("GET_HOT_MUSIC", res.songlist)
                         resolve()
                     })
@@ -112,7 +113,7 @@ export default {
                 https
                     .get(url)
                     .then(res => {
-                      console.log(res)
+
                         ctx.commit("GET_SUTRA_MUSIC", res.songlist)
                         resolve()
                     })
@@ -125,7 +126,7 @@ export default {
           https
               .get(url)
               .then(res => {
-                  console.log(res)
+
                   ctx.commit("GET_LYRIC", res.lyric)
               })
       },
@@ -147,7 +148,7 @@ export default {
               https
                   .get('/vKey',data)
                   .then(res => {
-                      console.log(res)
+
                       let num1 = res.indexOf('(')
                       let num2 = res.indexOf(')')
                       let result = JSON.parse(res.substring(num1 + 1, num2))

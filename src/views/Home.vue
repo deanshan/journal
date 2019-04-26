@@ -5,9 +5,9 @@
 
         <el-container>
             <!-- el-header必须写在这里，否则el-container没有flex-direction(原因待查找) -->
-            <!-- <el-header height="60px">
+            <el-header height="60px">
                 <JHeader></JHeader>
-            </el-header> -->
+            </el-header>
 
             <el-container>
 

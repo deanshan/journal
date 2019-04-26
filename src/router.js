@@ -106,15 +106,19 @@ export default new Router({
                             component:() => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/recommend/Recommend.vue')
                         },
                         {
-                            path: 'play',
-                            name: 'play',
+                            path: '',
+                            // name: 'play',
                             components: {
                                 default: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/Play.vue'),
                                 songTitle: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/SongTitle.vue'),
-                                playControl: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/PlayControl.vue'),
-                                Audio
+                                playControl: () => import(/* webpackChunkName:"music" */ '@/components/main/pleasure/music/play/PlayControl.vue')
                             },
                             children: [
+                                {
+                                    path: '',
+                                    name: 'playCover',
+                                    component: resolve => require(['@/components/main/pleasure/music/play/PlayCover.vue'], resolve)
+                                },
                                 {
                                     path: 'lyric',
                                     name: 'lyric',

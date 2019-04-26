@@ -34,5 +34,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.music {
+    display: flex;
+    flex-direction: column;
+}
 </style>

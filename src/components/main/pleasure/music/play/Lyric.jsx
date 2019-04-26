@@ -1,4 +1,3 @@
-import { parseLyric } from '@/utils/parseLyric'
 import { mapState, mapGetters } from 'vuex'
 import BScroll from 'better-scroll'
 import { eventBus } from '@/utils/eventBus'
@@ -19,21 +18,21 @@ export default {
         currentTime: state => state.currentTime
     }),
     ...mapState('list', {
-        lrc: state => state.lrc
+        lyric: state => state.lyric
     }),
     ...mapGetters('list', ['getCover']),
-    parseLrc () {
-        return parseLyric(this.lrc)
-    }
+    // lrc () {
+    //     return parseLyric(this.lrc)
+    // }
   },
   render () {
     let curClass = 'cur'
     // 遍历歌词生成对应li
-    let lrcList = this.parseLrc.map((lrc, index) => {
+    let lrcList = this.lyric.map((lrc, index) => {
       if (lrc[0] <= this.currentTime && index >= this.curlrc) {
         this.curlrc = index
         curClass = 'cur'
-        if (index > 0) this.timeDif = this.parseLrc[index][0] - this.parseLrc[index - 1][0]
+        if (index > 0) this.timeDif = this.lyric[index][0] - this.lyric[index - 1][0]
       } else {
         curClass = ''
       }
