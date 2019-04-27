@@ -20,12 +20,12 @@
                             :style="{'background-image': `url(https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.data.albummid}.jpg?max_age=2592000)`}"
                         ></router-link>
                     </li>
-                    <li>
-                        <span @click="playPause(key)">
-                            <i class="iconfont" v-show="playIcon">&#xe617;</i>
-                            <i class="iconfont" v-show="!playIcon">&#xe681;</i>
+                    <li @click="playPause(key)">
+                        <span>
+                            <i class="iconfont" v-show="key === currentMusic">{{ playIcon ? '&#xe617;' : '&#xe681;' }}</i>
+                            <i class="iconfont" v-show="key !== currentMusic">&#xe617;</i>
                         </span>
-                        <span>{{ item.data.songname }}</span>
+                        <span :style="{'color': key === currentMusic ? 'red' : ''}">{{ item.data.songname }}</span>
                     </li>
                     <li>lyric</li>
                     <li>{{ item.data.interval }}</li>
@@ -33,7 +33,7 @@
                     <li>icon</li>
                 </ul>
             </el-tab-pane>
-            <el-tab-pane label="热歌" name="hostMusic">
+            <el-tab-pane label="热歌" name="hotMusic">
                 <ul class="title row">
                     <li>序列</li>
                     <li>封面</li>
@@ -43,7 +43,7 @@
                     <li>歌手</li>
                     <li>icon</li>
                 </ul>
-                <ul v-for="(item, key) in hotMusic" :key="key" class="row" ref="hostMusicList">
+                <ul v-for="(item, key) in hotMusic" :key="key" class="row" ref="hotMusicList">
                     <li>{{ key }}</li>
                     <li>
                         <router-link
@@ -84,12 +84,12 @@
                             :style="{'background-image': `url(https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.data.albummid}.jpg?max_age=2592000)`}"
                         ></router-link>
                     </li>
-                    <li>
-                        <span @click="playPause(key)">
-                            <i class="iconfont" v-show="playIcon">&#xe617;</i>
-                            <i class="iconfont" v-show="!playIcon">&#xe681;</i>
+                    <li @click="playPause(key)">
+                        <span>
+                            <i class="iconfont" v-show="key === currentMusic">{{ playIcon ? '&#xe617;' : '&#xe681;' }}</i>
+                            <i class="iconfont" v-show="key !== currentMusic">&#xe617;</i>
                         </span>
-                        <span>{{ item.data.songname }}</span>
+                        <span :style="{'color': key === currentMusic ? 'red' : ''}">{{ item.data.songname }}</span>
                     </li>
                     <li>lyric</li>
                     <li>{{ item.data.interval }}</li>
@@ -180,9 +180,6 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-.el-tabs__header {
-
 }
 .el-tabs__item {
     font-size: 22px;

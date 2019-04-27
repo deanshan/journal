@@ -4,6 +4,14 @@
             <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
         </div>
         <div class="header-content">
+
+            <div
+                class="music"
+                @click="playPause"
+                :class="[!paused ? 'rotate-animation-running' : 'rotate-animation-paused']"
+                :style="{'background-image': `url(${getCover})`}"
+            ></div>
+
             <div class="search"></div>
             <div class="settings" :class="[ isVisible ? 'bg' : '']">
                 <el-dropdown
@@ -35,7 +43,7 @@
 
 <script>
 
-import { mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
     name: "jheader",
@@ -44,8 +52,18 @@ export default {
             isVisible: false
         }
     },
+    computed: {
+        ...mapState('player', {
+            paused: state => state.paused
+        }),
+        ...mapGetters('list', ['getCover'])
+    },
     methods: {
         ...mapMutations(['SET_TOKEN']),
+        ...mapMutations('player', ['PLAY_PAUSE']),
+        playPause() {
+            this.paused ? this.PLAY_PAUSE({paused: false}) : this.PLAY_PAUSE({paused: true})
+        },
         logout() {
             this.SET_TOKEN({token: ''})
             sessionStorage.clear()
@@ -87,6 +105,13 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .music {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
         .search {
             width: 200px;
         }

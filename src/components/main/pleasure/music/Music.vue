@@ -1,6 +1,6 @@
 <template>
     <div class="music h100">
-        <Audio></Audio>
+        <!-- <Audio></Audio> -->
         <router-view name="songTitle"></router-view>
         <router-view></router-view>
         <router-view name="playControl"></router-view>
@@ -9,7 +9,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Audio from "@/components/common/Audio.vue"
+// import Audio from "@/components/common/Audio.vue"
 export default {
     name: 'Music',
     data() {
@@ -18,7 +18,7 @@ export default {
         }
     },
     components: {
-        Audio
+        // Audio
     },
     methods: {
         ...mapActions('list', ['getNewMusic', 'getHotMusic', 'getSutraMusic', 'getLyric','getVKey'])

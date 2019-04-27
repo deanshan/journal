@@ -172,3 +172,19 @@
 .h100 {
     height: 100%;
 }
+
+// 360度旋转
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+.rotate-animation-running {
+    animation: rotate 8s linear infinite running;
+}
+.rotate-animation-paused {
+    animation: rotate 8s linear infinite paused;
+}
