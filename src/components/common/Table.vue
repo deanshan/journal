@@ -23,11 +23,18 @@
                     scope.row: Object 对应data每一行的所有数据,可以对不同状态添加不同的类或图标
                     scope.$index: 对应当前行的下标
                 -->
-                <template slot-scope="{row, $index}">
+                <!-- <template slot-scope="{row, $index}">
                     <span :class="[row[data.className],row[data.classIcon]]">
-                        <input class="edit-cell" v-if="showEdit[$index]"    v-model="row[data.prop]">
-                        <span v-if="!showEdit[$index]">{{row[data.prop]}}</span>
-                        <!-- {{ row[data.prop] }} -->
+                        <input class="edit-cell" v-model="row[data.prop]" :disabled="!showEdit[$index]">
+                    </span>
+                </template> -->
+                <template slot-scope="{row, $index}">
+                    <!-- <span :class="[row[data.className],row[data.classIcon]]"> -->
+                    <span :class="[row[data.className],row[data.classIcon]]">
+                        <!-- <input class="edit-cell" v-if="showEdit[$index]"    v-model="row[data.prop]"> -->
+                        <!-- <span v-if="!showEdit[$index]">{{row[data.prop]}}</span> -->
+                        <span v-if="Object.keys(row)[key] !== 'url'">{{row[data.prop]}}</span>
+                        <a :href="row[data.prop]" v-if="Object.keys(row)[key] === 'url'" target="_blank">{{row[data.prop]}}</a>
                     </span>
                 </template>
             </el-table-column>
@@ -159,9 +166,9 @@ export default {
         },
 
         //更新
-        handleUpdate(formName) {
+        // handleUpdate(formName) {
 
-        },
+        // },
         //删除
         handleDelete(index, row) {
             this.tableData.splice(index, 1)

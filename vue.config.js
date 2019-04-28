@@ -9,7 +9,7 @@ module.exports = {
         open: true,     // 自动启动浏览器
         proxy: {
             '/server': {
-              target: 'http://10.2.103.237:3100',
+              target: 'http://10.2.103.246:3100',
               // target: 'http://169.254.186.21:3100',
               ws: true,
               changeOrigin: true,
