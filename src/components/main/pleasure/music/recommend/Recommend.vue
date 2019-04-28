@@ -160,17 +160,6 @@ export default {
     },
     mounted () {
         this.playIcon = this.paused
-        // switch(this.musicTypeIndex) {
-        //     case 0:
-        //         this.activeMusicType = 'newMusic'
-        //         break;
-        //     case 1:
-        //         this.activeMusicType = 'hotMusic'
-        //         break;
-        //     case 2:
-        //         this.activeMusicType = 'sutraMusic'
-        //         break;
-        // }
     }
 }
 </script>
