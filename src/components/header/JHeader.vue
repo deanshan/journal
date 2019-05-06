@@ -4,14 +4,35 @@
             <a class="link link-journal" href="javascript:void(0)" data-letters="Journal">Journal</a>
         </div>
         <div class="header-content">
+            <div class="music-controls">
+                <div
+                    class="cover"
+                    @click="playPause"
+                    :class="[!paused ? 'rotate-animation-running' : 'rotate-animation-paused']"
+                    :style="{'background-image': `url(${getCover})`}"
+                ></div>
+                <div class="controls">
+                    <el-progress :percentage="80"></el-progress>
 
-            <div
-                class="music"
-                @click="playPause"
-                :class="[!paused ? 'rotate-animation-running' : 'rotate-animation-paused']"
-                :style="{'background-image': `url(${getCover})`}"
-            ></div>
-
+                    <div class="music-ctl">
+                        <div @click="prevNextMusic('prev')">
+                            <i class="iconfont">&#xe621;</i>
+                        </div>
+                        <div @click="playPause">
+                            <i class="iconfont">{{ paused ? '&#xe617;' : '&#xe681;' }}</i>
+                        </div>
+                        <div @click="prevNextMusic('next')">
+                            <i class="iconfont">&#xe622;</i>
+                        </div>
+                        <div @click="changeMode">
+                            <i class="iconfont play-mode" v-show="playMode === 'order'">&#xe61a;</i>
+                            <i class="iconfont play-mode" v-show="playMode === 'single'">&#xe62f;</i>
+                            <i class="iconfont play-mode" v-show="playMode === 'circle'">&#xe701;</i>
+                            <i class="iconfont play-mode" v-show="playMode === 'random'">&#xe624;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="search"></div>
             <div class="settings" :class="[ isVisible ? 'bg' : '']">
                 <el-dropdown
@@ -43,7 +64,7 @@
 
 <script>
 
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     name: "jheader",
@@ -54,13 +75,17 @@ export default {
     },
     computed: {
         ...mapState('player', {
-            paused: state => state.paused
+            paused: state => state.paused,
+            playMode: state => state.playMode
         }),
-        ...mapGetters('list', ['getCover'])
+        ...mapGetters('list', ['getCover']),
+        ...mapGetters('player', ['getCurrentIndex']),
     },
     methods: {
         ...mapMutations(['SET_TOKEN']),
-        ...mapMutations('player', ['PLAY_PAUSE']),
+        ...mapMutations('player', ['PLAY_PAUSE', 'SET_PLAY_MODE']),
+        ...mapMutations('list', ['CHANGE_MUSIC']),
+        ...mapActions('list', ['getLyric']),
         playPause() {
             this.paused ? this.PLAY_PAUSE({paused: false}) : this.PLAY_PAUSE({paused: true})
         },
@@ -77,10 +102,26 @@ export default {
         },
         toggle(isVisible) {
             this.isVisible = isVisible
+        },
+        prevNextMusic (prevNext) {
+            this.getCurrentIndex({type: prevNext})
+            this.CHANGE_MUSIC()
+            this.getLyric()
+        },
+        // 切换模式
+        changeMode () {
+        this.SET_PLAY_MODE()
         }
     }
 };
 </script>
+
+<style lang="scss">
+.el-progress__text {
+    margin-left: 25px;
+    color: #fff;
+}
+</style>
 
 <style lang="scss" scoped>
 #header {
@@ -105,12 +146,34 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .music {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100% 100%;
-            cursor: pointer;
+        .music-controls {
+            width: 300px;
+            padding: 10px 10px;
+            background: #8b5c7e;
+            display: flex;
+            .cover {
+                flex-shrink: 0;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-size: 100% 100%;
+                cursor: pointer;
+                margin-right: 30px;
+            }
+            .controls {
+                flex: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                .music-ctl {
+                    display: flex;
+                    justify-content: space-between;
+                    >div {
+                        cursor: pointer;
+                    }
+                }
+            }
+
         }
         .search {
             width: 200px;

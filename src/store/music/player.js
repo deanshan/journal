@@ -14,11 +14,7 @@ export default {
       let currentMusic = rootState.list.currentMusic;
       let length = rootGetters["list/getCurrentList"].length;
       let playMode = state.playMode;
-      if (
-        playMode === "order" ||
-        playMode === "single" ||
-        playMode === "circle"
-      ) {
+      if (playMode === "order" || playMode === "single" || playMode === "circle") {
         if (payload.type === "prev") {
           currentMusic = (currentMusic - 1 + length) % length;
         } else {

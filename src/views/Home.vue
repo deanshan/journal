@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 import Audio from "@/components/common/Audio.vue"
 
@@ -37,6 +38,16 @@ export default {
         JHeader,
         JSidebar,
         JMain
+    },
+    methods: {
+        ...mapActions('list', ['getNewMusic', 'getHotMusic', 'getSutraMusic', 'getLyric','getVKey'])
+    },
+    async created () {
+        await this.getNewMusic()
+        await this.getHotMusic()
+        await this.getSutraMusic()
+        await this.getVKey()
+        this.getLyric()
     }
 }
 </script>
