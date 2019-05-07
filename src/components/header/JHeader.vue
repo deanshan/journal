@@ -148,7 +148,7 @@ export default {
         align-items: center;
         .music-controls {
             width: 300px;
-            padding: 10px 10px;
+            padding: 5px 10px;
             background: #8b5c7e;
             display: flex;
             .cover {
