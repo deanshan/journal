@@ -87,7 +87,8 @@ export default {
         ...mapMutations('list', ['CHANGE_MUSIC']),
         ...mapActions('list', ['getLyric']),
         playPause() {
-            this.paused ? this.PLAY_PAUSE({paused: false}) : this.PLAY_PAUSE({paused: true})
+            this.PLAY_PAUSE({ paused: !this.paused})
+            // this.paused ? this.PLAY_PAUSE({paused: false}) : this.PLAY_PAUSE({paused: true})
         },
         logout() {
             this.SET_TOKEN({token: ''})
@@ -110,7 +111,7 @@ export default {
         },
         // 切换模式
         changeMode () {
-        this.SET_PLAY_MODE()
+            this.SET_PLAY_MODE()
         }
     }
 };

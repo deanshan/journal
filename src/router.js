@@ -61,32 +61,32 @@ export default new Router({
                 {
                     path:'html',
                     name:'html',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/html/HTML.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/HTML.vue')
                 },
                 {
                     path:'css',
                     name:'css',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/css/CSS.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/CSS.vue')
                 },
                 {
                     path:'javascript',
                     name:'javascript',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/javascript/JavaScript.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/JavaScript.vue')
                 },
                 {
                     path:'es6',
                     name:'es6',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/es6/ES6.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/ES6.vue')
                 },
                 {
                     path:'vue',
                     name:'vue',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/vue/VUE.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/VUE.vue')
                 },
                 {
                     path:'fetch',
                     name:'fetch',
-                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/fetch/Fetch.vue')
+                    component:() => import(/* webpackChunkName:"knowledge" */ '@/components/main/knowledge/Fetch.vue')
                 },
             ]
         },

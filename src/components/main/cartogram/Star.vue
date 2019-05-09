@@ -1,10 +1,10 @@
 <template>
-    <div id="star-chart">
+    <div class="star-view">
 
         <NavTitle :titles="['星空图']"></NavTitle>
 
-        <div class="views">
-            <div id="star-view" ></div>
+        <div class="main-content">
+            <div class="star-echarts" ref="star"></div>
         </div>
     </div>
 </template>
@@ -26,13 +26,11 @@ export default {
     components:{
         NavTitle
     },
-    computed: {
-        operationUrl() {
-            return sessionStorage.getItem('cmp-operation')
-        }
-    },
     mounted() {
-        this.getCityData()
+        this.$nextTick(() => {
+            this.getCityData()
+
+        })
     },
     methods: {
         // 获取所有城市列表
@@ -116,8 +114,9 @@ export default {
             }
         },
         initVirtualMachine({ legendData, schemaData, seriesData }) {
-            let virtualMachine = document.getElementById("star-view")
-            let myChart = this.$echarts.init(virtualMachine, 'macarons')
+            // let virtualMachine = document.getElementById("star-view")
+            let star = this.$refs.star
+            let myChart = this.$echarts.init(star)
 
             let option = {
                  backgroundColor: new this.$echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
@@ -272,7 +271,7 @@ export default {
             if (option && typeof option === "object") {
                 myChart.setOption(option, true);
             }
-            EleResize.on(document.querySelector('.views'), () => {
+            EleResize.on(star, () => {
                 myChart.resize()
             })
         }
@@ -281,25 +280,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#star-chart {
-    width: 100%;
+.star-view {
     height: 100%;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    .views {
-        width: 100%;
-        height: 100%;
-        overflow-x: hidden;
-        background: rgb(243,243,243);
+    .main-content {
+        // background: rgb(243,243,243);
         flex: 1;
-        #star-view {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        display: flex;
+        .star-echarts {
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
             width: 100%;
-            height: 600px;
-            margin-bottom: 20px;
+            height: 100%;
         }
     }
 }

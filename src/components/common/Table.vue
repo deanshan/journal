@@ -74,15 +74,6 @@
             </el-table-column>
         </el-table>
 
-        <!-- 分页导航 -->
-        <!-- <el-pagination
-            background
-            layout="total, prev, pager, next, jumper"
-            :current-page="currentPage"
-            :page-size="pageSize"
-            :total="total"
-            @current-change="changeCurrentPage"
-        ></el-pagination> -->
         <div class="pagination">
             <el-button class="first" :disabled="currentPage === 1">首页</el-button>
             <el-button class="prev" :disabled="currentPage === 1" @click.native="prev">上一页</el-button>

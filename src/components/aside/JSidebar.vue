@@ -5,7 +5,7 @@
                 <div
                     class="collapse"
                     :style="{'left': !isCollapse ? '220px' : '-10px', }"
-                    @click="changeCollapse"
+                    @click="isCollapse = !isCollapse"
                 >
                     <img :src="[!isCollapse ? images.open : images.close]">
                 </div>
@@ -25,7 +25,7 @@
                     ></MenuLevelAside>
 
                     <MenuLevelAside
-                        :level="3"
+                        :level="2"
                         :menulists="this.menulist.knowledge"
                     ></MenuLevelAside>
 
@@ -67,7 +67,8 @@ export default {
                         {
                             "index": "/cartogram/star",
                             "name": "星空图",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "fa fa-share-alt-square",
+                            "unicode": "&#xe618;"
                         },
                         {
                             "index": "/cartogram/matrix",
@@ -79,74 +80,38 @@ export default {
                 knowledge: {
                     title: "知识库",
                     index: "/knowledge",
-                    submeunlists: {
-                        html: {
-                            subtitle: "HTML",
-                            index: "/html",
-                            lists:[
-                                {
-                                    "index": "/knowledge/html",
-                                    "name": "HTML",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
+                    lists: [
+                        {
+                            "index": "/knowledge/html",
+                            "name": "HTML",
+                            "iconClass": "fa fa-share-alt-square"
                         },
-                        css: {
-                            subtitle: "CSS",
-                            index: "/css",
-                            lists:[
-                                {
-                                    "index": "/knowledge/css",
-                                    "name": "CSS",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
+                        {
+                            "index": "/knowledge/css",
+                            "name": "CSS",
+                            "iconClass": "fa fa-share-alt-square"
                         },
-                        javaScript: {
-                            subtitle: "JavaScript",
-                            index: "/javaScript",
-                            lists:[
-                                {
-                                    "index": "/knowledge/javaScript",
-                                    "name": "JavaScript",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
+                        {
+                            "index": "/knowledge/javaScript",
+                            "name": "JavaScript",
+                            "iconClass": "fa fa-share-alt-square"
                         },
-                        es6: {
-                            subtitle: "ES6",
-                            index: "/es6",
-                            lists:[
-                                {
-                                    "index": "/knowledge/es6",
-                                    "name": "ES6",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
+                        {
+                            "index": "/knowledge/es6",
+                            "name": "ES6",
+                            "iconClass": "fa fa-share-alt-square"
                         },
-                        vue: {
-                            subtitle: "VUE",
-                            index: "/vue",
-                            lists:[
-                                {
-                                    "index": "/knowledge/vue",
-                                    "name": "VUE",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
+                        {
+                            "index": "/knowledge/vue",
+                            "name": "VUE",
+                            "iconClass": "fa fa-share-alt-square"
                         },
-                        fetch: {
-                            subtitle: "Fetch",
-                            index: "/fetch",
-                            lists:[
-                                {
-                                    "index": "/knowledge/fetch",
-                                    "name": "Fetch",
-                                    "iconClass": "fa fa-share-alt-square"
-                                },
-                            ]
-                        }
-                    }
+                        {
+                            "index": "/knowledge/fetch",
+                            "name": "Fetch",
+                            "iconClass": "fa fa-share-alt-square"
+                        },
+                    ]
                 },
                 pleasure: {
                     title: "娱乐",
@@ -194,9 +159,9 @@ export default {
     computed: {
     },
     methods: {
-        changeCollapse() {
-            this.isCollapse = !this.isCollapse
-        }
+        // changeCollapse() {
+        //     this.isCollapse = !this.isCollapse
+        // }
     }
 }
 </script>
@@ -207,8 +172,8 @@ export default {
     line-height: 30px;
     top: 48%;
     z-index: 100;
-    transition: all .2s ease 0s;
-    cursor: pointer;
     width: 20px;
+    transition: all .2s linear;
+    cursor: pointer;
 }
 </style>

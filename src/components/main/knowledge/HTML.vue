@@ -33,7 +33,6 @@ export default {
     data() {
         return {
             loading: false,     //页面加载状态
-            url: '',
             tableData:[
                 {
                     name: '垂直居中1',

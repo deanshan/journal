@@ -1,5 +1,5 @@
 <template>
-    <div class="operation-main-content">
+    <div class="matrix-view">
         <!-- 导向 -->
         <NavTitle :titles="['矩阵图']"></NavTitle>
         <!-- 主体 -->
@@ -14,7 +14,7 @@
                     ></el-tab-pane>
                 </el-tabs>
             </div>
-            <div id="ip-pool" ></div>
+            <div class="matrix-echarts" ref="matrix"></div>
         </div>
     </div>
 </template>
@@ -44,11 +44,6 @@ export default {
     },
     components: {
         NavTitle
-    },
-    computed: {
-        operationUrl() {
-            return sessionStorage.getItem('cmp-operation')
-        }
     },
     mounted() {
         this.initScatterData()
@@ -166,8 +161,9 @@ export default {
             }
         },
         initScatter(data) {
-            let ipPool = document.getElementById("ip-pool");
-            let myChart = this.$echarts.init(ipPool);
+            // let ipPool = document.getElementById("matrix-container");
+            let matrix = this.$refs.matrix;
+            let myChart = this.$echarts.init(matrix);
 
             let option = {
                 title: {
@@ -263,7 +259,7 @@ export default {
             if (option && typeof option === "object") {
                 myChart.setOption(option, true);
             }
-            EleResize.on(ipPool, () => {
+            EleResize.on(matrix, () => {
                 myChart.resize()
             })
         }
@@ -272,7 +268,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.operation-main-content {
+.matrix-view {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -283,7 +279,7 @@ export default {
         .select-data {
             padding: 10px;
         }
-        #ip-pool {
+        .matrix-echarts {
             flex: 1;
             display: flex;
             justify-content: center;
