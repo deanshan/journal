@@ -23,20 +23,20 @@ import "./sass/global/iconfont.scss";
 import { https } from './utils/https.js'
 
 // 验证用户登录状态
-router.beforeEach((to, from, next) => {
-
-    if(to.name === 'login') {   // 登录页面
-        next()
-    } else {    //非登录页面
-        //FIXME:可以通过sessionStorage获取token，此处在路由(router.js)加载前已重新把token存储到vuex
-        if(store.state.token) {
-            next()
-        } else {
-            // 退出页面，进行登录页面或指定页面
-            next('/login')
-        }
-    }
-})
+// router.beforeEach((to, from, next) => {
+//TODO:未判断注册页面
+//     if(to.name === 'login') {   // 登录页面
+//         next()
+//     } else {    //非登录页面
+//         //FIXME:可以通过sessionStorage获取token，此处在路由(router.js)加载前已重新把token存储到vuex
+//         if(store.state.token) {
+//             next()
+//         } else {
+//             // 退出页面，进行登录页面或指定页面
+//             next('/login')
+//         }
+//     }
+// })
 
 Vue.use(baiduMap, { ak: 'DlBAFrcThN8g3kkbfRcfnrHS1pWUwDeS' })
 
