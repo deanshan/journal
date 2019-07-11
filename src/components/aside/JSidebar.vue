@@ -63,90 +63,94 @@ export default {
                 cartogram: {
                     title: "统计图",
                     index: "/cartogram",
+                    iconClass: "icon-tongjitu",
                     lists: [
                         {
                             "index": "/cartogram/star",
                             "name": "星空图",
-                            "iconClass": "fa fa-share-alt-square",
+                            "iconClass": "icon-tongjitu",
                             "unicode": "&#xe618;"
                         },
                         {
                             "index": "/cartogram/matrix",
                             "name": "矩阵图",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-tongjitu"
                         }
                     ]
                 },
                 knowledge: {
                     title: "知识库",
                     index: "/knowledge",
+                    iconClass: "icon-zhishiku",
                     lists: [
                         {
                             "index": "/knowledge/html",
                             "name": "HTML",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                         {
                             "index": "/knowledge/css",
                             "name": "CSS",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                         {
                             "index": "/knowledge/javaScript",
                             "name": "JavaScript",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                         {
                             "index": "/knowledge/es6",
                             "name": "ES6",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                         {
                             "index": "/knowledge/vue",
                             "name": "VUE",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                         {
                             "index": "/knowledge/fetch",
                             "name": "Fetch",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-zhishiku"
                         },
                     ]
                 },
                 pleasure: {
                     title: "娱乐",
                     index: "/pleasure",
+                    iconClass: "icon-yule",
                     lists: [
                         {
                             "index": "/pleasure/music",
                             "name": "音乐",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-yiliao"
                         }
                     ]
                 },
                 monitorCenter: {
                     title: "地理位置",
                     index: "/monitorCenter",
+                    iconClass: "icon-diliweizhi",
                     lists: [
                         {
                             "index": "/monitorCenter/resourceMonitor",
                             "name": "地理位置",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-diliweizhi"
                         },
                         {
                             "index": "/monitorCenter/monitorTemplate",
                             "name": "地理位置",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-diliweizhi"
                         },
                         {
                             "index": "/monitorCenter/resourceAlarm",
                             "name": "地理位置",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-diliweizhi"
                         },
                         {
                             "index": "/monitorCenter/noticeGroup",
                             "name": "地理位置",
-                            "iconClass": "fa fa-share-alt-square"
+                            "iconClass": "icon-diliweizhi"
                         }
                     ]
                 }

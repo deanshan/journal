@@ -57,11 +57,16 @@
 .el-submenu__title:hover,
 .el-menu-item:focus,
 .el-menu-item:hover {
-    background: linear-gradient(to right,#04acdd,#2090ff);
+    background: linear-gradient(to right,#07417a,#04acdd,#2090ff);
 }
 .el-menu-item.is-active {
-    color: #fff;
-    background: linear-gradient(to right,#04acdd,#2090ff);
+    // color: #fff;
+    background: linear-gradient(to right,#07417a,#04acdd,#2090ff);
+    #menu-effect {
+        i, span {
+            color: greenyellow !important;
+        }
+    }
 }
 /*菜单关闭*/
 .el-submenu>.el-submenu__title i.fa.caret-direction.fa-caret-right{

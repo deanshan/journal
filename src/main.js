@@ -17,7 +17,6 @@ import "./sass/global/global.scss";
 import "./sass/global/font-special.scss";
 // 字体图标样式
 import "./sass/global/iconfont.scss";
-// import 'font-awesome/scss/font-awesome.scss'
 
 // utils
 import { https } from './utils/https.js'

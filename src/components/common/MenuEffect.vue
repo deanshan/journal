@@ -1,16 +1,7 @@
 <template>
     <div id="menu-effect" @mousemove="effect($event)" ref="effect">
-        <!-- 图标 -->
-        <slot name="icon"></slot>
-
-        <a
-            :class="[isEffect ? 'link link-flip' : '']"
-            :style="setStyle"
-        >
-            <span v-if="isEffect === false">{{ title }}</span>
-            <span v-else-if="isEffect === true" v-for="(str, k) in title.split('')" :key="k">{{ str }}</span>
-        </a>
-
+        <i class="iconfont" :class="iconClass" :style="styleObj"></i>
+        <div class="title link link-flip"><span>{{ title }}</span></div>
     </div>
 </template>
 
@@ -18,24 +9,22 @@
 export default {
     name: 'menuEffect',
     props: {
-        setStyle: {
-            default: () => {},  //  参数类型为Array/Object必须使用函数返回默认值，否则报错
-            type: Object
+        iconClass: {
+            type: String,
+            default: '',
+        },
+        styleObj: {
+            type: Object,
+            default: () => {
+                return {
+                    'padding-left': '30px'
+                }
+            }
         },
         title: {
+            type: String,
             default: '',
-            type: String
-        },
-        padding_left: {
-            default: '',
-            type: String
-        },
-        isEffect: {
-            default: false,
-            type: Boolean
         }
-    },
-    mounted() {
     },
     methods: {
         effect(e) {
@@ -49,17 +38,18 @@ export default {
 <style lang="scss" scoped>
 #menu-effect {
     width: 100%;
+    height: 50px;
     overflow: hidden;
     transition: all .2s ease;
     position: relative;
     z-index: 101;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     &:hover {
         background: #07417a;
-        a,i {
-            color: gold;
+        span,i {
+            color: greenyellow;
         }
     }
     &:before {
@@ -83,13 +73,19 @@ export default {
         --opacity: 1;
         --scale: 1;
     }
-    a,i {
-      position: relative;
-      color: #83c7e3;
-      padding-left: 22px;
-    }
-    a {
+    .title {
         width: 100%;
+        position: relative;
+    }
+    span,i {
+      position: relative;
+      color: #fff;
+    }
+    span {
+        margin-left: 10px;
+    }
+    i {
+        font-size: 20px;
     }
 }
 </style>
