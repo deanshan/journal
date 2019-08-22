@@ -7,7 +7,7 @@
             <el-form-item>
                 <el-input
                     size="small"
-                    v-model=queryTerms.name.value
+                    v-model="queryTerms.name.value"
                     :placeholder="queryTerms.name.label"
                     @keyup.enter.native="search('queryTerms')"
                 >
