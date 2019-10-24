@@ -35,13 +35,10 @@
             </div>
             <div class="search"></div>
             <div class="settings" :class="[ isVisible ? 'bg' : '']">
-                <el-dropdown
-                    placement="top"
-                    @command="handleCommand"
-                    @visible-change="toggle"
-                >
+                <el-dropdown placement="top" @command="handleCommand" @visible-change="toggle">
                     <span class="drop-menu el-dropdown-link">
-                        castiel<i class="el-icon-arrow-down el-icon--right"></i>
+                        castiel
+                        <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="userInfo">
@@ -63,55 +60,54 @@
 </template>
 
 <script>
-
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
     name: "jheader",
     data() {
         return {
             isVisible: false
-        }
+        };
     },
     computed: {
-        ...mapState('player', {
+        ...mapState("player", {
             paused: state => state.paused,
             playMode: state => state.playMode
         }),
-        ...mapGetters('list', ['getCover']),
-        ...mapGetters('player', ['getCurrentIndex']),
+        ...mapGetters("list", ["getCover"]),
+        ...mapGetters("player", ["getCurrentIndex"])
     },
     methods: {
-        ...mapMutations(['SET_TOKEN']),
-        ...mapMutations('player', ['PLAY_PAUSE', 'SET_PLAY_MODE']),
-        ...mapMutations('list', ['CHANGE_MUSIC']),
-        ...mapActions('list', ['getLyric']),
+        ...mapMutations(["SET_TOKEN"]),
+        ...mapMutations("player", ["PLAY_PAUSE", "SET_PLAY_MODE"]),
+        ...mapMutations("list", ["CHANGE_MUSIC"]),
+        ...mapActions("list", ["getLyric"]),
         playPause() {
-            this.PLAY_PAUSE({ paused: !this.paused})
+            this.PLAY_PAUSE({ paused: !this.paused });
             // this.paused ? this.PLAY_PAUSE({paused: false}) : this.PLAY_PAUSE({paused: true})
         },
         logout() {
-            this.SET_TOKEN({token: ''})
-            sessionStorage.clear()
-            this.$router.push({ path: '/login' })
+            this.SET_TOKEN({ token: "" });
+            sessionStorage.clear();
+            this.$router.push({ path: "/login" });
         },
         handleCommand(command) {
-            switch(command) {
-                case 'logout':
-                    this.logout()
+            switch (command) {
+                case "logout":
+                    this.logout();
             }
         },
         toggle(isVisible) {
-            this.isVisible = isVisible
+            this.isVisible = isVisible;
         },
-        prevNextMusic (prevNext) {
-            this.getCurrentIndex({type: prevNext})
-            this.CHANGE_MUSIC()
-            this.getLyric()
+        prevNextMusic(prevNext) {
+            this.getCurrentIndex({ type: prevNext });
+            this.CHANGE_MUSIC();
+            this.getLyric();
         },
         // 切换模式
-        changeMode () {
-            this.SET_PLAY_MODE()
+        changeMode() {
+            this.SET_PLAY_MODE();
         }
     }
 };
@@ -141,7 +137,7 @@ export default {
         line-height: 60px;
         position: relative;
     }
-    .header-content{
+    .header-content {
         height: 100%;
         flex: auto;
         display: flex;
@@ -169,12 +165,11 @@ export default {
                 .music-ctl {
                     display: flex;
                     justify-content: space-between;
-                    >div {
+                    > div {
                         cursor: pointer;
                     }
                 }
             }
-
         }
         .search {
             width: 200px;
@@ -197,7 +192,9 @@ export default {
 }
 </style>
 <style scoped>
-.user-icon, .set-icon, .logout-icon {
+.user-icon,
+.set-icon,
+.logout-icon {
     margin-right: 5px;
 }
 </style>

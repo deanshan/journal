@@ -9,7 +9,7 @@
 
 <script>
 // import { mapActions } from 'vuex'
-// import Audio from "@/components/common/Audio.vue"
+// import Audio from "@/components/Audio.vue"
 export default {
     name: 'Music',
     data() {

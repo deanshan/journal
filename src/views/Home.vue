@@ -25,11 +25,11 @@
 <script>
 import { mapActions } from 'vuex'
 
-import Audio from "@/components/common/Audio.vue"
+import Audio from "@/components/Audio.vue"
 
-import JHeader from "@/components/header/JHeader.vue"
-import JSidebar from "@/components/aside/JSidebar.vue"
-import JMain from "@/components/main/JMain.vue"
+import JHeader from "@/views/header/JHeader.vue"
+import JSidebar from "@/views/aside/JSidebar.vue"
+import JMain from "@/views/main/JMain.vue"
 
 export default {
     name: 'Home',

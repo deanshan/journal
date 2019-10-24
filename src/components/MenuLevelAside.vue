@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import MenuEffect from '@/components/common/MenuEffect.vue'
+import MenuEffect from '@/components/MenuEffect.vue'
 
 export default {
     name: "listAside",

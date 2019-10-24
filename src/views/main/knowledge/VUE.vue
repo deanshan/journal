@@ -1,8 +1,8 @@
 <template>
 
-    <div class="html-content">
+    <div class="vue-content">
 
-        <NavTitle :titles="['知识库','HTML','html']"></NavTitle>
+        <NavTitle :titles="['知识库','VUE','vue']"></NavTitle>
 
         <!-- 主体 -->
         <div class="main-content">
@@ -24,21 +24,21 @@
 
 <script>
 
-import NavTitle from '@/components/common/NavTitle'
-import Table from '@/components/common/Table'
-// import QueryTable from '@/components/common/QueryTable'
+import NavTitle from '@/components/NavTitle'
+import Table from '@/components/Table'
+// import QueryTable from '@/components/QueryTable'
 
 export default {
-    name: "host",
+    name: "Vue",
     data() {
         return {
             loading: false,     //页面加载状态
             tableData:[
                 {
-                    name: '垂直居中1',
-                    type: 'css2/css3',
-                    details: '纯CSS实现垂直居中的几种方法',
-                    source: 'https://www.cnblogs.com/hutuzhu/p/4450850.html',
+                    name: '懒加载',
+                    type: 'vue2',
+                    details: 'vue2组件懒加载浅析',
+                    source: 'https://www.cnblogs.com/zhanyishu/p/6587571.html',
                     arrange: '是',
                     number: '0',
                     isEdit: false
@@ -163,14 +163,14 @@ export default {
         onExport(){
 
         },
-        tableRefresh(val){
+        tableRefresh(){
         },
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.html-content {
+.vue-content {
     height: 100%;
     display: flex;
     flex-direction: column;

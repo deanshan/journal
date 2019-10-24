@@ -48,7 +48,7 @@
 
 <script>
 
-import MenuLevelAside from '@/components/aside/MenuLevelAside.vue'
+import MenuLevelAside from '@/components/MenuLevelAside.vue'
 
 export default {
     name: "operationAside",

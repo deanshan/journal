@@ -16,23 +16,3 @@
 
 + vue-baidu-map
 +   npm install vue-baidu-map --save
-
-# 目录结构
-|——view
-|  |——Home.vue   //主界面
-|  |——Audio.vue  //音频封装（全局）
-|——components
-|  |——account   //登录注册
-|  |——common    //公共组件
-|  |——header    //头部
-|  |——aside     //侧边栏导航菜单
-|  |——main      //主体内容
-|  |  |——cartogram  //统计图
-|  |  |——knowledge  //知识库
-|  |  |——music      //音乐
-|  |  |  |——Music.vue   //音乐主界面
-|  |  |  |——Play.vue    //播放界面
-|  |  |  |——Lyric.vue   //歌词界面
-|  |  |  |——List.vue    //音乐列表
-|  |  |——geolocation //地理定位
-|  |  |——socket      //实时通讯

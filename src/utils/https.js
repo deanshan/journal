@@ -3,19 +3,6 @@ import router from '@/router'
 import axios from 'axios'
 import { Notification } from 'element-ui';
 
-// const baseUrl = () => {
-//     switch (process.env.NODE_ENV) {
-//         case 'development':
-//             return "http://10.2.102.97:3100"   //开发环境url
-//         case 'production':
-//             return "http://10.2.102.97:3100"   //生产环境url
-//         case 'test':
-//             return "http://10.2.102.97:3100"   //测试环境url
-//         default:
-//             return "http://10.2.102.97:3100"   //其它环境url
-//     }
-// }
-
 // FIXME:因music api是网络接口和node服务器两个不同的接口，暂时只能通过反向代理实现请求，否则无法请求网络接口
 // axios.defaults.baseURL = 'http://10.2.103.72:3100'
 // axios.defaults.baseURL = "http://169.254.186.21:3100"
@@ -24,7 +11,7 @@ import { Notification } from 'element-ui';
 axios.interceptors.request.use(config => {
 
     //FIXME: 判断vuex中的token是否存在，若存在，则加入头部，当页面刷新时在router里重新获取token加入vuex
-    if(store.state.token) {
+    if (store.state.token) {
         config.headers.common["token"] = store.state.token
     }
     return config
@@ -38,13 +25,13 @@ axios.interceptors.response.use(response => {
     return response.data
 }, error => {
 
-    if(error && error.response) {
+    if (error && error.response) {
 
         let status = error.response.status
         // TODO:暂时只针对token的有效期做了处理
-        switch(status) {
+        switch (status) {
             case 401:
-                Notification({ message: error.response.data})
+                Notification({ message: error.response.data })
                 router.push({ path: '/login' })
         }
     }
@@ -55,9 +42,10 @@ axios.interceptors.response.use(response => {
 // TODO:需要重新封装
 const promise = (url, params, method) => {
 
-    let options = { url, params, method}
-    if(method === 'post' || method === 'put') {
-        options = { url, data: params, method}
+    let options = { url, params, method }
+
+    if (method === 'post' || method === 'put') {
+        options = { url, data: params, method }
     }
     return new Promise((resolve, reject) => {
         axios(options)

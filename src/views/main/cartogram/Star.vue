@@ -11,7 +11,7 @@
 
 <script>
 
-import NavTitle from '@/components/common/NavTitle'
+import NavTitle from '@/components/NavTitle'
 
 import { EleResize } from '@/utils/resize.js'
 
